@@ -50,7 +50,7 @@ gulp.task('build:sass', function (cb)
 gulp.task('build:partials', function (cb) 
 {
     gulp.src(paths.template)
-        .pipe(templateCache())
+        .pipe(templateCache({ standalone: true }))
         .pipe(gulp.dest(paths.build + 'app/'))
         .on('finish', cb);
 });
