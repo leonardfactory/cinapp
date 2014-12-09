@@ -8,13 +8,15 @@ var sass = require('gulp-sass');
 var autoprefixer = require('gulp-autoprefixer');
 var serve = require('gulp-serve');
 var del = require('del');
+var templateCache = require('gulp-angular-templatecache');
 
 var paths = {
     build: './build/',
     
     src: './src/',
-    app_js: ['./src/app/**/*.js'],
-    sass: ['./src/sass/**/*.scss']
+    app_js: ['./src/app/**/*.js', '!./src/app/**/*.spec.js'],
+    sass: ['./src/sass/**/*.scss'],
+    template: ['./src/app/**/*.html']
 }
 
 gulp.task('build:copy-libs', function (cb) 
@@ -45,8 +47,16 @@ gulp.task('build:sass', function (cb)
         .on('finish', cb);
 });
 
+gulp.task('build:partials', function (cb) 
+{
+    gulp.src(paths.template)
+        .pipe(templateCache())
+        .pipe(gulp.dest(paths.build + 'app/'))
+        .on('finish', cb);
+});
 
-gulp.task('build:html', ['build:copy-libs', 'build:angular', 'build:sass'], function () 
+
+gulp.task('build:html', ['build:copy-libs', 'build:angular', 'build:sass', 'build:partials'], function () 
 {
     gulp.src('./src/index.html')
         .pipe(inject(gulp.src('./build/libs/**/*.{js,css}'), {name: 'bower', ignorePath: '/build/', addRootSlash: false})) // Bower
@@ -67,6 +77,7 @@ gulp.task('serve', serve('build'));
 
 gulp.task('watch', function () 
 {
-    gulp.watch(paths.app_js, ['build:angular', 'build:html']);
-    gulp.watch(paths.sass, ['build:sass', 'build:html']);
+    gulp.watch(paths.template, ['build:partials']);
+    gulp.watch(paths.app_js, ['build:angular']);
+    gulp.watch(paths.sass, ['build:sass']);
 });
