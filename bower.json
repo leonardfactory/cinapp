@@ -1,0 +1,16 @@
+{
+  "name": "cinapp",
+  "version": "0.0.1",
+  "authors": [
+    "Leonardo Ascione <me@leonardfactory.com>"
+  ],
+  "description": "Cinapp, a platform to make movie choice easier.",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
