@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>My movies</h2>
+            
+            <ul class="movies-list">
+                <li ng-repeat="movie in moviesCtrl.movies">
+                    {{movie.name}}
+                </li>
+                <li>
+                    <form class="form-inline" role="form">
+                        <div class="form-group">
+                            <label class="sr-only" for="movieTitle">Title</label>
+                            <input type="text" class="form-control" id="movieTitle" placeholder="Title" ng-model="moviesCtrl.inlineMovie.name">
+                        </div>
+                        <div class="form-group">
+                            <label class="sr-only" for="movieDirector">Director</label>
+                            <input type="text" class="form-control" id="movieDirector" placeholder="Director" ng-model="moviesCtrl.inlineMovie.director">
+                        </div>
+                        <div class="form-group">
+                            <label class="sr-only" for="movieYear">Year</label>
+                            <input type="number" class="form-control" id="movieYear" placeholder="Year" ng-model="moviesCtrl.inlineMovie.year">
+                        </div>
+                        <button type="submit" class="btn btn-default">Add</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

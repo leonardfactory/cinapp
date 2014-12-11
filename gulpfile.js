@@ -9,6 +9,7 @@ var autoprefixer = require('gulp-autoprefixer');
 var serve = require('gulp-serve');
 var del = require('del');
 var templateCache = require('gulp-angular-templatecache');
+var ngAnnotate = require('gulp-ng-annotate');
 
 var paths = {
     build: './build/',
@@ -41,6 +42,7 @@ gulp.task('build:angular', function (cb)
         .pipe(angularFilesort())
         .pipe(sourcemaps.init())
         .pipe(concat('app.js'))
+        .pipe(ngAnnotate())
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(paths.build + 'app/'))
         .on('finish', cb);
