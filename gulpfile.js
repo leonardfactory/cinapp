@@ -14,15 +14,24 @@ var paths = {
     build: './build/',
     
     src: './src/',
+    assets: ['./src/assets/**/*.*'],
     app_js: ['./src/app/**/*.js', '!./src/app/**/*.spec.js'],
     sass: ['./src/sass/**/*.scss'],
-    template: ['./src/app/**/*.html']
+    template: ['./src/app/**/*.html'],
+    index: './src/index.html'
 }
 
 gulp.task('build:copy-libs', function (cb) 
 {
     gulp.src(bowerFiles(), {base: './bower_components/' })
         .pipe(gulp.dest('./build/libs/'))
+        .on('finish', cb);
+});
+
+gulp.task('build:assets', function (cb) 
+{
+    gulp.src(paths.assets)
+        .pipe(gulp.dest('./build/assets/'))
         .on('finish', cb);
 });
 
@@ -56,7 +65,7 @@ gulp.task('build:partials', function (cb)
 });
 
 
-gulp.task('build:html', ['build:copy-libs', 'build:angular', 'build:sass', 'build:partials'], function () 
+gulp.task('build:html', ['build:copy-libs', 'build:angular', 'build:sass', 'build:partials', 'build:assets'], function () 
 {
     gulp.src('./src/index.html')
         .pipe(inject(gulp.src('./build/libs/**/*.{js,css}'), {name: 'bower', ignorePath: '/build/', addRootSlash: false})) // Bower
@@ -80,4 +89,5 @@ gulp.task('watch', function ()
     gulp.watch(paths.template, ['build:partials']);
     gulp.watch(paths.app_js, ['build:angular']);
     gulp.watch(paths.sass, ['build:sass']);
+    gulp.watch(paths.index, ['build:html']);
 });
