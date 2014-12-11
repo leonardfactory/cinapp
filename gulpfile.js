@@ -4,7 +4,7 @@ var angularFilesort = require('gulp-angular-filesort');
 var inject = require('gulp-inject');
 var concat = require('gulp-concat');
 var sourcemaps = require('gulp-sourcemaps');
-var sass = require('gulp-sass');
+var sass = require('gulp-ruby-sass');
 var autoprefixer = require('gulp-autoprefixer');
 var serve = require('gulp-serve');
 var del = require('del');
@@ -16,7 +16,7 @@ var paths = {
     src: './src/',
     assets: ['./src/assets/**/*.*'],
     app_js: ['./src/app/**/*.js', '!./src/app/**/*.spec.js'],
-    sass: ['./src/sass/**/*.scss'],
+    sass: './src/sass/',
     template: ['./src/app/**/*.html'],
     index: './src/index.html'
 }
@@ -46,14 +46,21 @@ gulp.task('build:angular', function (cb)
         .on('finish', cb);
 });
 
-gulp.task('build:sass', function (cb) 
+gulp.task('build:sass', function () 
 {
-    gulp.src(paths.sass)
-        .pipe(sass())
-        .pipe(concat('app.css'))
+    return sass(paths.sass, {
+            sourcemap: false,
+            style: 'compact',
+            loadPath: [
+                paths.sass,
+                './bower_components/bootstrap-sass-official/assets/stylesheets'
+            ]
+        })
+        .on('error', function (err) {
+            console.error('Error', err.message);
+        })
         .pipe(autoprefixer({ browsers: ['last 2 versions'], cascade: false }))
-        .pipe(gulp.dest(paths.build + 'app/'))
-        .on('finish', cb);
+        .pipe(gulp.dest(paths.build + 'assets/css/'));
 });
 
 gulp.task('build:partials', function (cb) 
@@ -69,7 +76,7 @@ gulp.task('build:html', ['build:copy-libs', 'build:angular', 'build:sass', 'buil
 {
     gulp.src('./src/index.html')
         .pipe(inject(gulp.src('./build/libs/**/*.{js,css}'), {name: 'bower', ignorePath: '/build/', addRootSlash: false})) // Bower
-        .pipe(inject(gulp.src(['./build/app/**/*.{js,css}']), {name: 'app', ignorePath: '/build/', addRootSlash: false})) // AngularJS
+        .pipe(inject(gulp.src(['./build/app/**/*.js', './build/assets/**/*.{js,css}']), {name: 'app', ignorePath: '/build/', addRootSlash: false})) // AngularJS and Styles
         .pipe(gulp.dest('./build'));
 });
 
@@ -88,6 +95,6 @@ gulp.task('watch', function ()
 {
     gulp.watch(paths.template, ['build:partials']);
     gulp.watch(paths.app_js, ['build:angular']);
-    gulp.watch(paths.sass, ['build:sass']);
+    gulp.watch('./src/sass/**/*.scss', ['build:sass']);
     gulp.watch(paths.index, ['build:html']);
 });
