@@ -12,4 +12,13 @@ body {
   }
 }
 
+div.alert.ng-enter {
+  animation: 0.5s fadeInDown;
+}
+
+div.alert.ng-leave {
+  animation: 0.5s fadeOutDown;
+}
+
 @import "movies";
+@import "loader";

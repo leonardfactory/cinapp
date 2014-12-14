@@ -1,11 +1,18 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
+            
+            <div class="spinner" ng-if="moviesCtrl.loading">
+                <div class="loader">Loading</div>
+            </div>
+            
             <h2>My movies</h2>
             
+            <alert ng-repeat="alert in moviesCtrl.alerts" type="{{alert.type}}" close="moviesCtrl.closeAlert($index)">{{alert.message}}</alert>
+            
             <ul class="movies-list">
-                <li ng-repeat="movie in moviesCtrl.movies">
-                    {{movie.name}}
+                <li ng-repeat="movie in moviesCtrl.movies.models">
+                    {{movie.getName()}} • {{movie.getDirector()}} • {{movie.getYear()}}
                 </li>
                 <li>
                     <form class="form-inline" role="form">
@@ -21,7 +28,7 @@
                             <label class="sr-only" for="movieYear">Year</label>
                             <input type="number" class="form-control" id="movieYear" placeholder="Year" ng-model="moviesCtrl.inlineMovie.year">
                         </div>
-                        <button type="submit" class="btn btn-default">Add</button>
+                        <button type="submit" class="btn btn-default" ng-click="moviesCtrl.addMovie()">Add</button>
                     </form>
                 </li>
             </ul>

@@ -8,5 +8,9 @@ ul.movies-list {
     width: 100%;
     margin: 0.3em 0;
     padding: 0.3em;
+    
+    &.ng-enter {
+      animation: fadeIn 0.4s;
+    }
   }
 }

@@ -1,0 +1,36 @@
+.spinner .loader {
+  margin:6em auto;
+  font-size:6px;
+  position:relative;
+  text-indent:-9999em;
+  border-top:1.1em solid rgba(83,83,85,0.2);
+  border-right:1.1em solid rgba(83,83,85,0.2);
+  border-bottom:1.1em solid rgba(83,83,85,0.2);
+  border-left:1.1em solid rgba(83,83,85,1);
+  transform: translateZ(0);
+  animation: spinner 1.1s infinite linear;
+}
+.spinner .loader,.spinner .loader:after {
+	border-radius:50%;
+	width:8em;
+	height:8em;
+}
+
+@keyframes spinner {
+  0% {
+  	-webkit-transform:rotate(0deg);
+  	transform:rotate(0deg);
+  }
+  100% {
+  	-webkit-transform:rotate(360deg);
+  	transform:rotate(360deg);
+  }
+}
+
+.spinner.ng-enter {
+  animation: 0.5s fadeInLeft;
+}
+
+.spinner.ng-leave {
+  animation: 0.5s fadeOutRight;
+}
