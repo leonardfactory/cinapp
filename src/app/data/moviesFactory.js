@@ -9,8 +9,5 @@ angular
             attrs: ['name', 'director', 'year']
         });
         
-        this.UserMovie = Parse.Object.extend({
-            className: 'UserMovie',
-            attrs: ['user', 'movie']
-        });
+        
     });
