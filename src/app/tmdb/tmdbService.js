@@ -3,9 +3,12 @@ angular
     .factory('tmdbService', function ($q) 
     {
         var tmdbService = {
+            config: {},
+            
             api: {
                 search: {},
-                movies: {}
+                movies: {},
+                configurations: {}
             }
         };
         
@@ -15,13 +18,32 @@ angular
                 var defer = $q.defer();
                 
                 theMovieDb[namespace][method](query, function (data) {
-                    defer.resolve(data);
+                    defer.resolve(JSON.parse(data));
                 }, function (error) {
                     defer.reject(error);
                 });
                 
                 return defer.promise;
             }
+        }
+        
+        function deferredRequestNoParams(namespace, method) {
+            return function () {
+                var defer = $q.defer();
+                
+                theMovieDb[namespace][method](function (data) {
+                    defer.resolve(JSON.parse(data));
+                }, function (error) {
+                    defer.reject(error);
+                });
+                
+                return defer.promise;
+            }
+        }
+        
+        // Configuration
+        tmdbService.api.configurations = {
+            getConfiguration: deferredRequestNoParams('configurations', 'getConfiguration')
         }
         
         // Movies
@@ -34,6 +56,16 @@ angular
         tmdbService.api.search = {
             getMovie: deferredRequest('search', 'getMovie')
         };
+        
+        // Init
+        tmdbService.init = function () {
+            tmdbService.api
+                .configurations.getConfiguration()
+                .then(function (data) 
+                {
+                    tmdbService.config = data;
+                });
+        }
         
         return tmdbService;
     });

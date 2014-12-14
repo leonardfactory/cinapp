@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="input-group has-feedback" ng-class="{'has-error': searchCtrl.queryError}">
+                <input type="text" class="form-control" ng-model="searchCtrl.query">
+                <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" ng-click="searchCtrl.search()">Search</button>
+                </span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Results -->
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="movies-list">
+                <li ng-repeat="movie in searchCtrl.results">
+                    <div class="movie-cover col-md-2">
+                        <movie-img></movie-img>
+                    </div>
+                    <div class="movie-description col-md-10">
+                        <div class="movie-name">{{movie.original_title}}</div>
+                        <!-- <div class="movie-info">{{movie.director}} &mdash; {{movie.year}}</div> -->
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
