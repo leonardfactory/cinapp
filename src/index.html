@@ -41,10 +41,22 @@
                     </a>
                 </div>
                 
-                <div collapse="navCollapsed" class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-right">
+                <div collapse="navCollapsed" class="collapse navbar-collapse" ng-controller="LoginCtrl as loginCtrl">
+                    <form class="navbar-form navbar-right" role="login" ng-if="loginCtrl.logged === false">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Username" ng-model="loginCtrl.user.username">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Password" ng-model="loginCtrl.user.password">
+                        </div>
+                        <button type="submit" class="btn btn-default" ng-click="loginCtrl.login()">Login</button>
+                    </form>
+                    <ul ng-if="loginCtrl.logged === true" class="nav navbar-nav navbar-right">
                         <li class="active"><a href="#/">Home <span class="sr-only">(current)</span></a></li>
                         <li><a href="#/movies">My Movies</a></li>
+                    </ul>
+                    <ul ng-if="loginCtrl.logged === false" class="nav navbar-nav navbar-right">
+                        <li class="active"><a href="#/">Home <span class="sr-only">(current)</span></a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </div>
