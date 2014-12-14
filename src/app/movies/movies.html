@@ -11,8 +11,14 @@
             <alert ng-repeat="alert in moviesCtrl.alerts" type="{{alert.type}}" close="moviesCtrl.closeAlert($index)">{{alert.message}}</alert>
             
             <ul class="movies-list">
-                <li ng-repeat="movie in moviesCtrl.movies.models">
-                    {{movie.getName()}} • {{movie.getDirector()}} • {{movie.getYear()}}
+                <li ng-repeat="movie in moviesCtrl.movies.models" class="row">
+                    <div class="movie-cover col-md-2">
+                        <div class="movie-cover-placeholder"></div>
+                    </div>
+                    <div class="movie-description col-md-10">
+                        <div class="movie-name">{{movie.getName()}}</div>
+                        <div class="movie-info">{{movie.getDirector()}} &mdash; {{movie.getYear()}}</div>
+                    </div>
                 </li>
                 <li>
                     <form class="form-inline" role="form">

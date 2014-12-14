@@ -78,7 +78,8 @@ gulp.task('build:html', ['build:copy-libs', 'build:angular', 'build:sass', 'buil
 {
     gulp.src('./src/index.html')
         .pipe(inject(gulp.src('./build/libs/**/*.{js,css}'), {name: 'bower', ignorePath: '/build/', addRootSlash: false})) // Bower
-        .pipe(inject(gulp.src(['./build/app/**/*.js', './build/assets/**/*.{js,css}']), {name: 'app', ignorePath: '/build/', addRootSlash: false})) // AngularJS and Styles
+        .pipe(inject(gulp.src('./build/assets/**/*.{js,css}'), {name: 'assets', ignorePath: '/build/', addRootSlash: false})) // Assets
+        .pipe(inject(gulp.src('./build/app/**/*.js'), {name: 'app', ignorePath: '/build/', addRootSlash: false})) // AngularJS and Styles
         .pipe(gulp.dest('./build'));
 });
 

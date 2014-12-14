@@ -12,12 +12,28 @@ body {
   }
 }
 
-div.alert.ng-enter {
-  animation: 0.5s fadeInDown;
-}
-
-div.alert.ng-leave {
-  animation: 0.5s fadeOutDown;
+div.alert {
+  &.ng-enter {
+    animation: 0.5s fadeInDown;
+    transition: 1s linear all;
+    max-height: 0;
+  }
+  
+  &.ng-enter-active {
+    transition: 1s linear all;
+    max-height: 999px;
+  }
+  
+  &.ng-leave {
+    animation: 0.5s fadeOutDown;
+    transition: 1s linear all;
+    max-height: 999px;
+  }
+  
+  &.ng-leave-active {
+    transition: 1s linear all;
+    max-height: 0;
+  }
 }
 
 @import "movies";

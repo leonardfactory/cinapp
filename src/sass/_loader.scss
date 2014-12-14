@@ -27,10 +27,26 @@
   }
 }
 
-.spinner.ng-enter {
-  animation: 0.5s fadeInLeft;
-}
-
-.spinner.ng-leave {
-  animation: 0.5s fadeOutRight;
+.spinner {
+  &.ng-enter {
+    animation: 0.5s fadeInLeft;
+    transition: 0.3s linear max-height;
+    overflow: hidden;
+    max-height: 0;
+    
+    &.ng-enter-active {
+      max-height: 300px;
+    }
+  }
+  
+  &.ng-leave {
+    animation: 0.5s fadeOutRight;
+    transition: 0.3s linear max-height;
+    overflow: hidden;
+    max-height: 300px;
+    
+    &.ng-leave-active {
+      max-height: 0;
+    }
+  }
 }
