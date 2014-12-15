@@ -15,9 +15,9 @@
     <div class="row">
         <div class="col-md-12">
             <ul class="movies-list">
-                <li ng-repeat="movie in searchCtrl.results">
+                <li ng-repeat="movie in searchCtrl.results" class="clearfix">
                     <div class="movie-cover col-md-2">
-                        <movie-img></movie-img>
+                        <movie-img movie="movie"></movie-img>
                     </div>
                     <div class="movie-description col-md-10">
                         <div class="movie-name">{{movie.original_title}}</div>

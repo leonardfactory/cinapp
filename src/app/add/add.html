@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="spinner" ng-if="addCtrl.loading">
+                <div class="loader">Loading</div>
+            </div>
+            
+            <div class="input-group">
+                <input type="text" placeholder="IMDB Address" class="form-control" ng-model="addCtrl.url">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" ng-click="addCtrl.find()">Search</button>
+                </span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Movie found -->
+    <div class="row" ng-if="addCtrl.result !== null">
+        <div class="col-md-4">
+            <movie-img movie="addCtrl.result"></movie-img>
+        </div>
+        <div class="col-md-8">
+            <div class="movie-name">{{addCtrl.result.title}}</div>
+        </div>
+    </div>
+</div>

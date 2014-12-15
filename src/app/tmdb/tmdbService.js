@@ -8,6 +8,7 @@ angular
             api: {
                 search: {},
                 movies: {},
+                find: {},
                 configurations: {}
             }
         };
@@ -44,13 +45,18 @@ angular
         // Configuration
         tmdbService.api.configurations = {
             getConfiguration: deferredRequestNoParams('configurations', 'getConfiguration')
-        }
+        };
+        
+        // Find
+        tmdbService.api.find = {
+            getById:    deferredRequest('find', 'getById')
+        };
         
         // Movies
         tmdbService.api.movies = {
             getById:    deferredRequest('movies', 'getById'),
             getImages:  deferredRequest('movies', 'getImages')
-        }
+        };
         
         // Search
         tmdbService.api.search = {
@@ -65,7 +71,7 @@ angular
                 {
                     tmdbService.config = data;
                 });
-        }
+        };
         
         return tmdbService;
     });

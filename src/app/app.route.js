@@ -11,6 +11,12 @@ angular
                 controller: 'MoviesCtrl',
                 controllerAs: 'moviesCtrl'
             })
+            .state('add', {
+                url: '/add',
+                templateUrl: 'add/add.html',
+                controller: 'AddController',
+                controllerAs: 'addCtrl'
+            })
             .state('search', {
                 url: '/search',
                 templateUrl: 'search/search.html',
