@@ -52,6 +52,13 @@
             <a class="nav-brand" href="#">
                 <img src="assets/images/nav-logo-big.png" />
             </a>
+            
+            <!-- Loader -->
+            <div class="spinner-container" ng-controller="LoaderController as loaderCtrl">
+                <div class="spinner" ng-if="loaderCtrl.loading">
+                    <div class="loader">Loading</div>
+                </div>
+            </div>
         </nav>
         <!--<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
             <div class="container">

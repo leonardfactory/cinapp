@@ -1,6 +1,6 @@
 angular
     .module('cinApp')
-    .controller('MoviesCtrl', function ($scope, $timeout, User, Movie, WatchedCollection) 
+    .controller('MoviesCtrl', function ($scope, $timeout, loaderService, User, Movie, WatchedCollection) 
     {
         var _this = this;
         
@@ -9,15 +9,11 @@ angular
         this.inlineMovie = {};
         
         // Deferred loading
-        $timeout(function () {
-            _this.loading = true;
-        })
-        .then(function () {
-            return _this.movies.fetch();
-        })
-        .then(function () {
-            _this.loading = false;
-        });
+        $timeout(loaderService.start)
+            .then(function () {
+                return _this.movies.fetch();
+            })
+            .then(loaderService.done);
         
         this.alerts = [];
         

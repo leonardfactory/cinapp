@@ -1,13 +1,6 @@
 <div class="container">
     <div class="row">
         <div class="twelve columns">
-            
-            <div class="spinner-container">
-                <div class="spinner" ng-if="moviesCtrl.loading">
-                    <div class="loader">Loading</div>
-                </div>
-            </div>
-            
             <h2>My movies</h2>
             
             <alert ng-repeat="alert in moviesCtrl.alerts" type="{{alert.type}}" close="moviesCtrl.closeAlert($index)">{{alert.message}}</alert>

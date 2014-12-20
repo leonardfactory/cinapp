@@ -1,6 +1,6 @@
 angular
     .module('cinApp')
-    .controller('AddController', function (tmdbService, Movie, $scope) 
+    .controller('AddController', function (tmdbService, loaderService, Movie, $scope) 
     {
         var _this = this;
         
@@ -8,8 +8,6 @@ angular
         this.result = null;
         
         this.modalShown = false;
-        
-        this.loading = false;
         
         var imdbRegex = /^(?:http:\/\/)?(?:www\.)?imdb\.com\/title\/(tt\d+)/i;
         
@@ -29,7 +27,7 @@ angular
             var data = imdbRegex.exec(_this.url);
             if(data.length !== null) // Found 
             {
-                _this.loading = true;
+                loaderService.start();
                 
                 tmdbService.api
                     .find.getById({ id: data[1], external_source: "imdb_id" })
@@ -49,8 +47,9 @@ angular
                         $scope.$apply(function () {
                             _this.modalShown = true;
                             _this.result = movie;
-                            _this.loading = false;
                         });
+                        
+                        loaderService.done();
                         
                         console.log(movie);
                     })
@@ -59,9 +58,7 @@ angular
                         console.log('Whoops! There was an error while retrieving movie.');
                         console.log(error);
                         
-                        $scope.$apply(function () {
-                            _this.loading = false;
-                        });
+                        loaderService.done();
                     });
             }
         }
