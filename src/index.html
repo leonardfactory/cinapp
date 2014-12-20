@@ -18,7 +18,6 @@
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
         
-        <!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet"> -->
         <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Bitter:400,700' rel='stylesheet' type='text/css'>
         
@@ -30,7 +29,30 @@
         <!-- endinject -->
     </head>
     <body>
-        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <nav class="navbar u-full-width" role="navigation">
+            <div class="u-pull-right" ng-controller="LoginCtrl as loginCtrl" ng-cloak>
+                <ul class="navbar-menu" ng-if="loginCtrl.logged === false">
+                    <li ui-sref-active="active"><a ui-sref="main">Home</a></li>
+                    <li>
+                        <form class="navbar-form form-inline" role="login" > <!-- -->
+                            <input type="text" placeholder="Username" ng-model="loginCtrl.user.username">
+                            <input type="password" placeholder="Password" ng-model="loginCtrl.user.password">
+                            <button type="submit" class="button" ng-click="loginCtrl.login()">Login</button>
+                        </form>
+                    </li>
+                </ul>
+                <ul class="navbar-menu" ng-if="loginCtrl.logged === true">
+                    <li ui-sref-active="active"><a ui-sref="main">Home</a></li>
+                    <li ui-sref-active="active"><a ui-sref="movies">My Movies</a></li>
+                    <li ui-sref-active="active"><a ui-sref="search">Search</a></li>
+                    <li ui-sref-active="active"><a ui-sref="add">Add</a></li>
+                </ul>
+            </div>
+            <a class="nav-brand" href="#">
+                <img src="assets/images/nav-logo-big.png" />
+            </a>
+        </nav>
+        <!--<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed">
@@ -40,7 +62,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="#">
-                        <img src="assets/images/nav-logo.png" />
+                        <img src="assets/images/nav-logo-big.png" />
                     </a>
                 </div>
                 
@@ -55,17 +77,17 @@
                         <button type="submit" class="btn btn-default" ng-click="loginCtrl.login()">Login</button>
                     </form>
                     <ul ng-if="loginCtrl.logged === true" class="nav navbar-nav navbar-right">
-                        <li class="active"><a href="#/">Home <span class="sr-only">(current)</span></a></li>
-                        <li><a href="#/movies">My Movies</a></li>
-                        <li><a href="#/search">Search</a></li>
-                        <li><a href="#/add">Add</a></li>
+                        <li ui-sref-active="active"><a ui-sref="main">Home <span class="sr-only">(current)</span></a></li>
+                        <li ui-sref-active="active"><a ui-sref="movies">My Movies</a></li>
+                        <li ui-sref-active="active"><a ui-sref="search">Search</a></li>
+                        <li ui-sref-active="active"><a ui-sref="add">Add</a></li>
                     </ul>
                     <ul ng-if="loginCtrl.logged === false" class="nav navbar-nav navbar-right">
                         <li class="active"><a href="#/">Home <span class="sr-only">(current)</span></a></li>
                     </ul>
-                </div><!-- /.navbar-collapse -->
+                </div>
             </div>
-        </nav>
+        </nav>-->
         
         <div ui-view></div>
         <!-- bower:js -->

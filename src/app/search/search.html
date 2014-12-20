@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
+        <div class="twelve columns">
             <div class="input-group has-feedback" ng-class="{'has-error': searchCtrl.queryError}">
                 <input type="text" class="form-control" ng-model="searchCtrl.query">
                 <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
@@ -13,7 +13,7 @@
     
     <!-- Results -->
     <div class="row">
-        <div class="col-md-12">
+        <div class="twelve columns">
             <ul class="movies-list">
                 <li ng-repeat="movie in searchCtrl.results" class="clearfix">
                     <div class="movie-cover col-md-2">

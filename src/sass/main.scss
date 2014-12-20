@@ -1,17 +1,29 @@
 @import "variables";
 
+/* General Typography
+ * =============================================================== */
 body {
-  padding-top: 70px;
+  font-family: $font-family-sans-serif;
 }
 
-.navbar-brand {
-  padding-top: 6px;
-  
-  img {
-    height: 48px;
+/* Navbar
+ * =============================================================== */
+@import "navbar";
+
+/* Modal
+ * =============================================================== */
+@import "modal";
+
+/* Forms
+ * =============================================================== */
+.form-inline {
+  input, button {
+    display: inline-block;
   }
 }
 
+/* Alert
+ * =============================================================== */
 div.alert {
   &.ng-enter {
     animation: 0.5s fadeInDown;

@@ -1,0 +1,49 @@
+@import "variables";
+
+// Vars
+$navbar-height: 100px;
+$navbar-brand-img-height: 68px;
+
+body {
+  padding-top: $navbar-height + 10px;
+}
+
+.navbar {
+  background-color: $gray-lighter;
+  height: $navbar-height;
+  padding: 0 30px;
+  position: fixed;
+  top: 0;
+  z-index: 2;
+}
+
+ul.navbar-menu {
+  height: $navbar-height;
+  list-style-type: none;
+  
+  li {
+    display: inline-block;
+    list-style-type: none;
+    height: $navbar-height;
+    line-height: $navbar-height;
+    vertical-align: middle;
+    padding: 0 $padding-small;
+    
+    a, a:visited {
+      text-decoration: none;
+    }
+    
+    a:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+.nav-brand {
+  padding-top: ($navbar-height - $navbar-brand-img-height) / 2;
+  display: block;
+  
+  img {
+    height: $navbar-brand-img-height;
+  }
+}

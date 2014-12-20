@@ -7,6 +7,8 @@ angular
         this.url = '';
         this.result = null;
         
+        this.modalShown = false;
+        
         this.loading = false;
         
         var imdbRegex = /^(?:http:\/\/)?(?:www\.)?imdb\.com\/title\/(tt\d+)/i;
@@ -14,6 +16,7 @@ angular
         this.find = function () 
         {
             var data = imdbRegex.exec(_this.url);
+            this.modalShown = true;
             if(data.length !== null) // Found 
             {
                 _this.loading = true;

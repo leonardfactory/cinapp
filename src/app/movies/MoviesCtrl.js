@@ -28,7 +28,7 @@ angular
             movie.setYear(_this.inlineMovie.year);
             
             _this.movies.addMovie(movie).then(function () {
-                User.current().relation('watched').add(movie);
+                // User.current().relation('watched').add(movie);
                 
                 _this.alerts.push({
                     message: 'Added movie `' + movie.getName() + '`',
