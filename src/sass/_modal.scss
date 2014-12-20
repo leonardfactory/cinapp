@@ -21,12 +21,55 @@
 }
 
 .modal-overlay {
-  width: 600px;
-  height: 400px;
+  width: 800px;
+  height: 430px;
   
   position: fixed;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   background-color: $gray-lighter;
+}
+
+/** Movie Modal **/
+.modal-overlay {
+  .content {
+    box-sizing: border-box;
+    width: 500px;
+    float: left;
+    padding: $padding-general;
+  }
+  
+  .poster {
+    width: 300px;
+    height: 430px;
+    float: right;
+    overflow: hidden;
+  }
+  
+  h1.title {
+    font-weight: bold;
+    font-size: 1.8em;
+    color: $brand-primary;
+  }
+  
+  blockquote {
+    font-style: italic;
+    line-height: 1.1;
+    color: #95A4A5;
+    margin: 0.1em 0.1em 1em 0.1em;
+    font-size: 1em;
+  }
+  
+  p.description {
+    font-size: 0.9em;
+    font-family: $font-family-serif;
+    color: #7E8B8C;
+  }
+  
+  .actions {
+    a {
+      margin-right: 0.4em;
+    }
+  }
 }

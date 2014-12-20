@@ -1,16 +1,22 @@
 angular
     .module('cinApp')
-    .controller('MoviesCtrl', function ($scope, User, Movie, WatchedCollection) 
+    .controller('MoviesCtrl', function ($scope, $timeout, User, Movie, WatchedCollection) 
     {
         var _this = this;
         
+        this.movies = new WatchedCollection();
+        
         this.inlineMovie = {};
         
-        this.loading = true;
-        
-        this.movies = new WatchedCollection();
-        this.movies.fetch().then(function () {
-            _this.loading = false; 
+        // Deferred loading
+        $timeout(function () {
+            _this.loading = true;
+        })
+        .then(function () {
+            return _this.movies.fetch();
+        })
+        .then(function () {
+            _this.loading = false;
         });
         
         this.alerts = [];

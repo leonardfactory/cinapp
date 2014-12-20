@@ -10,8 +10,9 @@
 $gray-base:              #000 !default;
 $gray-darker:            lighten($gray-base, 13.5%) !default; // #222
 $gray-dark:              lighten($gray-base, 20%) !default;   // #333
-$gray:                   lighten($gray-base, 33.5%) !default; // #555
-$gray-light:             #dbe8f0; //lighten($gray-base, 46.7%) !default; // #777
+$gray:                   #7e8b8c; // #555
+$gray-light:             #95a4a5; //lighten($gray-base, 46.7%) !default; // #777
+$gray-very-light:        #bdc3c7;
 $gray-lighter:           #ecf2f6; // lighten($gray-base, 93.5%) !default; // #eee
 
 $brand-primary:         #0B486A !default;
@@ -52,3 +53,7 @@ $font-family-base:        $font-family-sans-serif !default;
 $padding-general: 32px;
 $padding-medium: 16px;
 $padding-small: 8px;
+
+//== Navbar
+$navbar-height: 100px;
+$navbar-brand-img-height: 68px;

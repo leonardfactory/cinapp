@@ -1,6 +1,6 @@
 angular
     .module('cinApp')
-    .controller('AddController', function (tmdbService, Movie) 
+    .controller('AddController', function (tmdbService, Movie, $scope) 
     {
         var _this = this;
         
@@ -13,10 +13,20 @@ angular
         
         var imdbRegex = /^(?:http:\/\/)?(?:www\.)?imdb\.com\/title\/(tt\d+)/i;
         
+        // Mousetrap `esc` for Modal
+        Mousetrap.bind('esc', function () 
+        {
+            if(_this.modalShown) {
+                $scope.$apply(function () {
+                     _this.modalShown = false;
+                });
+            }
+        });
+        
+        // Find movie
         this.find = function () 
         {
             var data = imdbRegex.exec(_this.url);
-            this.modalShown = true;
             if(data.length !== null) // Found 
             {
                 _this.loading = true;
@@ -24,7 +34,7 @@ angular
                 tmdbService.api
                     .find.getById({ id: data[1], external_source: "imdb_id" })
                     .then(function (results) 
-                    {
+                    {   
                         if(results.movie_results.length > 0) {
                             var tmdbId = results.movie_results[0].id;
                             return tmdbService.api
@@ -36,15 +46,22 @@ angular
                     })
                     .then(function (movie) 
                     {
-                        _this.result = movie;
+                        $scope.$apply(function () {
+                            _this.modalShown = true;
+                            _this.result = movie;
+                            _this.loading = false;
+                        });
+                        
                         console.log(movie);
-                        _this.loading = false;
                     })
                     .catch(function (error) 
                     {
                         console.log('Whoops! There was an error while retrieving movie.');
                         console.log(error);
-                        _this.loading = false;
+                        
+                        $scope.$apply(function () {
+                            _this.loading = false;
+                        });
                     });
             }
         }

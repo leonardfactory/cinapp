@@ -1,0 +1,89 @@
+@import "variables";
+
+.btn {
+  border-radius: 4px;
+  padding: $padding-small $padding-medium;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  letter-spacing: .05rem;
+  
+  transition: background-color 0.2s linear, color 0.2s linear;
+}
+
+//== Button icons
+.btn {
+  span[class*="iconicfill-"] {
+    display: inline-block;
+    font-size: 1.7em;
+    vertical-align: middle;
+    margin-top: -0.05em;
+    width: 20px;
+    transition: color 0.2s linear;
+  }
+}
+
+//== Button in forms
+form .btn {
+  padding: 0 $padding-medium;
+}
+
+//== Button styles
+@mixin button-style($color) {
+  border: 2px solid $color;
+  color: $color;
+  background-color: none;
+  
+  span[class*="iconicfill-"] {
+    color: $color;
+  }
+  
+  &:hover {
+    background-color: $color;
+    color: white;
+    
+    span[class*="iconicfill-"] {
+      color: white;
+    }
+  }
+}
+
+.btn-normal   { @include button-style($gray); }
+.btn-primary  { @include button-style($brand-primary); }
+.btn-action   { @include button-style($brand-info); }
+
+//== Form inputs
+input[type="text"].form-control,
+input[type="password"].form-control,
+input[type="number"].form-control {
+  border: 2px solid $gray-very-light;
+  color: $gray;
+  transition: border 0.2s linear;
+  
+  &:focus {
+    border: 2px solid $brand-info;
+  }
+}
+
+//== Logout button
+a.logout {
+  cursor: pointer;
+}
+
+//== Placeholder
+$placeholder-color: $gray-very-light;
+::-webkit-input-placeholder { /* WebKit browsers */
+    color:    $placeholder-color;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    $placeholder-color;
+   opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    $placeholder-color;
+   opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+   color:    $placeholder-color;
+}

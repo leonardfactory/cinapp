@@ -6,8 +6,20 @@ var models = angular.module('cinApp.models', ['parse-angular', 'parse-angular.en
 var app = angular.module('cinApp', ['cinApp.models', 'parse-angular', 'parse-angular.enhance', 'ngAnimate', 'ui.router', 'templates']);
 var templates = angular.module('templates', []);
 
+angular.element(document).ready(function() {
+    deferredBootstrapper.bootstrap({
+        element: document.body,
+        module: 'cinApp',
+        injectorModules: 'cinApp',
+        resolve: {
+            tmdbService: function (tmdbService) {
+                return tmdbService.init();
+            }
+        }
+    });
+});
+
 app.run(function (parseService, tmdbService) 
 {
     parseService.init();
-    tmdbService.init();
 });

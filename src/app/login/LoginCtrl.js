@@ -34,4 +34,10 @@ angular
                     _this.alert = 'Error while logging: ' + error;
                 });
         }
+        
+        this.logout = function () 
+        {
+            Parse.User.logOut();
+            _this.logged = false;
+        }
     });

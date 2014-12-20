@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="cinApp">
+<html>
     <head>
         <title>Cinapp</title>
 
@@ -35,9 +35,9 @@
                     <li ui-sref-active="active"><a ui-sref="main">Home</a></li>
                     <li>
                         <form class="navbar-form form-inline" role="login" > <!-- -->
-                            <input type="text" placeholder="Username" ng-model="loginCtrl.user.username">
-                            <input type="password" placeholder="Password" ng-model="loginCtrl.user.password">
-                            <button type="submit" class="button" ng-click="loginCtrl.login()">Login</button>
+                            <input type="text" class="form-control" placeholder="Username" ng-model="loginCtrl.user.username">
+                            <input type="password" class="form-control" placeholder="Password" ng-model="loginCtrl.user.password">
+                            <button type="submit" class="btn btn-normal" ng-click="loginCtrl.login()">Login</button>
                         </form>
                     </li>
                 </ul>
@@ -46,6 +46,7 @@
                     <li ui-sref-active="active"><a ui-sref="movies">My Movies</a></li>
                     <li ui-sref-active="active"><a ui-sref="search">Search</a></li>
                     <li ui-sref-active="active"><a ui-sref="add">Add</a></li>
+                    <li><a class="logout" ng-click="loginCtrl.logout()">Logout</a></li>
                 </ul>
             </div>
             <a class="nav-brand" href="#">

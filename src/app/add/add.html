@@ -1,26 +1,44 @@
 <div class="modal-background" ng-class="{ 'modal-shown': addCtrl.modalShown }">
     <div class="modal-overlay">
-        
+        <div class="content">
+            <h1 class="title">{{ addCtrl.result.title }}</h1>
+            
+            <blockquote ng-if="addCtrl.result.tagline">{{ addCtrl.result.tagline }}</blockquote>
+            
+            <p class="description">{{ addCtrl.result.overview }}</p>
+            
+            <div class="actions">
+                <a class="btn btn-action">
+                    <span class="iconicfill-check"></span> Check
+                </a>
+                <a class="btn btn-action">
+                    <span class="iconicfill-plus"></span> Add to Watchlist
+                </a>
+            </div>
+        </div>
+        <div class="poster">
+            <movie-img movie="addCtrl.result" size="300px"></movie-img>
+        </div>
     </div>
 </div>
 <div class="container">
     <div class="row">
         <div class="twelve columns">
-            <div class="spinner" ng-if="addCtrl.loading">
-                <div class="loader">Loading</div>
+            <div class="spinner-container">
+                <div class="spinner" ng-if="addCtrl.loading">
+                    <div class="loader">Loading</div>
+                </div>
             </div>
             
-            <div class="input-group">
+            <form role="add">
                 <input type="text" placeholder="IMDB Address" class="form-control" ng-model="addCtrl.url">
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" ng-click="addCtrl.find()">Search</button>
-                </span>
-            </div>
+                <button class="btn btn-normal" type="button" ng-click="addCtrl.find()">Search</button>
+            </form>
         </div>
     </div>
     
     <!-- Movie found -->
-    <div class="row" ng-if="addCtrl.result !== null">
+    <div class="row" style="display: none;">
         <div class="four columns">
             <movie-img movie="addCtrl.result"></movie-img>
         </div>

@@ -65,11 +65,12 @@ angular
         
         // Init
         tmdbService.init = function () {
-            tmdbService.api
+            return tmdbService.api
                 .configurations.getConfiguration()
                 .then(function (data) 
                 {
                     tmdbService.config = data;
+                    return tmdbService;
                 });
         };
         

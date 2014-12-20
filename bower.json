@@ -21,7 +21,9 @@
     "parse-angular-patch": "*",
     "angular-animate": "~1.3.6",
     "animate.css": "~3.2.0",
-    "angular-ui-router": "~0.2.13"
+    "angular-ui-router": "~0.2.13",
+    "mousetrap": "~1.4.6",
+    "angular-deferred-bootstrap": "~0.1.5"
   },
   "overrides": {
     "bootstrap-sass-official": {

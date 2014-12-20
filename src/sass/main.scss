@@ -1,5 +1,13 @@
 @import "variables";
 
+/* Icons
+ * =============================================================== */
+@import url(http://weloveiconfonts.com/api/?family=iconicfill);
+
+[class*="iconicfill-"]:before {
+  font-family: 'IconicFill', sans-serif;
+}
+
 /* General Typography
  * =============================================================== */
 body {
@@ -21,6 +29,8 @@ body {
     display: inline-block;
   }
 }
+
+@import "ui";
 
 /* Alert
  * =============================================================== */
