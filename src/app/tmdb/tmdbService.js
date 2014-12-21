@@ -55,6 +55,7 @@ angular
         // Movies
         tmdbService.api.movies = {
             getById:    deferredRequest('movies', 'getById'),
+            getCredits: deferredRequest('movies', 'getCredits'),
             getImages:  deferredRequest('movies', 'getImages')
         };
         

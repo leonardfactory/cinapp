@@ -27,7 +27,7 @@ angular
             var movie = new Movie();
             movie.setName(_this.inlineMovie.name);
             movie.setDirector(_this.inlineMovie.director);
-            movie.setYear(_this.inlineMovie.year);
+            movie.setYear(parseInt(_this.inlineMovie.year, 10));
             
             _this.movies.addMovie(movie).then(function () {
                 // User.current().relation('watched').add(movie);

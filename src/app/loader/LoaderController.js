@@ -4,9 +4,13 @@ angular
     {
         var _this = this;
         
-        $scope.$watch('loaderService.loading', function (newValue, oldValue) {
-            if(newValue !== oldValue) {
-                _this.loading = newValue;
-            }
-        });
+        $scope.$watch(
+            function () {
+                return loaderService.loading
+            }, 
+            function (newValue, oldValue) {
+                if(newValue !== oldValue) {
+                    _this.loading = newValue;
+                }
+            });
     });

@@ -3,7 +3,7 @@ angular
     .directive('movieImg', function (tmdbService) 
     {
         return {
-            template: '<img src="{{baseImagePath}}{{movie.poster_path}}" width="{{width}}" />',
+            template: '<img src="{{baseImagePath}}{{posterPath}}" width="{{width}}" />',
             scope: {
                 movie: '=',
                 size: '@'
@@ -13,6 +13,16 @@ angular
                     scope.baseImagePath = tmdbService.config.images.base_url + '/' + tmdbService.config.images.poster_sizes[3];
                 }
                 scope.width = attrs.size ? attrs.size : 'auto';
+                
+                // Adapt movie
+                scope.$watch('movie', function (movie) {
+                    if(movie && movie.poster_path) {
+                        scope.posterPath = movie.poster_path;
+                    }
+                    else if(movie && movie.getPosterPath) {
+                        scope.posterPath = movie.getPosterPath();
+                    }
+                });
             }
         }
     });

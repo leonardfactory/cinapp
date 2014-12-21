@@ -2,8 +2,8 @@
  * Cinapp entry point.
  * Here we define the ngApp while initializing some useful stuff.
  */
-var models = angular.module('cinApp.models', ['parse-angular', 'parse-angular.enhance']);
-var app = angular.module('cinApp', ['cinApp.models', 'parse-angular', 'parse-angular.enhance', 'ngAnimate', 'ui.router', 'templates']);
+var models = angular.module('cinApp.models', ['parse-angular', 'parse-angular.enhance', 'parse-extend']);
+var app = angular.module('cinApp', ['cinApp.models', 'parse-angular', 'parse-angular.enhance', 'parse-extend', 'ngAnimate', 'ui.router', 'templates']);
 var templates = angular.module('templates', []);
 
 angular.element(document).ready(function() {

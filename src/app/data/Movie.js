@@ -4,7 +4,7 @@ angular
     {   
         var Movie = Parse.Object.extend({
             className: 'Movie',
-            attrs: ['name', 'director', 'year']
+            attrs: ['name', 'originalTitle', 'director', 'releaseDate', 'posterPath', 'overview', 'imdbId', 'tmdbId', 'status', 'voteAverage', 'runtime']
         });
         
         return Movie;

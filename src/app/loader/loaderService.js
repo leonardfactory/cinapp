@@ -1,19 +1,25 @@
 angular
     .module('cinApp')
-    .service('loaderService', function () 
+    .service('loaderService', function ($rootScope) 
     {
-        return {
+        var self = {
             loading: false,
-            counter: 0,
-            start: function () {
-                this.counter++;
-                this.loading = true;
-            },
-            done: function () {
-                this.counter--;
-                if(this.counter === 0) {
-                    this.loading = false;   
-                }
+            counter: 0
+        };
+        
+        self.start = function ()
+        {
+            self.counter++;
+            self.loading = true;
+        }
+        
+        self.done = function () 
+        {
+            self.counter--;
+            if(self.counter === 0) {
+                self.loading = false;   
             }
         }
+        
+        return self;
     });

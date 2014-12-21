@@ -7,12 +7,12 @@
             
             <ul class="movies-list">
                 <li ng-repeat="movie in moviesCtrl.movies.models" class="row">
-                    <div class="movie-cover col-md-2">
-                        <div class="movie-cover-placeholder"></div>
+                    <div class="movie-cover two columns">
+                        <movie-img movie="movie" size="100px"></movie-img>
                     </div>
-                    <div class="movie-description col-md-10">
-                        <div class="movie-name">{{movie.getName()}}</div>
-                        <div class="movie-info">{{movie.getDirector()}} &mdash; {{movie.getYear()}}</div>
+                    <div class="movie-description ten columns">
+                        <div class="movie-name">{{movie.name}}</div>
+                        <div class="movie-info">{{movie.director}} &mdash; {{movie.releaseDate | date:'yyyy' }}</div>
                     </div>
                 </li>
                 <li>

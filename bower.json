@@ -23,7 +23,8 @@
     "animate.css": "~3.2.0",
     "angular-ui-router": "~0.2.13",
     "mousetrap": "~1.4.6",
-    "angular-deferred-bootstrap": "~0.1.5"
+    "angular-deferred-bootstrap": "~0.1.5",
+    "moment": "~2.8.4"
   },
   "overrides": {
     "bootstrap-sass-official": {
