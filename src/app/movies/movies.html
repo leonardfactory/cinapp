@@ -17,18 +17,9 @@
                 </li>
                 <li>
                     <form class="form-inline" role="form">
-                        <div class="form-group">
-                            <label class="sr-only" for="movieTitle">Title</label>
-                            <input type="text" class="form-control" id="movieTitle" placeholder="Title" ng-model="moviesCtrl.inlineMovie.name">
-                        </div>
-                        <div class="form-group">
-                            <label class="sr-only" for="movieDirector">Director</label>
-                            <input type="text" class="form-control" id="movieDirector" placeholder="Director" ng-model="moviesCtrl.inlineMovie.director">
-                        </div>
-                        <div class="form-group">
-                            <label class="sr-only" for="movieYear">Year</label>
-                            <input type="text" class="form-control" id="movieYear" placeholder="Year" ng-model="moviesCtrl.inlineMovie.year">
-                        </div>
+                        <input type="text" class="form-control" id="movieTitle" placeholder="Title" ng-model="moviesCtrl.inlineMovie.name">
+                        <input type="text" class="form-control" id="movieDirector" placeholder="Director" ng-model="moviesCtrl.inlineMovie.director">
+                        <input type="text" class="form-control" id="movieYear" placeholder="Year" ng-model="moviesCtrl.inlineMovie.year">
                         <button type="submit" class="btn btn-normal" ng-click="moviesCtrl.addMovie()">Add</button>
                     </form>
                 </li>

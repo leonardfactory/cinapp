@@ -25,6 +25,10 @@ ul.navbar-menu {
     vertical-align: middle;
     padding: 0 $padding-small;
     
+    &.active {
+      background-color: white;
+    }
+    
     a, a:visited {
       text-decoration: none;
     }
