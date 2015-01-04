@@ -4,15 +4,21 @@ angular
     {
         return {
             template: '<img src="{{baseImagePath}}{{posterPath}}" width="{{width}}" />',
+            replace: true,
             scope: {
                 movie: '=',
-                size: '@'
+                size: '@',
+                masonry: '@'
             },
             link: function (scope, element, attrs) {
                 if(tmdbService.config) {
                     scope.baseImagePath = tmdbService.config.images.base_url + '/' + tmdbService.config.images.poster_sizes[3];
                 }
                 scope.width = attrs.size ? attrs.size : 'auto';
+                
+                if(attrs.masonry !== null) {
+                    element.addClass('movie-cover');
+                }
                 
                 // Adapt movie
                 scope.$watch('movie', function (movie) {
