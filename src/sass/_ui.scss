@@ -14,11 +14,11 @@
 
 //== Button icons
 .btn {
-  span[class*="iconicfill-"] {
+  span.oi {
     display: inline-block;
-    font-size: 1.7em;
+    font-size: 1.25em;
+    margin-top: 0.2em;
     vertical-align: middle;
-    margin-top: -0.05em;
     width: 20px;
     transition: color 0.2s linear;
   }
@@ -35,7 +35,7 @@ form .btn {
   color: $color;
   background-color: none;
   
-  span[class*="iconicfill-"] {
+  span.oi {
     color: $color;
   }
   
@@ -43,7 +43,7 @@ form .btn {
     background-color: $color;
     color: white;
     
-    span[class*="iconicfill-"] {
+    span.oi {
       color: white;
     }
   }

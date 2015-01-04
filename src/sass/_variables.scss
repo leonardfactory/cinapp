@@ -57,3 +57,12 @@ $padding-small: 8px;
 //== Navbar
 $navbar-height: 60px;
 $navbar-brand-img-height: 38px;
+
+//== Clearfix
+.clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
