@@ -23,6 +23,7 @@
                      
                      if(Parse._.isObject(prototypeProps) && Parse._.isArray(prototypeProps.attrs))
                      {
+                         // Define properties
                          angular.forEach(prototypeProps.attrs, function (attr) 
                          {
                              Object.defineProperty(newClass.prototype, attr, {
@@ -32,6 +33,17 @@
                                  set: function (value) { this.set(attr, value); return this; }
                              });
                          });
+                         
+                         // Plain-Object converter
+                         newClass.prototype.toObject = function () 
+                         {
+                             var obj = {};
+                             var _this = this;
+                             angular.forEach(prototypeProps.attrs, function (attr) {
+                                 obj[attr] = _this.get(attr);
+                             });
+                             return obj;
+                         }
                      }
                      
                      return newClass;

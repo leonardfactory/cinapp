@@ -12,16 +12,16 @@ angular
             addMovie: function (movie) {
                 var _this = this;
                 
-                movie.relation('users').add(User.current());
-                
-                return movie.save().then(function (object) {
-                    _this.add(object);
-                    User.current().relation('watched').add(movie);
+                return Parse.Cloud
+                    .run('insertMovie', { movie: movie.toObject() })
+                    .then(function (object) {
+                        _this.add(object);
+                        User.current().relation('watched').add(object);
                     
-                    return User.current().save().then(function (user) {
-                        return object;
+                        return User.current().save().then(function (user) {
+                            return object;
+                        });
                     });
-                });
             }
         });
         
