@@ -93,7 +93,7 @@ gulp.task('build:partials', function (cb)
 });
 
 
-gulp.task('build:html', ['build:copy-libs', 'build:angular', 'build:sass-fast', 'build:partials', 'build:assets'], function () 
+gulp.task('build:html', ['build:copy-libs', 'build:common', 'build:angular', 'build:sass-fast', 'build:partials', 'build:assets'], function () 
 {
     gulp.src('./src/index.html')
         .pipe(plumber(onError))
