@@ -11,6 +11,18 @@ angular
                 controller: 'MoviesCtrl',
                 controllerAs: 'moviesCtrl'
             })
+            .state('watchlist', {
+                url: '/watchlist',
+                templateUrl: 'watchlist/watchlist.html',
+                controller: 'WatchlistController',
+                controllerAs: 'watchlistCtrl'
+            })
+            .state('watchlist.single', {
+                url: '/watchlist/:normalizedName',
+                templateUrl: 'watchlist/single.html',
+                controller: 'SingleWatchlistController',
+                controllerAs: 'singleCtrl'
+            })
             .state('add', {
                 url: '/add',
                 templateUrl: 'add/add.html',

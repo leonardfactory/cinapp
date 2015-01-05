@@ -1,5 +1,16 @@
 @import "variables";
 
+//== Icons
+span.oi {
+  display: inline-block;
+  font-size: 1.25em;
+  margin-top: 0.2em;
+  vertical-align: middle;
+  width: 20px;
+  transition: color 0.2s linear;
+}
+
+//== Buttons
 .btn {
   border-radius: 4px;
   padding: $padding-small $padding-medium;
@@ -15,12 +26,7 @@
 //== Button icons
 .btn {
   span.oi {
-    display: inline-block;
-    font-size: 1.25em;
-    margin-top: 0.2em;
-    vertical-align: middle;
-    width: 20px;
-    transition: color 0.2s linear;
+    // ..
   }
 }
 
@@ -40,6 +46,7 @@ form .btn {
   }
   
   &:hover {
+    border: 2px solid $color;
     background-color: $color;
     color: white;
     

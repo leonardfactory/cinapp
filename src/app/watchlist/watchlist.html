@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="row">
+        <div class="four columns">
+            <h2>Watchlists</h2>
+            <ul class="watchlists">
+                <li ng-repeat="watchlist in watchlistCtrl.watchlists.models">
+                     <a ui-sref="#/watchlist/{{watchlist.normalizedName}}">{{watchlist.name}}</a>
+                </li>
+            </ul>
+            
+            <a ng-click="watchlistCtrl.createWatchlist()" class="btn btn-action">
+                <span class="oi" data-glyph="plus"></span> Create Watchlist
+            </a>
+        </div>
+        <div class="eight columns">
+            <div ui-view></div>
+        </div>
+    </div>
+</div>
