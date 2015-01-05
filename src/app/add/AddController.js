@@ -70,7 +70,7 @@ angular
                                 .movies.getById({ id: tmdbId, language: 'it' });
                         }
                         else {
-                            console.error('No movie found...');
+                            throw new Error('No movie found...');
                         }
                     })
                     .then(function (movie) 
