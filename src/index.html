@@ -35,9 +35,9 @@
                     <li ui-sref-active="active"><a ui-sref="main">Home</a></li>
                     <li>
                         <form class="navbar-form form-inline" role="login" > <!-- -->
-                            <input type="text" class="form-control" placeholder="Username" ng-model="loginCtrl.user.username">
-                            <input type="password" class="form-control" placeholder="Password" ng-model="loginCtrl.user.password">
-                            <button type="submit" class="btn btn-normal" ng-click="loginCtrl.login()">Login</button>
+                            <input type="text" class="form-control form-control-negative" placeholder="Username" ng-model="loginCtrl.user.username">
+                            <input type="password" class="form-control form-control-negative" placeholder="Password" ng-model="loginCtrl.user.password">
+                            <button type="submit" class="btn btn-primary" ng-click="loginCtrl.login()">Login</button>
                         </form>
                     </li>
                 </ul>
@@ -51,7 +51,7 @@
                 </ul>
             </div>
             <a class="nav-brand" href="#">
-                <img src="assets/images/nav-logo.png" />
+                <img src="assets/images/nav-logo-negative.png" />
             </a>
             
             <!-- Loader -->

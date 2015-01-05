@@ -130,6 +130,17 @@ form .btn {
       color: white;
     }
   }
+  
+  &.btn-negative {
+    border: 2px solid $gray-lighter;
+    color: $gray-lighter;
+    
+    &:hover {
+      border: 2px solid white;
+      background-color: white;
+      color: $color;
+    }
+  }
 }
 
 .btn-normal   { @include button-style($gray); }
@@ -143,10 +154,22 @@ input[type="password"].form-control,
 input[type="number"].form-control {
   border: 2px solid $gray-very-light;
   color: $gray;
-  transition: border 0.2s linear;
+  transition: border 0.2s linear, background-color 0.2s linear;
   
   &:focus {
     border: 2px solid $brand-info;
+  }
+  
+  &.form-control-negative {
+    background-color: lighten($brand-primary, 5%);
+    border: 2px solid lighten($brand-primary, 5%);
+    color: $gray-lighter;
+    
+    &:focus {
+      border: none;
+      background-color: $brand-primary;
+      border: 2px solid $brand-primary;
+    }
   }
 }
 
