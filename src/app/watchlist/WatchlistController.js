@@ -1,13 +1,10 @@
 angular
     .module('cinApp')
-    .controller('WatchlistController', function ($timeout, loaderService, WatchlistCollection, angularModal)
+    .controller('WatchlistController', function ($timeout, loaderService, Watchlist, WatchlistCollection, angularModal)
     {
         this.watchlists = new WatchlistCollection();
         
         var _this = this;
-        
-        // Watchlist to be created
-        this.created = {};
         
         // Deferred loading
         $timeout(loaderService.start)
@@ -26,10 +23,19 @@ angular
                     templateUrl: 'watchlist/modal-create.html',
                     closeDelay: 100 /* ms */
                 })
-                .then(function (shouldAdd) {
-                    console.log('Created name is ' + _this.created.name);
-                    console.log('ShouldAdd is ' + shouldAdd);
+                .then(function (result) {
+                    if(result.result) {
+                        var name = result.params;
+                        
+                        loaderService.start();
+                        
+                        var watchlist   = new Watchlist();
+                        watchlist.name  = name;
+                        
+                        return _this.watchlists.addWatchlist(watchlist); 
+                    }
                 })
+                .then(loaderService.done)
                 .catch(function (error) {
                     console.log('Error ' + error);
                 });

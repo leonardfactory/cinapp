@@ -20,8 +20,8 @@ modal.factory('angularModal', function ($q, $templateCache, $document, $rootScop
         var modalScope = $rootScope.$new();
         
         var closeDeferred = $q.defer();
-        modalScope.close = function (result) {
-            closeDeferred.resolve(result);
+        modalScope.close = function (result, params) {
+            closeDeferred.resolve({ result: result, params: params });
         }
         
         // Compute element from template and insert it in the DOM
@@ -39,10 +39,10 @@ modal.factory('angularModal', function ($q, $templateCache, $document, $rootScop
             
             var delay = options.closeDelay || 0;
             $timeout(function () {
+                deferred.resolve({ result: result.result, params: result.params });
+                
                 modalScope.$destroy();
                 element.remove();
-            
-                deferred.resolve(result);
             }, delay);
         });
         
@@ -55,10 +55,6 @@ modal.factory('angularModal', function ($q, $templateCache, $document, $rootScop
 modal.directive('ngModalBox', function () {
     return {
         templateUrl: 'modal/modal-box.html',
-        transclude: true,
-        scope: {
-            close: '&',
-            shown: '='
-        }
+        transclude: true
     }
 });

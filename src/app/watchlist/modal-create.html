@@ -1,10 +1,13 @@
-<ng-modal-box close="close(false)" shown="shown" class="modal-watchlist">
-    <form role="create">
-        <input type="text" placeholder="Watchlist Name" class="form-control" ng-model="watchlistCtrl.created.name">
-        <br />
-        <div class="modal-actions">
-            <button class="btn btn-normal" type="button" ng-click="close(false)">Cancel</button>
-            <button class="btn btn-action" type="button" ng-click="close(true)">Add Watchlist</button>
-        </div>
-    </form>
-</ng-modal-box>
+<!--<ng-modal-box close="close(false)" shown="shown" class="modal-watchlist"> -->
+<div class="modal-background modal-watchlist" ng-class="{ 'modal-shown' : shown }">
+    <div class="modal-overlay">
+        <form role="create">
+            <input type="text" placeholder="Watchlist Name" class="form-control" ng-model="name">
+            <br />
+            <div class="modal-actions">
+                <button class="btn btn-normal" type="button" ng-click="close(false)">Cancel</button>
+                <button class="btn btn-action" type="button" ng-click="close(true, name)">Add Watchlist</button>
+            </div>
+        </form>
+    </div>
+</div>

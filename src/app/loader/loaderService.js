@@ -15,7 +15,9 @@ angular
         
         self.done = function () 
         {
-            self.counter--;
+            if(self.counter > 0) {
+                self.counter--;
+            } 
             if(self.counter === 0) {
                 self.loading = false;   
             }
