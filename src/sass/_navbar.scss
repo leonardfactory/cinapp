@@ -11,6 +11,7 @@ body {
   position: fixed;
   top: 0;
   z-index: 2;
+  box-shadow: 0px 1px 4px 0px rgba(0,0,0,0.2);
 }
 
 ul.navbar-menu {
@@ -30,13 +31,18 @@ ul.navbar-menu {
     
     &.active {
       background-color: #3498db;
+      a, a:visited {
+        color: white;
+      }
     }
     
     a, a:visited {
+      color: $gray-lighter;
       text-decoration: none;
     }
     
     a:hover {
+      color: white;
       text-decoration: none;
     }
   }

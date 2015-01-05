@@ -13,7 +13,7 @@ $gray-dark:              lighten($gray-base, 20%) !default;   // #333
 $gray:                   #7e8b8c; // #555
 $gray-light:             #95a4a5; //lighten($gray-base, 46.7%) !default; // #777
 $gray-very-light:        #bdc3c7;
-$gray-lighter:           #ecf2f6; // lighten($gray-base, 93.5%) !default; // #eee
+$gray-lighter:           #ecf0f1; // lighten($gray-base, 93.5%) !default; // #eee
 
 $brand-primary:         #0B486A !default;
 $brand-success:         #51b26d !default;
@@ -27,7 +27,7 @@ $brand-danger:          #e74b3c !default;
 //## Settings for some of the most global styles.
 
 //** Background color for `<body>`.
-$body-bg:               #ecf0f1 !default;
+$body-bg:               $gray-lighter !default;
 //** Global text color on `<body>`.
 $text-color:            #34495e !default;
 
