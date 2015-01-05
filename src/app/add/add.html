@@ -16,8 +16,9 @@
                         <span class="oi" data-glyph="eye"></span> Add to Watchlist
                     </a>
                     <ul>
-                        <li>First of many others lists</li>
-                        <li>Second</li>
+                        <li ng-repeat="watchlist in addCtrl.watchlists.models">
+                            <a ng-click="addCtrl.addToWatchlist(watchlist)">{{watchlist.name}}</a>
+                        </li>
                     </ul>
                 </div>
             </div>

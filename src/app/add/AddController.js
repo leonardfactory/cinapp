@@ -1,6 +1,6 @@
 angular
     .module('cinApp')
-    .controller('AddController', function (tmdbService, loaderService, Movie, WatchedCollection, $scope) 
+    .controller('AddController', function (tmdbService, loaderService, Movie, WatchedCollection, Watchlist, WatchlistCollection, WatchlistMoviesCollection, $scope) 
     {
         var _this = this;
         
@@ -12,6 +12,10 @@ angular
         this.movies = new WatchedCollection();
         
         var imdbRegex = /^(?:http:\/\/)?(?:www\.)?imdb\.com\/title\/(tt\d+)/i;
+        
+        // Watchlists
+        this.watchlists = new WatchlistCollection();
+        this.watchlists.fetch();
         
         // Mousetrap `esc` for Modal
         Mousetrap.bind('esc', function () 
@@ -31,22 +35,32 @@ angular
                 loaderService.start();
                 
                 var movie = new Movie();
-                movie.setName(_this.result.title);
-                movie.setOriginalTitle(_this.result.original_title);
-                movie.setReleaseDate(moment(_this.result.release_date, 'YYYY-MM-DD').toDate());
-                movie.setStatus(_this.result.status);
-                movie.setPosterPath(_this.result.poster_path);
-                movie.setImdbId(_this.result.imdb_id);
-                movie.setTmdbId(_this.result.id.toString());
-                movie.setDirector(_this.result.director);
-                movie.setOverview(_this.result.overview);
-                movie.setRuntime(_this.result.runtime);
-                movie.setVoteAverage(_this.result.vote_average);
+                movie.fromApiObject(_this.result);
                 
                 _this.movies.addMovie(movie).then(function () {
                     loaderService.done();
                     console.log('Added: ' + _this.result.title);
                 });
+            }
+        }
+        
+        // Add to watchlists
+        this.addToWatchlist = function (watchlist) 
+        {   
+            if(_this.result !== null)
+            {
+                var watchlistMovies = WatchlistMoviesCollection.fromWatchlist(watchlist);
+                
+                loaderService.start();
+                
+                watchlistMovies.fetch()
+                    .then(function (results) {
+                        var movie = new Movie();
+                        movie.fromApiObject(_this.result);
+                        
+                        return watchlistMovies.addMovie(movie);
+                    })
+                    .then(loaderService.done);
             }
         }
         
