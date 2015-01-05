@@ -28,6 +28,13 @@
   transform: translate(-50%, -50%);
   background-color: $gray-lighter;
   
+  h3 {
+    font-size: 1.6rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin: 0 0 1.8rem 0;
+  }
+  
   .modal-actions {
     text-align: right;
   }
@@ -37,17 +44,26 @@
 .modal-overlay form {
   margin: $padding-general;
   
-  input[type="text"], input[type="password"] {
+  input[type="text"], 
+  input[type="email"],
+  input[type="password"] {
     width: 100%;
   }
 }
 
 /** Add Watchlist modal **/
 .modal-watchlist {
-  
   .modal-overlay {
     width: 400px;
-    height: 160px;
+    height: 200px;
+  }
+}
+
+/** Add User modal **/
+.modal-add-user {
+  .modal-overlay {
+    width: 400px;
+    height: 200px;
   }
 }
 
@@ -90,7 +106,6 @@
   p.description {
     margin-top: 1.8em;
     font-size: 0.9em;
-    font-family: $font-family-serif;
     color: #7E8B8C;
   }
   

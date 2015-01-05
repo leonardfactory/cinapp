@@ -5,7 +5,7 @@ body {
 }
 
 .navbar {
-  background-color: $gray-lighter;
+  background-color: #2980b9;
   height: $navbar-height;
   padding: 0 30px;
   position: fixed;
@@ -24,9 +24,12 @@ ul.navbar-menu {
     line-height: $navbar-height;
     vertical-align: middle;
     padding: 0 $padding-small;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1.3rem;
     
     &.active {
-      background-color: white;
+      background-color: #3498db;
     }
     
     a, a:visited {

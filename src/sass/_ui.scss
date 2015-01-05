@@ -138,6 +138,7 @@ form .btn {
 
 //== Form inputs
 input[type="text"].form-control,
+input[type="email"].form-control,
 input[type="password"].form-control,
 input[type="number"].form-control {
   border: 2px solid $gray-very-light;

@@ -7,7 +7,7 @@
 //
 //## Gray and brand colors for use across Bootstrap.
 
-$gray-base:              #000 !default;
+$gray-base:              #2c3e50 !default;
 $gray-darker:            lighten($gray-base, 13.5%) !default; // #222
 $gray-dark:              lighten($gray-base, 20%) !default;   // #333
 $gray:                   #7e8b8c; // #555
@@ -27,16 +27,14 @@ $brand-danger:          #e74b3c !default;
 //## Settings for some of the most global styles.
 
 //** Background color for `<body>`.
-$body-bg:               #fff !default;
+$body-bg:               #ecf0f1 !default;
 //** Global text color on `<body>`.
-$text-color:            $gray-dark !default;
+$text-color:            #34495e !default;
 
 //** Global textual link color.
-$link-color:            $brand-primary !default;
+$link-color:            $brand-info !default;
 //** Link hover color set via `darken()` function.
 $link-hover-color:      darken($link-color, 15%) !default;
-//** Link hover decoration.
-$link-hover-decoration: underline !default;
 
 
 //== Typography
@@ -45,6 +43,7 @@ $link-hover-decoration: underline !default;
 
 $font-family-sans-serif:  "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
 $font-family-serif:       "Bitter", Georgia, "Times New Roman", Times, serif !default;
+$font-family-text:        "Helvetica Neue", Helvetica, Arial, sans-serif !default;
 //** Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
 $font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace !default;
 $font-family-base:        $font-family-sans-serif !default;
