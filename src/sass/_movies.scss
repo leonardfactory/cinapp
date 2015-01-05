@@ -68,5 +68,9 @@ ul.movies-list {
     &.ng-enter {
       animation: fadeInDown 0.4s;
     }
+    
+    &:first-of-type {
+      margin-top: 0;
+    }
   }
 }

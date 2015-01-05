@@ -19,5 +19,12 @@ angular
             return acl;
         }
         
+        Security.WatchlistRemove = function (watchlist, user) 
+        {
+            var acl = watchlist.getACL();
+            acl.setWriteAccess(user.id, false);
+            return acl;
+        }
+        
         return Security;
     });

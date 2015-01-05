@@ -19,13 +19,16 @@ ul.watchlists {
   li {
     margin: 0;
     padding: 0;
+    position: relative;
     
     &.ng-enter {
       animation: fadeIn 0.4s;
     }
     
-    a {
-      background-color: darken($gray-lighter, 5%);
+    $watchlist-background-color: darken($gray-lighter, 5%);
+    
+    a.watchlist {
+      background-color: $watchlist-background-color;
       color: $brand-primary;
       cursor: pointer;
       
@@ -46,6 +49,21 @@ ul.watchlists {
         background-color: $brand-primary;
         color: white;
       }
+    }
+    
+    //== Remove watchlist
+    a.remove {
+      font-size: 2rem;
+      color: $watchlist-background-color;
+      display: block;
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translate(0%, -50%);
+    }
+    
+    a.remove:hover {
+      color: #e74c3c;
     }
   }
 }

@@ -4,7 +4,10 @@
             <h2>Watchlists</h2>
             <ul class="watchlists">
                 <li ng-repeat="watchlist in watchlistCtrl.watchlists.models">
-                     <a ui-sref-active="active" ui-sref="watchlist.single({ normalizedName: watchlist.normalizedName })">{{watchlist.name}}</a>
+                     <a class="watchlist" ui-sref-active="active" ui-sref="watchlist.single({ normalizedName: watchlist.normalizedName })">
+                         {{watchlist.name}}
+                     </a>
+                     <a class="remove" ng-click="watchlistCtrl.removeWatchlist(watchlist)"><span class="oi" data-glyph="circle-x"></span></a>
                 </li>
             </ul>
             

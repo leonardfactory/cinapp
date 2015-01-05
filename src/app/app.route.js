@@ -18,7 +18,7 @@ angular
                 controllerAs: 'watchlistCtrl'
             })
             .state('watchlist.single', {
-                url: '/watchlist/:normalizedName',
+                url: '/:normalizedName',
                 templateUrl: 'watchlist/single.html',
                 controller: 'SingleWatchlistController',
                 controllerAs: 'singleCtrl'
