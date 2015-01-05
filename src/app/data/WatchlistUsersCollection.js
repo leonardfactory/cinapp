@@ -12,6 +12,7 @@ angular
                 var _this = this;
                 
                 this._watchlist.setACL(Security.WatchlistUpdate(this._watchlist, user));
+                this._watchlist.usersCount++;
                 this._watchlist.relation('users').add(user);
                 
                 this.add(user);

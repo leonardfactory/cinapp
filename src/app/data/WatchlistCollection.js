@@ -14,7 +14,7 @@ angular
                 
                 watchlist.setACL(Security.Watchlist());
                 watchlist.relation('users').add(User.current());
-                watchlist.usersCount++;
+                watchlist.usersCount = 1;
                 
                 // Compute normalizedName
                 watchlist.normalizedName = watchlist.name.trim().replace(/\W+/g, '-').toLowerCase() + '-' + User.current().id.toLowerCase().substr(0, 3);
