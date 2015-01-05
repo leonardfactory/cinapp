@@ -2,11 +2,11 @@
     <div class="modal-overlay">
         <form role="add-user">
             <h3>Add User to Watchlist</h3>
-            <input type="email" placeholder="Mail or Username" class="form-control" ng-model="mail">
+            <input type="text" placeholder="Mail or Username" class="form-control" ng-model="singleCtrl.addUserQuery" />
             <br />
             <div class="modal-actions">
                 <button class="btn btn-normal" type="button" ng-click="close(false)">Cancel</button>
-                <button class="btn btn-action" type="button" ng-click="close(true, mail)">Add User</button>
+                <button class="btn btn-action" type="button" ng-click="close(true, singleCtrl.addUserQuery)">Add User</button>
             </div>
         </form>
     </div>

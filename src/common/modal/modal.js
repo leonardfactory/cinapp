@@ -17,11 +17,17 @@ modal.factory('angularModal', function ($q, $templateCache, $document, $rootScop
         }
         
         // Scope
-        var modalScope = $rootScope.$new();
+        var modalScope = (options.scope || $rootScope).$new();
         
-        var closeDeferred = $q.defer();
         modalScope.close = function (result, params) {
-            closeDeferred.resolve({ result: result, params: params });
+            modalScope.shown = false;
+            
+            var delay = options.closeDelay || 0;
+            $timeout(function () {
+                deferred.resolve({ result: result, params: params });
+                modalScope.$destroy();
+                element.remove();
+            }, delay);
         }
         
         // Compute element from template and insert it in the DOM
@@ -32,19 +38,6 @@ modal.factory('angularModal', function ($q, $templateCache, $document, $rootScop
         
         // Show
         modalScope.shown = true;
-        
-        // Close and remove scope + DOM element
-        closeDeferred.promise.then(function (result) {
-            modalScope.shown = false;
-            
-            var delay = options.closeDelay || 0;
-            $timeout(function () {
-                deferred.resolve({ result: result.result, params: result.params });
-                
-                modalScope.$destroy();
-                element.remove();
-            }, delay);
-        });
         
         return deferred.promise;
     }

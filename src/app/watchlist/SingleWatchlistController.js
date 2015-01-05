@@ -1,6 +1,6 @@
 angular
     .module('cinApp')
-    .controller('SingleWatchlistController', function ($stateParams, $timeout, loaderService, User, Watchlist, WatchlistMoviesCollection, WatchlistUsersCollection, angularModal) 
+    .controller('SingleWatchlistController', function ($stateParams, $timeout, $scope, loaderService, User, Watchlist, WatchlistMoviesCollection, WatchlistUsersCollection, angularModal) 
     {
         var _this = this;
         
@@ -10,16 +10,19 @@ angular
         
         this.watchlistUsers = null;
         
+        // Created
+        this.addUserQuery = '';
+        
         $timeout(loaderService.start)
             .then(function () {
                 // Find current watchlist based on `normalizedName` passed to this UIRouter state.
+                // @todo Can be optimized passing directly the watchlist with UIRouter.
                 var query = new Parse.Query(Watchlist);
                 query.equalTo('normalizedName', $stateParams.normalizedName);
                 return query.first();
             })
             .then(function (watchlist) {
                 _this.watchlist = watchlist;
-                console.log('Found watchlist');
                 
                 _this.movies = WatchlistMoviesCollection.fromWatchlist(watchlist);
                 return _this.movies.fetch();
@@ -39,11 +42,11 @@ angular
         {
             angularModal
                 .show({
-                    templateUrl: 'watchlist/modal-add-user.html'
+                    templateUrl: 'watchlist/modal-add-user.html',
+                    scope: $scope
                 })
                 .then(function (result) {
                     if(result.result) {
-                        console.log('Searching for: ' + result.params);
                         loaderService.start();
                         
                         var userData = result.params;
