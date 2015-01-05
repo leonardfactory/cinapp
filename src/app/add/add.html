@@ -11,9 +11,15 @@
                 <a ng-click="addCtrl.check()" class="btn btn-action">
                     <span class="oi" data-glyph="check"></span> Check
                 </a>
-                <a class="btn btn-action">
-                    <span class="oi" data-glyph="eye"></span> Add to Watchlist
-                </a>
+                <div class="btn-dropdown btn-dropdown-action">
+                    <a class="btn btn-action">
+                        <span class="oi" data-glyph="eye"></span> Add to Watchlist
+                    </a>
+                    <ul>
+                        <li>First of many others lists</li>
+                        <li>Second</li>
+                    </ul>
+                </div>
             </div>
             
             <p class="description">{{ addCtrl.result.overview }}</p>

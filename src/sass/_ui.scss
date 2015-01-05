@@ -30,6 +30,82 @@ span.oi {
   }
 }
 
+//== Dropdown buttons
+.btn-dropdown {
+  position: relative;
+  display: inline-block;
+  
+  ul {
+    position: absolute;
+    top: 2em;
+    left: 0;
+    width: 98%;
+    box-sizing: border-box;
+    
+    list-style-type: none;
+    
+    background-color: white;
+    border-radius: 0 0 4px 4px;
+    
+    visibility: hidden;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.2s;
+    
+    li {
+      padding: $padding-smaller $padding-medium;
+      margin: 0;
+      cursor: pointer;
+    }
+  }
+  
+  &:hover {
+    .btn {
+      border-radius: 4px 4px 0 0;
+    }
+    
+    ul {
+      visibility: visible;
+      display: block;
+      opacity: 1;
+    }
+  }
+}
+
+//== Dropdown buttons tyles
+@mixin button-dropdown-style($color) {
+  
+  &:hover {
+    .btn {
+      border: 2px solid $color;
+      background-color: $color;
+      color: white;
+    
+      span.oi {
+        color: white;
+      }
+    }
+  }
+  
+  ul {
+    border: 2px solid $color;
+    border-top: none;
+  }
+  
+  ul li:first-of-type {
+    border-top: none;
+  }
+  
+  ul li {
+    color: $color;
+    border-top: 2px solid $color;
+  }
+}
+
+.btn-dropdown-normal  { @include button-dropdown-style($gray); }
+.btn-dropdown-primary { @include button-dropdown-style($brand-primary); }
+.btn-dropdown-action  { @include button-dropdown-style($brand-info); }
+
 //== Button in forms
 form .btn {
   padding: 0 $padding-medium;
