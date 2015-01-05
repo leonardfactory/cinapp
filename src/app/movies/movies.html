@@ -11,7 +11,7 @@
                     <div class="movie-description">
                         <div class="movie-name">{{movie.name}}</div>
                         <div class="movie-info">
-                            {{movie.director}} &mdash; {{movie.releaseDate | date:'yyyy' }}
+                            <movie-data movie="movie"></movie-data>
                             <p>
                                {{movie.overview | characters:200 }} 
                             </p>

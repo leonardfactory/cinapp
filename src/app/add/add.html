@@ -1,11 +1,11 @@
 <div class="modal-background" ng-class="{ 'modal-shown': addCtrl.modalShown }">
-    <div class="modal-overlay">
+    <div class="modal-overlay modal-movie">
         <div class="content">
             <h1 class="title">{{ addCtrl.result.title }}</h1>
             
             <blockquote ng-if="addCtrl.result.tagline">{{ addCtrl.result.tagline }}</blockquote>
-            
-            <p class="description">{{ addCtrl.result.overview }}</p>
+
+            <movie-data movie="addCtrl.result"></movie-data>
             
             <div class="actions">
                 <a ng-click="addCtrl.check()" class="btn btn-action">
@@ -15,6 +15,8 @@
                     <span class="oi" data-glyph="eye"></span> Add to Watchlist
                 </a>
             </div>
+            
+            <p class="description">{{ addCtrl.result.overview }}</p>
         </div>
         <div class="poster">
             <movie-img movie="addCtrl.result" size="300px"></movie-img>
