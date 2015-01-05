@@ -3,7 +3,7 @@ angular
     .directive('movieImg', function (tmdbService) 
     {
         return {
-            template: '<img src="{{baseImagePath}}{{posterPath}}" width="{{width}}" />',
+            template: '<img ng-src="{{baseImagePath}}{{posterPath}}" width="{{width}}" />',
             replace: true,
             scope: {
                 movie: '=',
