@@ -20,8 +20,12 @@ ul.watchlists {
     margin: 0;
     padding: 0;
     
+    &.ng-enter {
+      animation: fadeIn 0.4s;
+    }
+    
     a {
-      background-color: $gray-lighter;
+      background-color: darken($gray-lighter, 5%);
       color: $brand-primary;
       cursor: pointer;
       

@@ -3,6 +3,10 @@
 .movie-cover {
   float: left;
   margin-right: 0.4em;
+  
+  img {
+    box-shadow: 0px 1px 4px 0px rgba(0,0,0,0.4);
+  }
 }
 
 .movie-description {
@@ -17,6 +21,11 @@
 
 .movie-info {
   color: $gray;
+  
+  p {
+    margin: 0;
+    padding: 0;
+  }
 }
 
 ul.movie-data {
@@ -48,13 +57,16 @@ ul.movies-list {
     list-style-type: none;
     display: block;
     width: 100%;
-    margin: 0.2em 0;
-    padding: 0 0 0.2em 0.2em;
+    margin: 2rem 0;
+    padding: 2rem;
+    
+    background-color: white;
+    box-shadow: 0px 1px 4px 0px rgba(0,0,0,0.05);
     
     @extend .clearfix;
     
     &.ng-enter {
-      animation: fadeIn 0.4s;
+      animation: fadeInDown 0.4s;
     }
   }
 }
