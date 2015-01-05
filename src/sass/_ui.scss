@@ -23,6 +23,19 @@ span.oi {
   transition: background-color 0.2s linear, color 0.2s linear;
 }
 
+.btn-small {
+  padding: $padding-smaller $padding-small;
+  font-size: 11px;
+  line-height: 28px;
+  height: 28px;
+  
+  span.oi {
+    font-size: 0.9em;
+    width: 16px;
+    margin-top: 0.1em;
+  }
+}
+
 //== Button icons
 .btn {
   span.oi {

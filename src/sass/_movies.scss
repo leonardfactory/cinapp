@@ -28,6 +28,17 @@
   }
 }
 
+.movie-actions {
+  float: right;
+  margin-top: 1em;
+  
+  @extend .clearfix;
+  
+  a {
+    margin-right: 0.6em;
+  }
+}
+
 ul.movie-data {
   font-family: $font-family-sans-serif;
   font-size: 0.9em;
