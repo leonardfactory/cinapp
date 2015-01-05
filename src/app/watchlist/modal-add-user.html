@@ -1,0 +1,13 @@
+<div class="modal-background modal-add-user" ng-class="{ 'modal-shown' : shown }">
+    <div class="modal-overlay">
+        <form role="add-user">
+            <h3>Add User to Watchlist</h3>
+            <input type="email" placeholder="Mail or Username" class="form-control" ng-model="mail">
+            <br />
+            <div class="modal-actions">
+                <button class="btn btn-normal" type="button" ng-click="close(false)">Cancel</button>
+                <button class="btn btn-action" type="button" ng-click="close(true, mail)">Add User</button>
+            </div>
+        </form>
+    </div>
+</div>

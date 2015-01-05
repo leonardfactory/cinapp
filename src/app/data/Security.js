@@ -12,5 +12,12 @@ angular
             return acl;
         }
         
+        Security.WatchlistUpdate = function (watchlist, user) 
+        {
+            var acl = watchlist.getACL();
+            acl.setWriteAccess(user.id, true);
+            return acl;
+        }
+        
         return Security;
     });

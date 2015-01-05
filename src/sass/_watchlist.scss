@@ -1,0 +1,77 @@
+@import "variables";
+
+.watchlists-sidebar {
+  h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 0 0 0.4rem 0;
+    padding: $padding-medium 0;
+    
+    color: $text-color;
+    letter-spacing: .1rem;
+  }
+}
+
+ul.watchlists {
+  list-style-type: none;
+  
+  li {
+    margin: 0;
+    padding: 0;
+    
+    a {
+      background-color: $gray-lighter;
+      color: $brand-primary;
+      cursor: pointer;
+      
+      padding: $padding-medium;
+      
+      display: block;
+      box-sizing: border-box;
+      width: 100%;
+      
+      transition: color 0.2s, background-color 0.2s;
+      
+      &:hover, &.active:hover {
+        background-color: $brand-info;
+        color: white;
+      }
+      
+      &.active {
+        background-color: $brand-primary;
+        color: white;
+      }
+    }
+  }
+}
+
+//== Single Watchlist
+.watchlist-header {
+  @extend .clearfix;
+  padding: $padding-medium 0;
+  margin: 0 0 0.4rem 0;
+  
+  h2 {
+    font-size: 2.4rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 0 0 0.1rem 0;
+  
+    color: $text-color;
+    letter-spacing: .1rem;
+  }
+
+  .actions {
+    float: right;
+    margin-top: 1rem;
+  }
+  
+  p.users {
+    color: $gray;
+    
+    span.ng-enter {
+      animation: fadeInLeft 0.2s;
+    }
+  }
+}

@@ -1,4 +1,17 @@
-<h2>{{ singleCtrl.watchlist.name }}</h2>
+<div class="watchlist-header">
+    <div class="actions">
+        <a class="btn btn-action" ng-click="singleCtrl.addUser()">
+            <span class="oi" data-glyph="plus"></span> Add User
+        </a>
+    </div>
+    
+    <h2>{{ singleCtrl.watchlist.name }}</h2>
+    <p class="users">
+        <span ng-repeat="user in singleCtrl.watchlistUsers.models">
+            {{ user.displayName() }}{{ $last ? '' : ', ' }}
+        </span>
+    </p>
+</div>
 <ul class="movies-list">
     <li ng-repeat="movie in singleCtrl.movies.models">
         <div class="movie-cover">

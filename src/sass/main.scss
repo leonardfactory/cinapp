@@ -4,7 +4,13 @@
  * =============================================================== */
 body {
   font-family: $font-family-sans-serif;
+  background-color: $body-bg;
+  color: $text-color;
 }
+
+/* Links
+ * =============================================================== */
+@import "links";
 
 /* Navbar
  * =============================================================== */
@@ -51,5 +57,6 @@ div.alert {
 }
 
 @import "movies";
+@import "watchlist";
 @import "loader";
 @import "search";
