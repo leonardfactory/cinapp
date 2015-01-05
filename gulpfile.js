@@ -29,6 +29,7 @@ var paths = {
     common_js: ['./src/common/**/*.js', '!./src/common/**/*.spec.js'],
     sass: ['./src/sass/**/*.scss'],
     template: ['./src/app/**/*.html'],
+    common_template: ['./src/common/**/*.html'],
     index: './src/index.html'
 }
 
@@ -57,6 +58,16 @@ gulp.task('build:common', function (cb)
         .pipe(gulp.dest(paths.build + 'common/'))
         .on('finish', cb);
 });
+
+gulp.task('build:common-partials', function (cb) 
+{
+    gulp.src(paths.common_template)
+        .pipe(plumber(onError))
+        .pipe(templateCache({ standalone: true, module: 'common-templates' }))
+        .pipe(gulp.dest(paths.build + 'common/'))
+        .on('finish', cb);
+});
+
 
 gulp.task('build:angular', function (cb) 
 {
@@ -93,7 +104,7 @@ gulp.task('build:partials', function (cb)
 });
 
 
-gulp.task('build:html', ['build:copy-libs', 'build:common', 'build:angular', 'build:sass-fast', 'build:partials', 'build:assets'], function () 
+gulp.task('build:html', ['build:copy-libs', 'build:common', 'build:common-partials', 'build:angular', 'build:sass-fast', 'build:partials', 'build:assets'], function () 
 {
     gulp.src('./src/index.html')
         .pipe(plumber(onError))
@@ -117,9 +128,10 @@ gulp.task('serve', serve('build'));
 
 gulp.task('watch', function () 
 {
-    watch(paths.template,   function () { gulp.start('build:partials'); });
-    watch(paths.app_js,     function () { gulp.start('build:angular'); });
-    watch(paths.common_js,  function () { gulp.start('build:common'); });
-    watch(paths.sass,       function () { gulp.start('build:sass-fast'); });
-    watch(paths.index,      function () { gulp.start('build:html'); });
+    watch(paths.template,           function () { gulp.start('build:partials'); });
+    watch(paths.common_template,    function () { gulp.start('build:common-partials'); });
+    watch(paths.app_js,             function () { gulp.start('build:angular'); });
+    watch(paths.common_js,          function () { gulp.start('build:common'); });
+    watch(paths.sass,               function () { gulp.start('build:sass-fast'); });
+    watch(paths.index,              function () { gulp.start('build:html'); });
 });
