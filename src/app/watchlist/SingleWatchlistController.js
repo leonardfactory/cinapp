@@ -1,10 +1,12 @@
 angular
     .module('cinApp')
-    .factory('SingleWatchlistController', function ($stateParams, $timeout, loaderService, Watchlist, WatchlistMoviesCollection) 
+    .controller('SingleWatchlistController', function ($stateParams, $timeout, loaderService, Watchlist, WatchlistMoviesCollection) 
     {
         var _this = this;
         
         this.watchlist = null;
+        
+        this.movies = null;
         
         $timeout(loaderService.start)
             .then(function () {
@@ -16,6 +18,9 @@ angular
             .then(function (watchlist) {
                 _this.watchlist = watchlist;
                 console.log('Found watchlist');
+                
+                _this.movies = WatchlistMoviesCollection.fromWatchlist(watchlist);
+                return _this.movies.fetch();
             })
             .then(loaderService.done)
             .catch(function (error) {
