@@ -1,5 +1,6 @@
 @import "variables";
 
+/** Modal Elements **/
 .modal-background {
   position: fixed;
   z-index: 100;
@@ -21,23 +22,47 @@
 }
 
 .modal-overlay {
-  width: 800px;
-  height: 430px;
-  
   position: fixed;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   background-color: $gray-lighter;
+  
+  .modal-actions {
+    text-align: right;
+  }
+}
+
+/** Modal forms **/
+.modal-overlay form {
+  margin: $padding-general;
+  
+  input[type="text"], input[type="password"] {
+    width: 100%;
+  }
+}
+
+/** Add Watchlist modal **/
+.modal-watchlist {
+  
+  .modal-overlay {
+    width: 400px;
+    height: 160px;
+  }
 }
 
 /** Movie Modal **/
-.modal-overlay {
+.modal-movie {
+  width: 800px;
+  height: 430px;
+
   .content {
     box-sizing: border-box;
     width: 500px;
     float: left;
     padding: $padding-general;
+    overflow-y: auto;
+    max-height: 430px;
   }
   
   .poster {
@@ -51,6 +76,7 @@
     font-weight: bold;
     font-size: 1.8em;
     color: $brand-primary;
+    margin-bottom: 0.2em;
   }
   
   blockquote {
@@ -62,12 +88,14 @@
   }
   
   p.description {
+    margin-top: 1.8em;
     font-size: 0.9em;
     font-family: $font-family-serif;
     color: #7E8B8C;
   }
   
   .actions {
+    margin: 1.2em 0;
     a {
       margin-right: 0.4em;
     }
