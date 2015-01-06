@@ -19,6 +19,10 @@
   &.modal-shown {
     visibility: visible;
     opacity: 1;
+    
+    .modal-container {
+      animation: zoomIn 0.4s;
+    }
   }
 }
 
@@ -54,7 +58,7 @@
 
 /** Modal forms **/
 .modal-overlay form {
-  margin: $padding-general;
+  padding: $padding-general;
   
   input[type="text"], 
   input[type="email"],
