@@ -1,4 +1,5 @@
 @import "variables";
+@import "animations/spinLoader";
 
 //== Icons
 span.oi {
@@ -33,6 +34,22 @@ span.oi {
     font-size: 0.9em;
     width: 16px;
     margin-top: 0.1em;
+  }
+}
+
+//== Loading button
+.btn-loading {
+  span.oi:before {
+    font-family: 'spinner';
+    font-style: normal;
+    font-weight: normal;
+    content: '\e800';
+    font-size: 1.4rem;
+    animation: spinLoader 1s linear infinite;
+  }
+  
+  span.oi {
+    margin-top: 0;
   }
 }
 
@@ -124,6 +141,7 @@ form .btn {
   padding: 0 $padding-medium;
 }
 
+
 //== Button styles
 @mixin button-style($color) {
   border: 2px solid $color;
@@ -141,6 +159,25 @@ form .btn {
     
     span.oi {
       color: white;
+    }
+  }
+  
+  // Toggled button
+  &.btn-toggle.btn-toggled {
+    background-color: $color;
+    color: white;
+    
+    span.oi {
+      color: white;
+    }
+    
+    &:hover {
+      background-color: transparent !important;
+      color: $color;
+    
+      span.oi {
+        color: $color;
+      }
     }
   }
   

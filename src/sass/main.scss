@@ -2,6 +2,19 @@
 
 * { box-sizing: border-box; }
 
+/* Spinner icon font
+ * =========== */
+@font-face {
+  font-family: 'spinner';
+  src: url('../fonts/spinner.eot?3335971');
+  src: url('../fonts/spinner.eot?3335971#iefix') format('embedded-opentype'),
+       url('../fonts/spinner.woff?3335971') format('woff'),
+       url('../fonts/spinner.ttf?3335971') format('truetype'),
+       url('../fonts/spinner.svg?3335971#spinner') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* General Typography
  * =============================================================== */
 body {
