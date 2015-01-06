@@ -12,12 +12,6 @@ modalComponent.factory('angularModal', function ($q, $templateCache, $document, 
         var modalResultDefer   = $q.defer();
         var modalOpenDefer     = $q.defer();
         
-        // Modal window
-        var modalWindow = {
-            result   : modalResultDefer.promise,
-            opened   : modalOpenDefer.promise
-        }
-        
         // Check options
         if(!options.templateUrl) {
            throw new Error("No template URL specified for modal dialog.");
@@ -26,16 +20,30 @@ modalComponent.factory('angularModal', function ($q, $templateCache, $document, 
         // Scope
         var modalScope = (options.scope || $rootScope).$new();
         
-        modalScope.$close = function (result, params) {
-            modalScope.leaving = true;
+        // Compute element from template and insert it in the DOM
+        var body                = $document.find('body');
+        var elementTemplate     = angular.element($templateCache.get(options.templateUrl));
+        var element             = $compile(elementTemplate)(modalScope); // Link to modal scope
+        body.append(element);
+        
+        // Modal window
+        var modalWindow = {
+            result   : modalResultDefer.promise,
+            opened   : modalOpenDefer.promise,
             
-            modalResultDefer.resolve({ result: result, params: params });
-            
-            var delay = options.closeDelay || 400;
-            $timeout(function () {
-                modalScope.$destroy();
-                element.remove();
-            }, delay);
+            // Animations
+            _latestEffect : '',
+            effect : function (effectName) {
+                element.removeClass('modal-animation-' + this._latestEffect);
+                
+                this._latestEffect = effectName;
+                $timeout(function () {
+                    element.addClass('modal-animation-' + effectName);
+                }, 0);
+            },
+            shake : function () {
+                this.effect('shake');
+            }
         }
         
         // Controller
@@ -56,15 +64,25 @@ modalComponent.factory('angularModal', function ($q, $templateCache, $document, 
             }
         }
         
-        // Compute element from template and insert it in the DOM
-        var body                = $document.find('body');
-        var elementTemplate     = angular.element($templateCache.get(options.templateUrl));
-        var element             = $compile(elementTemplate)(modalScope); // Link to modal scope
-        body.append(element);
+        // Close utility
+        modalScope.$close = function (result, params) {
+            modalScope.leaving = true;
+            
+            modalResultDefer.resolve({ result: result, params: params });
+            
+            var delay = options.closeDelay || 400;
+            $timeout(function () {
+                modalScope.$destroy();
+                element.remove();
+            }, delay);
+        }
         
         // Show
         modalScope.shown = true;
         modalScope.leaving = false;
+        
+        // Start show effect
+        modalWindow.effect('shown');
         
         return modalWindow;
     }
@@ -72,7 +90,7 @@ modalComponent.factory('angularModal', function ($q, $templateCache, $document, 
     return angularModal;
 });
 
-modalComponent.directive('ngModalBox', function () {
+modalComponent.directive('ngModalBox', function ($timeout) {
     return {
         templateUrl: 'modal/modal-box.html',
         transclude: true,

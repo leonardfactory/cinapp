@@ -15,6 +15,11 @@
   opacity: 0;
   visibility: hidden;
   transition: visibility 0s, opacity 0.3s ease-out;
+  
+  &.modal-shown {
+    visibility: visible;
+    opacity: 1;
+  }
 }
 
 .modal-overlay {
@@ -45,17 +50,14 @@
 .modal-background {
   
   /** Show **/
-  &.modal-shown {
-    visibility: visible;
-    opacity: 1;
-    
+  &.modal-animation-shown {
     .modal-container {
       animation: zoomIn 0.4s;
     }
   }
   
   /** Leaving **/
-  &.modal-leaving {
+  &.modal-animation-leaving {
     opacity: 0 !important;
     
     .modal-container {
@@ -64,7 +66,7 @@
   }
   
   /** Shake **/
-  &.modal-shake {
+  &.modal-animation-shake {
     .modal-container {
       animation: shakeSlow 0.4s;
     }
@@ -100,9 +102,11 @@
 
 /** Movie Modal **/
 .modal-movie {
-  width: 800px;
-  height: 430px;
-
+  .modal-container {
+    width: 800px;
+    height: 430px;
+  }
+  
   .content {
     box-sizing: border-box;
     width: 500px;
