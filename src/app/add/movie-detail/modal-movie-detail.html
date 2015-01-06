@@ -1,0 +1,30 @@
+<ng-modal-box class="modal-movie">
+    <div class="content">
+        <h1 class="title">{{ movieCtrl.movie.title }}</h1>
+    
+        <blockquote ng-if="movieCtrl.movie.tagline">{{ movieCtrl.movie.tagline }}</blockquote>
+
+        <movie-data movie="movieCtrl.movie"></movie-data>
+    
+        <div class="actions">
+            <a ng-click="movieCtrl.check()" class="btn btn-action">
+                <span class="oi" data-glyph="check"></span> Check
+            </a>
+            <div class="btn-dropdown btn-dropdown-action">
+                <a class="btn btn-action">
+                    <span class="oi" data-glyph="eye"></span> Add to Watchlist
+                </a>
+                <ul>
+                    <li ng-repeat="watchlist in movieCtrl.watchlists.models">
+                        <a ng-click="movieCtrl.addToWatchlist(watchlist)">{{ watchlist.name }}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    
+        <p class="description">{{ movieCtrl.movie.overview }}</p>
+    </div>
+    <div class="poster">
+        <movie-img movie="movieCtrl.movie" size="300px"></movie-img>
+    </div>
+</ng-modal-box>

@@ -1,14 +1,11 @@
 angular
     .module('cinApp')
-    .controller('AddController', function ($timeout, $scope, tmdbService, loaderService, Movie, WatchedCollection, Watchlist, WatchlistCollection, WatchlistMoviesCollection) 
+    .controller('AddController', function ($timeout, $scope, tmdbService, loaderService, angularModal, Movie, WatchedCollection, Watchlist, WatchlistCollection, WatchlistMoviesCollection) 
     {
         var _this = this;
         
         this.url = '';
         this.result = null;
-        
-        this.modalShown = false;
-        this.modalShake = false;
         
         this.movies = new WatchedCollection();
         
@@ -19,62 +16,14 @@ angular
         this.watchlists.fetch();
         
         // Mousetrap `esc` for Modal
-        Mousetrap.bind('esc', function () 
+        /* Mousetrap.bind('esc', function () 
         {
             if(_this.modalShown) {
                 $scope.$apply(function () {
                      _this.modalShown = false;
                 });
             }
-        });
-        
-        // Check movie as seen
-        this.check = function () 
-        {
-            if(_this.result !== null) 
-            {
-                loaderService.start();
-                
-                var movie = new Movie();
-                movie.fromApiObject(_this.result);
-                
-                _this.movies.addMovie(movie).then(function () {
-                    loaderService.done();
-                    console.log('Added: ' + _this.result.title);
-                });
-            }
-        }
-        
-        // Add to watchlists
-        this.addToWatchlist = function(watchlist) 
-        {   
-            if(_this.result !== null)
-            {
-                var watchlistMovies = WatchlistMoviesCollection.fromWatchlist(watchlist);
-                
-                loaderService.start();
-                
-                watchlistMovies.fetch()
-                    .then(function (results) {
-                        var movie = new Movie();
-                        movie.fromApiObject(_this.result);
-                        
-                        return watchlistMovies.addMovie(movie);
-                    })
-                    .fail(function (err) {
-                        console.log(err);
-                        
-                        // Shake the modal window.
-                        _this.modalShake = false;
-                        $timeout(function () {
-                            _this.modalShake = true;
-                        }, 0);
-                    })
-                    .always(function () {
-                        loaderService.done();
-                    });
-            }
-        }
+        }); */
         
         // Find movie
         this.find = function () 
@@ -101,9 +50,7 @@ angular
                     })
                     .then(function (movie) 
                     {
-                        $scope.$apply(function () {
-                            _this.result = movie;
-                        });
+                        _this.result = movie;
                         
                         // Now load director
                         return tmdbService.api
@@ -117,20 +64,23 @@ angular
                         
                         _this.result.director = director;
                         
-                        $scope.$apply(function () {
-                            _this.modalShown = true;
-                            loaderService.done();
+                        var modalWindow = angularModal.show({
+                            templateUrl     : 'add/movie-detail/modal-movie-detail.html',
+                            scope           : $scope,
+                            controller      : 'MovieDetailController',
+                            controllerAs    : 'movieCtrl',
+                            locals          : {
+                                movie : _this.result,
+                                watchlists : _this.watchlists
+                            }
                         });
                     })
                     .catch(function (error) 
                     {
                         console.log('Whoops! There was an error while retrieving movie.');
                         console.log(error);
-                        
-                        $scope.$apply(function () {
-                            loaderService.done();
-                        });
-                    });
+                    })
+                    .finally(loaderService.done);
             }
         }
     });
