@@ -15,16 +15,6 @@ angular
         this.watchlists = new WatchlistCollection();
         this.watchlists.fetch();
         
-        // Mousetrap `esc` for Modal
-        /* Mousetrap.bind('esc', function () 
-        {
-            if(_this.modalShown) {
-                $scope.$apply(function () {
-                     _this.modalShown = false;
-                });
-            }
-        }); */
-        
         // Find movie
         this.find = function () 
         {

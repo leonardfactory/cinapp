@@ -26,6 +26,16 @@ modalComponent.factory('angularModal', function ($q, $templateCache, $document, 
         var element             = $compile(elementTemplate)(modalScope); // Link to modal scope
         body.append(element);
         
+        // `Esc` binding
+        var escBinding = function (evt) {
+            if(evt.which === 27) {
+                evt.preventDefault();
+                modalScope.$close(false);
+            }
+        }
+        
+        $document.bind('keydown', escBinding);
+        
         // Modal window
         var modalWindow = {
             result   : modalResultDefer.promise,
@@ -66,12 +76,13 @@ modalComponent.factory('angularModal', function ($q, $templateCache, $document, 
         
         // Close utility
         modalScope.$close = function (result, params) {
-            modalScope.leaving = true;
+            modalWindow.effect('leaving');
             
             modalResultDefer.resolve({ result: result, params: params });
             
             var delay = options.closeDelay || 400;
             $timeout(function () {
+                $document.unbind('keydown', escBinding);
                 modalScope.$destroy();
                 element.remove();
             }, delay);
