@@ -1,4 +1,5 @@
 @import "variables";
+@import "animations/shake";
 
 /** Modal Elements **/
 .modal-background {
@@ -26,7 +27,12 @@
   left: 50%;
   top: 20%;
   transform: translate(-50%, -20%);
-  background-color: $gray-lighter;
+  
+  .modal-container {
+    width: 100%;
+    height: 100%;
+    background-color: $gray-lighter;
+  }
   
   h3 {
     font-size: 1.6rem;
@@ -37,6 +43,12 @@
   
   .modal-actions {
     text-align: right;
+  }
+  
+  &.modal-shake {
+    .modal-container {
+      animation: shakeSlow 0.4s;
+    }
   }
 }
 

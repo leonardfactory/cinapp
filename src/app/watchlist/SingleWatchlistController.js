@@ -63,7 +63,6 @@ angular
                 })
                 .then(function (user) {
                     if(user) { // Found
-                        console.log('Found user: ' + user.username);
                         return _this.watchlistUsers.addUser(user);
                     }
                 })

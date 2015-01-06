@@ -1,6 +1,6 @@
 angular
     .module('cinApp')
-    .controller('AddController', function (tmdbService, loaderService, Movie, WatchedCollection, Watchlist, WatchlistCollection, WatchlistMoviesCollection, $scope) 
+    .controller('AddController', function ($timeout, $scope, tmdbService, loaderService, Movie, WatchedCollection, Watchlist, WatchlistCollection, WatchlistMoviesCollection) 
     {
         var _this = this;
         
@@ -8,6 +8,7 @@ angular
         this.result = null;
         
         this.modalShown = false;
+        this.modalShake = false;
         
         this.movies = new WatchedCollection();
         
@@ -45,7 +46,7 @@ angular
         }
         
         // Add to watchlists
-        this.addToWatchlist = function (watchlist) 
+        this.addToWatchlist = function(watchlist) 
         {   
             if(_this.result !== null)
             {
@@ -60,7 +61,18 @@ angular
                         
                         return watchlistMovies.addMovie(movie);
                     })
-                    .then(loaderService.done);
+                    .fail(function (err) {
+                        console.log(err);
+                        
+                        // Shake the modal window.
+                        _this.modalShake = false;
+                        $timeout(function () {
+                            _this.modalShake = true;
+                        }, 0);
+                    })
+                    .always(function () {
+                        loaderService.done();
+                    });
             }
         }
         

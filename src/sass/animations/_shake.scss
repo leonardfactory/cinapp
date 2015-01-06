@@ -1,0 +1,17 @@
+@keyframes shakeSlow {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  20%, 60% {
+    transform: translate3d(-10px, 0, 0);
+  }
+
+  40%, 80% {
+    transform: translate3d(10px, 0, 0);
+  }
+}
+
+.shakeSlow {
+  animation-name: shakeSlow;
+}

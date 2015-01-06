@@ -1,6 +1,6 @@
 angular
     .module('cinApp.models')
-    .factory('WatchlistMoviesCollection', function (User, Movie) 
+    .factory('WatchlistMoviesCollection', function ($q, User, Movie, MovieError) 
     {
         var WatchlistMoviesCollection = Parse.Collection.extend({
             model: Movie,
@@ -15,12 +15,15 @@ angular
                 return Parse.Cloud
                     .run('insertMovie', { movie: movie.toObject() })
                     .then(function (object) {
-                        _this.add(object);
-                        _this._watchlist.relation('movies').add(object);
+                        try {
+                            _this._watchlist.relation('movies').add(object);
+                            _this.add(object);
+                        }
+                        catch (e) {
+                            return $q.reject('Movie already added');
+                        }
                         
-                        _this._watchlist.save().then(function (watchlist) {
-                            return object;
-                        });
+                        return _this._watchlist.save();
                     });
             }
         }, {
