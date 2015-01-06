@@ -90,7 +90,6 @@ modalComponent.factory('angularModal', function ($q, $templateCache, $document, 
         
         // Show
         modalScope.shown = true;
-        modalScope.leaving = false;
         
         // Start show effect
         modalWindow.effect('shown');
