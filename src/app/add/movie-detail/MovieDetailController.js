@@ -1,6 +1,6 @@
 angular
     .module('cinApp')
-    .controller('MovieDetailController', function ($scope, $modalWindow, loaderService, Movie, WatchlistMoviesCollection,  movie, watchlists) 
+    .controller('MovieDetailController', function ($scope, $modalWindow, loaderService, dataStorage, Movie, WatchlistMoviesCollection,  movie, watchlists) 
     {
         var _this = this;
         
@@ -17,10 +17,27 @@ angular
                 var movie = new Movie();
                 movie.fromApiObject(_this.movie);
                 
-                _this.movies.addMovie(movie).then(function () {
-                    loaderService.done();
-                    console.log('Added: ' + _this.result.title);
-                });
+                dataStorage.ready()
+                    .then(function () {
+                        if(dataStorage.watchedCollection.isMovieWatched(movie.imdbId)) {
+                            // Uncheck
+                            return dataStorage.watchedCollection.removeMovie(movie);
+                        }
+                        else {
+                            // Check
+                            return dataStorage.watchedCollection.addMovie(movie);
+                        }
+                    })
+                    .then(function () {
+                        console.log('Added: ' + _this.movie.title);
+                    })
+                    .catch(function (error) {
+                        console.log('Whoops. Unabled to check movie.');
+                        console.log(error);
+                    })
+                    .finally(function () {
+                        loaderService.done();
+                    });
             }
         }
         

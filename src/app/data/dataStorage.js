@@ -1,10 +1,10 @@
 angular
     .module('cinApp.models')
-    .factory('dataStorage', function (WatchedCollection, WatchlistCollection, User, $timeout) 
+    .factory('dataStorage', function (WatchedCollection, WatchlistCollection, User, $q, $timeout) 
     {
         var dataStorage = {
-            _ready : false,
-            _callbacks : [],
+            _ready      : false,
+            _promises   : [],
         };
         
         dataStorage.watchedCollection = new WatchedCollection();
@@ -20,23 +20,33 @@ angular
              */
             .then(function () {
                 dataStorage._ready = true;
-                angular.forEach(dataStorage._callbacks, function (cb) {
-                    cb();
+                
+                angular.forEach(dataStorage._promises, function (deferred) {
+                    deferred.resolve(dataStorage);
                 });
-                dataStorage._callbacks = [];
+                
+                dataStorage._promises = [];
             })
             .fail(function (error) {
                 console.log('Error in dataStorage loading');
                 console.log(error);
-            });
+                
+                angular.forEach(dataStorage._promises, function (deferred) {
+                    deferred.reject(error);
+                });
+            })
+            .done();
         
         // DataStorage ready
-        dataStorage.ready = function (cb) {
+        dataStorage.ready = function () {
+
             if(dataStorage._ready) { 
-                cb(); 
+                return $q.when(dataStorage);
             }
             else {
-                dataStorage._callbacks.push(cb);
+                var deferred = $q.defer();
+                dataStorage._promises.push(deferred);
+                return deferred.promise;
             }
         }
         

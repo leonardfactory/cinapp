@@ -6,14 +6,22 @@ angular
             templateUrl: 'movies/directive/movie-check-button.html',
             replace: true,
             scope: {
-                movie: '='
+                movie: '=',
+                small: '@'
             },
             link: function (scope, element, attrs) {
                 scope.loading = true;
-                dataStorage.ready(function () {
-                    scope.checked = dataStorage.watchedCollection.isMovieWatched(scope.movie.imdbId || scope.movie.imdb_id); 
-                    scope.loading = false;
-                });
+                
+                dataStorage.ready()
+                    .then(function () { 
+                        scope.loading = false;
+                        
+                        scope.$watch(function () {
+                            return dataStorage.watchedCollection.isMovieWatched(scope.movie.imdbId || scope.movie.imdb_id);
+                        }, function (isWatched) {
+                            scope.checked = isWatched;
+                        });
+                    });
             }
         }
     });

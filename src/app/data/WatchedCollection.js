@@ -18,10 +18,17 @@ angular
                         _this.add(object);
                         User.current().relation('watched').add(object);
                     
-                        return User.current().save().then(function (user) {
-                            return object;
-                        });
+                        return User.current().save();
                     });
+            },
+            removeMovie: function (movie) {
+                var _this = this;
+                
+                return Parse.Cloud
+                    .run('removeWatchedMovie', { movie: movie.toObject() })
+                    .then(function (savedMovie) {
+                        _this.remove(savedMovie);
+                    });        
             },
             isMovieWatched: function (movieImdbId) {
                 return _.some(this.models, function (model) {
