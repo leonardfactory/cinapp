@@ -22,6 +22,11 @@ angular
                             return object;
                         });
                     });
+            },
+            isMovieWatched: function (movieImdbId) {
+                return _.some(this.models, function (model) {
+                    return model.imdbId === movieImdbId;
+                });
             }
         });
         
