@@ -20,8 +20,10 @@ angular
                 
                 theMovieDb[namespace][method](query, function (data) {
                     defer.resolve(JSON.parse(data));
+                    return defer.promise;
                 }, function (error) {
                     defer.reject(error);
+                    return defer.promise;
                 });
                 
                 return defer.promise;
