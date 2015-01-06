@@ -1,0 +1,11 @@
+<ng-modal-box class="modal-add-user">
+    <form role="add-user">
+        <h3>Add User to &laquo;{{ addUserCtrl.watchlist.name }}&raquo;</h3>
+        <input type="text" placeholder="Mail or Username" class="form-control" ng-model="addUserCtrl.addUserQuery" />
+        <br />
+        <div class="modal-actions">
+            <button class="btn btn-normal" type="button" ng-click="$close(false)">Cancel</button>
+            <button class="btn btn-action" type="button" ng-click="addUserCtrl.addUser()">Add User</button>
+        </div>
+    </form>
+</ng-modal-box>

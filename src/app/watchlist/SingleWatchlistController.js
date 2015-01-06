@@ -40,36 +40,24 @@ angular
         // Trigger add user modal dialog.
         this.addUser = function () 
         {
-            angularModal
+            var modalWindow = angularModal
                 .show({
-                    templateUrl: 'watchlist/modal-add-user.html',
-                    scope: $scope
-                })
+                    templateUrl: 'watchlist/add-user/modal-add-user.html',
+                    scope: $scope,
+                    controller: 'AddUserController',
+                    controllerAs: 'addUserCtrl',
+                    locals: {
+                        watchlist: _this.watchlist,
+                        watchlistUsers: _this.watchlistUsers
+                    }
+                });
+                
+            modalWindow.result
                 .then(function (result) {
-                    if(result.result) {
-                        loaderService.start();
-                        
-                        var userData = result.params;
-
-                        var queryUsername = new Parse.Query(User);
-                        queryUsername.equalTo("username", userData);
-
-                        var queryMail = new Parse.Query(User);
-                        queryMail.equalTo("email", userData);
-
-                        var query = Parse.Query.or(queryUsername, queryMail); // Find email or username matching
-                        return query.first();
-                    }
+                    console.log('Completed.')
                 })
-                .then(function (user) {
-                    if(user) { // Found
-                        return _this.watchlistUsers.addUser(user);
-                    }
-                })
-                .then(loaderService.done)
                 .catch(function (error) {
                     console.log('Cannot add user.');
-                    loaderService.done();
                 });
         }
     });

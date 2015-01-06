@@ -1,6 +1,6 @@
-var modal = angular.module('angular-modal', ['common-templates']);
+var modalComponent = angular.module('angular-modal', ['common-templates']);
 
-modal.factory('angularModal', function ($q, $templateCache, $document, $rootScope, $compile, $timeout) 
+modalComponent.factory('angularModal', function ($q, $templateCache, $document, $rootScope, $compile, $controller, $timeout) 
 {
     var angularModal = {};
     
@@ -9,25 +9,51 @@ modal.factory('angularModal', function ($q, $templateCache, $document, $rootScop
      */
     angularModal.show = function (options) 
     {
-        var deferred = $q.defer();
+        var modalResultDefer   = $q.defer();
+        var modalOpenDefer     = $q.defer();
+        
+        // Modal window
+        var modalWindow = {
+            result   : modalResultDefer.promise,
+            opened   : modalOpenDefer.promise
+        }
         
         // Check options
         if(!options.templateUrl) {
-            deferred.reject("No template URL specified for modal dialog.");
+           throw new Error("No template URL specified for modal dialog.");
         }
         
         // Scope
         var modalScope = (options.scope || $rootScope).$new();
         
-        modalScope.close = function (result, params) {
-            modalScope.shown = false;
+        modalScope.$close = function (result, params) {
+            modalScope.leaving = true;
             
-            var delay = options.closeDelay || 0;
+            modalResultDefer.resolve({ result: result, params: params });
+            
+            var delay = options.closeDelay || 400;
             $timeout(function () {
-                deferred.resolve({ result: result, params: params });
                 modalScope.$destroy();
                 element.remove();
             }, delay);
+        }
+        
+        // Controller
+        if(options.controller) {
+            var locals = {};
+            locals.$scope       = modalScope;
+            locals.$modalWindow = modalWindow;
+            
+            if(options.locals) {
+                angular.forEach(options.locals, function (value, key) {
+                    locals[key] = value; 
+                });
+            }
+            
+            var ctrl = $controller(options.controller, locals);
+            if(options.controllerAs) {
+                modalScope[options.controllerAs] = ctrl;
+            }
         }
         
         // Compute element from template and insert it in the DOM
@@ -38,16 +64,18 @@ modal.factory('angularModal', function ($q, $templateCache, $document, $rootScop
         
         // Show
         modalScope.shown = true;
+        modalScope.leaving = false;
         
-        return deferred.promise;
+        return modalWindow;
     }
     
     return angularModal;
 });
 
-modal.directive('ngModalBox', function () {
+modalComponent.directive('ngModalBox', function () {
     return {
         templateUrl: 'modal/modal-box.html',
-        transclude: true
+        transclude: true,
+        replace: true
     }
 });

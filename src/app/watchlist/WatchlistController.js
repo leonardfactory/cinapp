@@ -11,18 +11,19 @@ angular
             .then(function () {
                 return _this.watchlists.fetch();
             })
-            .then(loaderService.done);
+            .finally(loaderService.done);
             
         /**
          * Creates a new Watchlist.
          */
         this.createWatchlist = function () 
         {
-            angularModal
+            var modalWindow = angularModal
                 .show({
-                    templateUrl: 'watchlist/modal-create.html',
-                    closeDelay: 100 /* ms */
-                })
+                    templateUrl: 'watchlist/modal-create.html'
+                });
+                
+            modalWindow.result
                 .then(function (result) {
                     if(result.result) {
                         var name = result.params;
@@ -35,10 +36,10 @@ angular
                         return _this.watchlists.addWatchlist(watchlist); 
                     }
                 })
-                .then(loaderService.done)
                 .catch(function (error) {
                     console.log('Error ' + error);
-                });
+                })
+                .finally(loaderService.done);
         }
         
         /**

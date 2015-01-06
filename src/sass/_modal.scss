@@ -15,15 +15,6 @@
   opacity: 0;
   visibility: hidden;
   transition: visibility 0s, opacity 0.3s ease-out;
-  
-  &.modal-shown {
-    visibility: visible;
-    opacity: 1;
-    
-    .modal-container {
-      animation: zoomIn 0.4s;
-    }
-  }
 }
 
 .modal-overlay {
@@ -48,7 +39,31 @@
   .modal-actions {
     text-align: right;
   }
+}
+
+/** Animations **/
+.modal-background {
   
+  /** Show **/
+  &.modal-shown {
+    visibility: visible;
+    opacity: 1;
+    
+    .modal-container {
+      animation: zoomIn 0.4s;
+    }
+  }
+  
+  /** Leaving **/
+  &.modal-leaving {
+    opacity: 0 !important;
+    
+    .modal-container {
+      animation: zoomOut 0.4s;
+    }
+  }
+  
+  /** Shake **/
   &.modal-shake {
     .modal-container {
       animation: shakeSlow 0.4s;

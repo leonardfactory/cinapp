@@ -1,4 +1,6 @@
-<div class="modal-background" ng-class="{ 'modal-shown' : shown }">
-    <div class="modal-overlay" ng-transclude>
+<div class="modal-background" ng-class="{ 'modal-shown' : shown, 'modal-leaving' : leaving }">
+    <div class="modal-overlay">
+        <div class="modal-container" ng-transclude>
+        </div>
     </div>
 </div>
