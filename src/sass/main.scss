@@ -25,25 +25,29 @@ body {
   color: $text-color;
 }
 
-h2 {
-  font-size: 2.4rem;
+h1, h2, h3, h4, h5, h6 {
   font-weight: bold;
   text-transform: uppercase;
+  padding: $padding-medium 0;
   margin: 0 0 0.1rem 0;
 
   color: $text-color;
   letter-spacing: .1rem;
 }
 
+h1 {
+  font-size: 3.2rem;
+  margin: 0 0 0.4rem 0;
+}
+
+h2 {
+  font-size: 2.4rem;
+  margin: 0 0 0.1rem 0;
+}
+
 h3 {
   font-size: 2rem;
-  font-weight: bold;
-  text-transform: uppercase;
   margin: 0 0 0.4rem 0;
-  padding: $padding-medium 0;
-  
-  color: $text-color;
-  letter-spacing: .1rem;
 }
 
 /* Links
