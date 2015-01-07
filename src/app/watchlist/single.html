@@ -14,18 +14,5 @@
     </p>
 </div>
 <ul class="movies-list">
-    <li ng-repeat="movie in singleCtrl.movies.models">
-        <div class="movie-cover">
-            <movie-img movie="movie" size="80px"></movie-img>
-        </div>
-        <div class="movie-description">
-            <div class="movie-name">{{movie.name}}</div>
-            <div class="movie-info">
-                <movie-data movie="movie"></movie-data>
-                <p>
-                   {{movie.overview | characters:200 }} 
-                </p>
-            </div>
-        </div>
-    </li>
+    <movie-list-item ng-repeat="movie in singleCtrl.movies.models" movie="movie" watchlist="singleCtrl.watchlist"></movie-list-item>
 </ul>

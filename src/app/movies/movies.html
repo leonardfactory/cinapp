@@ -4,26 +4,7 @@
             <alert ng-repeat="alert in moviesCtrl.alerts" type="{{alert.type}}" close="moviesCtrl.closeAlert($index)">{{alert.message}}</alert>
             
             <ul class="movies-list">
-                <li ng-repeat="movie in moviesCtrl.movies.models">
-                    <div class="movie-cover">
-                        <movie-img movie="movie" size="80px"></movie-img>
-                    </div>
-                    <div class="movie-description">
-                        <div class="movie-name">{{movie.name}}</div>
-                        <div class="movie-info">
-                            <movie-data movie="movie"></movie-data>
-                            <p>
-                               {{movie.overview | characters:200 }} 
-                            </p>
-                        </div>
-                    </div>
-                    <div class="movie-actions">
-                        <movie-check-button movie="movie" small="true"></movie-check-button>
-                        <a ng-click="moviesCtrl.checkMovie(movie)" class="btn btn-small btn-action">
-                            <span class="oi" data-glyph="check"></span> Check for everyone
-                        </a>
-                    </div>
-                </li>
+                <movie-list-item movie="movie" ng-repeat="movie in moviesCtrl.movies.models"></movie-list-item>
                 <li>
                     <form class="form-inline" role="form">
                         <input type="text" class="form-control" id="movieTitle" placeholder="Title" ng-model="moviesCtrl.inlineMovie.name">
