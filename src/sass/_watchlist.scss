@@ -25,6 +25,10 @@ ul.watchlists {
       animation: fadeIn 0.4s;
     }
     
+    &.ng-leave {
+      animation: fadeOut 0.4s;
+    }
+    
     $watchlist-background-color: darken($gray-lighter, 5%);
     
     a.watchlist {

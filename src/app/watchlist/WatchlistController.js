@@ -1,15 +1,16 @@
 angular
     .module('cinApp')
-    .controller('WatchlistController', function ($timeout, loaderService, Watchlist, WatchlistCollection, angularModal)
+    .controller('WatchlistController', function ($timeout, loaderService, dataStorage, Watchlist, angularModal)
     {
-        this.watchlists = new WatchlistCollection();
+        this.watchlists = null;
         
         var _this = this;
         
         // Deferred loading
-        $timeout(loaderService.start)
+        loaderService.start();
+        dataStorage.ready()
             .then(function () {
-                return _this.watchlists.fetch();
+                _this.watchlists = dataStorage.watchlistCollection;
             })
             .finally(loaderService.done);
             
