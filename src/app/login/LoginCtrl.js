@@ -1,6 +1,6 @@
 angular
     .module('cinApp')
-    .controller('LoginCtrl', function ($scope, parseService) 
+    .controller('LoginCtrl', function ($scope, parseService, User) 
     {
         var _this = this;
         
@@ -22,7 +22,7 @@ angular
         {
             _this.alert = null;
             
-            Parse.User
+            User
                 .logIn(_this.user.username, _this.user.password)
                 .then(function (user) 
                 {
@@ -37,7 +37,7 @@ angular
         
         this.logout = function () 
         {
-            Parse.User.logOut();
+            User.logOut();
             _this.logged = false;
         }
     });
