@@ -1,6 +1,6 @@
 angular
     .module('cinApp')
-    .service('moviesService', function ($q, dataStorage, loaderService, Movie, WatchlistMoviesCollection) 
+    .service('moviesService', function ($q, dataStorage, loaderService, User, Movie, WatchlistMoviesCollection) 
     {
         var moviesService = {};
         
@@ -25,7 +25,7 @@ angular
 
             dataStorage.ready()
                 .then(function () {
-                    if(dataStorage.watchedCollection.isMovieWatched(movie.imdbId)) {
+                    if(_.contains(User.current().watchedId, movie.imdbId)) {
                         // Uncheck
                         return dataStorage.watchedCollection.removeMovie(movie);
                     }

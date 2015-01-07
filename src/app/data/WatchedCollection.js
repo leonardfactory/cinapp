@@ -17,6 +17,7 @@ angular
                     .then(function (object) {
                         _this.add(object);
                         User.current().relation('watched').add(object);
+                        User.current().add('watchedId', object.imdbId);
                     
                         return User.current().save();
                     });
@@ -28,6 +29,13 @@ angular
                     .run('removeWatchedMovie', { movie: movie.toObject() })
                     .then(function (savedMovie) {
                         _this.remove(savedMovie);
+                        
+                        /*
+                         * Saving the user here should not be necessary, since it's saved by CloudCode.
+                         * However Parse has troubles handling the array without calling the save operation.
+                         */
+                        User.current().remove('watchedId', savedMovie.imdbId);
+                        return User.current().save();
                     });        
             },
             isMovieWatched: function (movieImdbId) {

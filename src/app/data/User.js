@@ -4,7 +4,7 @@ angular
     {   
         var User = Parse.User.extend({
             className: '_User',
-            attrs: ['username', 'email', 'name'],
+            attrs: ['username', 'email', 'name', 'watchedId'],
             displayName: function () {
                 return this.name ? this.name : this.username;
             }

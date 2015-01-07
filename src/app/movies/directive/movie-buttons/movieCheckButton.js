@@ -1,9 +1,9 @@
 angular
     .module('cinApp')
-    .directive('movieCheckButton', function (dataStorage) 
+    .directive('movieCheckButton', function (dataStorage, User) 
     {
         return {
-            templateUrl: 'movies/directive/movie-check-button.html',
+            templateUrl: 'movies/directive/movie-buttons/movie-check-button.html',
             replace: true,
             scope: {
                 movie: '=',
@@ -22,7 +22,7 @@ angular
                         $scope.loading = false;
                         
                         var isWatchedListener = $scope.$watch(function () {
-                            return dataStorage.watchedCollection.isMovieWatched(movieId);
+                            return _.contains(User.current().watchedId, movieId);
                         }, function (isWatched) {
                             $scope.checked = isWatched;
                         });
