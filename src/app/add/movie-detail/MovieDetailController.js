@@ -7,12 +7,6 @@ angular
         this.movie      = movie; /* Pass movie */
         this.watchlists = watchlists; /* Pass watchlists in order to avoid to load them multiple times from parse */
         
-        // Check movie as seen
-        this.check = function () 
-        {
-            //...
-        }
-        
         // Add to watchlists
         this.addToWatchlist = function(watchlist) 
         {   
