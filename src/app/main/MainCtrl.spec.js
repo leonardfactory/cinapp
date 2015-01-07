@@ -9,9 +9,4 @@ describe('Controller: MainCtrl', function()
         scope = $rootScope.$new();
         ctrl = $controller('MainCtrl', { $scope: scope });
     }));
-    
-    it('should have title set', function()
-    {
-        expect(ctrl.title).toEqual('Cinapp');
-    });
 });
