@@ -2,7 +2,7 @@
 
 .movie-cover {
   float: left;
-  margin-right: 1rem;
+  margin-right: 2rem;
   
   img {
     box-shadow: 1px 0px 4px 0px rgba(0,0,0,0.2);
@@ -20,19 +20,21 @@
 }
 
 .movie-info {
-  color: $gray;
+  color: $text-color;
   
   p {
     margin: 0;
     padding: 0;
+    color: lighten(#7E8B8C, 5%);
+    font-weight: normal;
   }
 }
 
 .movie-actions {
-  float: right;
+  position: absolute;
+  bottom: 0;
+  right: 0;
   padding: 0 2.2rem 2.2rem 0;
-  
-  @extend .clearfix;
   
   a {
     margin-left: 0.6em;
@@ -65,6 +67,11 @@ ul.movies-list {
   width: 100%;
   
   > li {
+    position: relative;
+    
+    height: 160px;
+    cursor: pointer;
+    
     list-style-type: none;
     display: block;
     width: 100%;
@@ -95,4 +102,41 @@ ul.movies-list {
       margin-top: 0;
     }
   }
+}
+
+/* Genres
+ * ====================================== */
+ul.movie-genres {
+  list-style-type: none;
+  margin: 0;
+}
+
+li.movie-genre {
+  border-radius: 2px;
+  padding: $padding-min $padding-smaller;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  font-size: 1rem;
+  
+  background-color: #7f8c8d;
+  color: white;
+  
+  display: inline-block;
+  margin-right: 0.4rem;
+}
+
+li.movie-genre {
+  &.movie-genre-drammatico,
+  &.movie-genre-dramma        { background-color: #16a085; }
+  &.movie-genre-azione        { background-color: #d35400; }
+  &.movie-genre-commedia      { background-color: #27ae60; }
+  &.movie-genre-romantico     { background-color: #c0392b; }
+  &.movie-genre-guerra        { background-color: #e67e22; }
+  &.movie-genre-avventura     { background-color: #f39c12; }
+  &.movie-genre-animazione    { background-color: #2e8ece; }
+  &.movie-genre-giallo        { background-color: #f1c40f; color: $gray; }
+  &.movie-genre-fantasy       { background-color: #8e44ad; }
+  &.movie-genre-horror        { background-color: #c0392b; }
+  &.movie-genre-fantascienza  { background-color: #8e44ad; }
+  &.movie-genre-storia        { background-color: #9b59b6; }
 }

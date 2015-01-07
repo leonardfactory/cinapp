@@ -1,15 +1,13 @@
-<li>
+<li ng-click="showDetail()">
     <div class="movie-cover">
-        <movie-img movie="movie" size="140px"></movie-img>
+        <movie-img movie="movie" height="160px"></movie-img>
     </div>
     <div class="movie-description">
         <div class="movie-name">{{movie.name}}</div>
         <div class="movie-info">
             <movie-data movie="movie"></movie-data>
-            <p>
-               {{movie.overview | characters:200 }} 
-            </p>
         </div>
+        <movie-genres movie="movie"></movie-genres>
     </div>
     <div class="movie-actions">
         <movie-check-button movie="movie" small="true"></movie-check-button>
