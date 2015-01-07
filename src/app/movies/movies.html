@@ -4,7 +4,7 @@
             <alert ng-repeat="alert in moviesCtrl.alerts" type="{{alert.type}}" close="moviesCtrl.closeAlert($index)">{{alert.message}}</alert>
             
             <ul class="movies-list">
-                <movie-list-item movie="movie" ng-repeat="movie in moviesCtrl.movies.models | orderBy : moviesCtrl.predicate"></movie-list-item>
+                <movie-list-item movie="movie" ng-repeat="movie in moviesCtrl.movies.models | orderBy : moviesCtrl.wpredicate"></movie-list-item>
             </ul>
         </div>
     </div>

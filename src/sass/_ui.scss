@@ -224,6 +224,14 @@ input[type="number"].form-control {
   }
 }
 
+.form-control.form-control-wide {
+  width: 50%;
+}
+
+form.form-center {
+  text-align: center;
+}
+
 //== Logout button
 a.logout {
   cursor: pointer;
