@@ -8,6 +8,9 @@ angular
         
         this.inlineMovie = {};
         
+        // Predicate
+        this.predicate = 'name';
+        
         // Deferred loading
         loaderService.start();
         dataStorage.ready()
