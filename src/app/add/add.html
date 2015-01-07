@@ -1,21 +1,11 @@
 <div class="container">
     <div class="row">
         <div class="twelve columns">
-            <input type="text" placeholder="Paste IMDB Address..." class="hero-input-text" ng-model="addCtrl.url" ng-click="addCtrl.reset()" ng-paste="addCtrl.find($event)" />
+            <input autofocus type="text" placeholder="Paste IMDB Address..." class="hero-input-text" ng-model="addCtrl.url" ng-click="addCtrl.reset()" ng-paste="addCtrl.find($event)" />
             <!--<form role="add">
                 <input type="text" placeholder="IMDB Address" class="form-control" ng-model="addCtrl.url">
                 <button class="btn btn-normal" type="button" ng-click="addCtrl.find()">Search</button>
             </form>-->
-        </div>
-    </div>
-    
-    <!-- Movie found -->
-    <div class="row" style="display: none;">
-        <div class="four columns">
-            <movie-img movie="addCtrl.result"></movie-img>
-        </div>
-        <div class="eight columns">
-            <div class="movie-name">{{addCtrl.result.title}}</div>
         </div>
     </div>
 </div>
