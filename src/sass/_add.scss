@@ -1,0 +1,23 @@
+@import "variables";
+
+input[type="text"].hero-input-text {
+  display: block;
+  width: 80%;
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  border-bottom: 2px solid darken($gray-lighter, 3%);
+  
+  font-size: 4rem;
+  color: $text-color;
+  
+  height: auto;
+  margin: 0 auto;
+  margin-top: 4rem;
+  
+  transition: border-color 0.3s ease-in;
+  
+  &:focus {
+    border-color: $brand-info;
+  }
+}

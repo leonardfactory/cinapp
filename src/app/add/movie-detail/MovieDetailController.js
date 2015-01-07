@@ -1,11 +1,16 @@
 angular
     .module('cinApp')
-    .controller('MovieDetailController', function ($scope, $modalWindow, loaderService, dataStorage, Movie, WatchlistMoviesCollection,  movie, watchlists) 
+    .controller('MovieDetailController', function ($scope, $modalWindow, loaderService, dataStorage, Movie, WatchlistMoviesCollection,  movie) 
     {
         var _this = this;
         
         this.movie      = movie; /* Pass movie */
-        this.watchlists = watchlists; /* Pass watchlists in order to avoid to load them multiple times from parse */
+        
+        this.watchlists = null;
+        dataStorage.ready()
+            .then(function () {
+                _this.watchlists = dataStorage.watchlistCollection;
+            });
         
         // Add to watchlists
         this.addToWatchlist = function(watchlist) 

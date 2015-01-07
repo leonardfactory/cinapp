@@ -3,7 +3,7 @@
 * { box-sizing: border-box; }
 
 /* Spinner icon font
- * =========== */
+ * =============================================================== */
 @font-face {
   font-family: 'spinner';
   src: url('../fonts/spinner.eot?3335971');
@@ -71,7 +71,10 @@ div.alert {
   }
 }
 
+/* Pages
+ * =============================================================== */
 @import "movies";
 @import "watchlist";
 @import "loader";
 @import "search";
+@import "add";

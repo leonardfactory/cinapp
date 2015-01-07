@@ -1,11 +1,11 @@
 <div class="container">
     <div class="row">
         <div class="twelve columns">
-            
-            <form role="add">
+            <input type="text" placeholder="Paste IMDB Address..." class="hero-input-text" ng-model="addCtrl.url" ng-click="addCtrl.reset()" ng-paste="addCtrl.find($event)" />
+            <!--<form role="add">
                 <input type="text" placeholder="IMDB Address" class="form-control" ng-model="addCtrl.url">
                 <button class="btn btn-normal" type="button" ng-click="addCtrl.find()">Search</button>
-            </form>
+            </form>-->
         </div>
     </div>
     
