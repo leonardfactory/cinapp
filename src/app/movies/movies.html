@@ -5,14 +5,6 @@
             
             <ul class="movies-list">
                 <movie-list-item movie="movie" ng-repeat="movie in moviesCtrl.movies.models"></movie-list-item>
-                <li>
-                    <form class="form-inline" role="form">
-                        <input type="text" class="form-control" id="movieTitle" placeholder="Title" ng-model="moviesCtrl.inlineMovie.name">
-                        <input type="text" class="form-control" id="movieDirector" placeholder="Director" ng-model="moviesCtrl.inlineMovie.director">
-                        <input type="text" class="form-control" id="movieYear" placeholder="Year" ng-model="moviesCtrl.inlineMovie.year">
-                        <button type="submit" class="btn btn-normal" ng-click="moviesCtrl.addMovie()">Add</button>
-                    </form>
-                </li>
             </ul>
         </div>
     </div>
