@@ -1,6 +1,6 @@
 angular
     .module('cinApp')
-    .controller('MovieDetailController', function ($scope, $modalWindow, loaderService, dataStorage, Movie, WatchlistMoviesCollection,  movie) 
+    .controller('MovieDetailController', function ($scope, $modalWindow, loaderService, dataStorage, moviesService,  movie) 
     {
         var _this = this;
         
@@ -17,24 +17,13 @@ angular
         {   
             if(_this.movie !== null)
             {
-                var watchlistMovies = WatchlistMoviesCollection.fromWatchlist(watchlist);
-                
-                loaderService.start();
-                
-                watchlistMovies.fetch()
-                    .then(function (results) {
-                        var movie = new Movie();
-                        movie.fromApiObject(_this.movie);
-                        
-                        return watchlistMovies.addMovie(movie);
+                moviesService.addToWatchlist(_this.movie, watchlist)
+                    .then(function () {
+                        $modalWindow.successed();
                     })
-                    .fail(function (err) {
-                        console.log(err);
-                        
-                        // Shake the modal window.
+                    .catch(function (error) {
                         $modalWindow.shake();
-                    })
-                    .always(loaderService.done);
+                    });
             }
         }
     });
