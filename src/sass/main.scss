@@ -2,6 +2,8 @@
 
 * { box-sizing: border-box; }
 
+body { overflow-y: scroll; }
+
 /* Spinner icon font
  * =============================================================== */
 @font-face {
@@ -89,6 +91,18 @@ div.alert {
   &.ng-leave-active {
     transition: 1s linear all;
     max-height: 0;
+  }
+}
+
+/* UI Router view transition
+ * =============================================================== */
+[ui-view] {
+  &.ng-enter {
+    animation: 0.2s fadeInLeft;
+  }
+  
+  &.ng-leave {
+    animation: 0.2s fadeOutRight;
   }
 }
 
