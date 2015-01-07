@@ -36,12 +36,15 @@ angular
                 {
                     $event.stopPropagation();
                     
-                    $scope.loading = true;
-                    moviesService
-                        .check($scope.movie)
-                        .finally(function () {
-                            $scope.loading = false;
-                        });
+                    if(!$scope.loading) 
+                    {
+                        $scope.loading = true;
+                        moviesService
+                            .check($scope.movie)
+                            .finally(function () {
+                                $scope.loading = false;
+                            });
+                    }
                 }
             }
         }

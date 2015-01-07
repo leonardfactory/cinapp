@@ -1,6 +1,6 @@
 angular
     .module('cinApp')
-    .controller('SingleWatchlistController', function ($stateParams, $timeout, $scope, loaderService, User, Watchlist, WatchlistMoviesCollection, WatchlistUsersCollection, angularModal) 
+    .controller('SingleWatchlistController', function ($stateParams, $timeout, $scope, loaderService, dataStorage, User, Watchlist, WatchlistMoviesCollection, WatchlistUsersCollection, angularModal) 
     {
         var _this = this;
         
@@ -23,19 +23,21 @@ angular
             })
             .then(function (watchlist) {
                 _this.watchlist = watchlist;
-                
-                _this.movies = WatchlistMoviesCollection.fromWatchlist(watchlist);
-                return _this.movies.fetch();
+                return dataStorage.ready();
             })
-            .then(function (movies) {
+            .then(function () {
+                return dataStorage.watchlistMoviesCollection(_this.watchlist);
+            })
+            .then(function (watchlistMovies) {
+                _this.movies = watchlistMovies;
+                
                 _this.watchlistUsers = WatchlistUsersCollection.fromWatchlist(_this.watchlist);
                 return _this.watchlistUsers.fetch();
             })
-            .then(loaderService.done)
             .catch(function (error) {
                 console.log('Whoops. Unable to load Watchlist.');
-                loaderService.done();
-            });
+            })
+            .finally(loaderService.done);
             
         // Trigger add user modal dialog.
         this.addUser = function () 

@@ -196,6 +196,7 @@ form .btn {
 .btn-normal   { @include button-style($gray); }
 .btn-primary  { @include button-style($brand-primary); }
 .btn-action   { @include button-style($brand-info); }
+.btn-danger   { @include button-style($brand-danger); }
 
 //== Form inputs
 input[type="text"].form-control,

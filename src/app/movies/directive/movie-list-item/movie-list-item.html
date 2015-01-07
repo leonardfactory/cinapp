@@ -11,5 +11,6 @@
     </div>
     <div class="movie-actions">
         <movie-check-button movie="movie" small="true"></movie-check-button>
+        <movie-watchlist-remove-button ng-if="watchlist" movie="movie" watchlist="watchlist" small="true"></movie-watchlist-remove-button>
     </div>
 </li>

@@ -25,6 +25,17 @@ angular
                         
                         return _this._watchlist.save();
                     });
+            },
+            hasMovie: function (movie) {
+                return _.some(this.models, function (model) {
+                    return model.id === movie.imdbId;
+                });
+            },
+            removeMovie: function (movie) {
+                this._watchlist.relation('movies').remove(movie);
+                this.remove(movie);
+                
+                return this._watchlist.save();
             }
         }, {
             /**

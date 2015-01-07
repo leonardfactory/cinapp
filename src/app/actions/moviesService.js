@@ -58,7 +58,7 @@ angular
 
             loaderService.start();
             
-            var movie;
+            var movie, watchlistMovies;
             
             if(!(movieObj instanceof Movie)) {
                 movie = new Movie();
@@ -68,21 +68,59 @@ angular
                 movie = movieObj;
             }
             
-            var watchlistMovies = WatchlistMoviesCollection.fromWatchlist(watchlist);
-            
-            watchlistMovies.fetch()
-                .then(function (results) {
+            dataStorage.ready()
+                .then(function () {
+                    return dataStorage.watchlistMoviesCollection(watchlist);
+                })
+                .then(function (_watchlistMovies) {
+                    watchlistMovies = _watchlistMovies;
                     return watchlistMovies.addMovie(movie);
                 })
                 .then(function () {
                     deferred.resolve(movie);
                 })
-                .fail(function (err) {
+                .catch(function (err) {
                     console.log(err);
                     deferred.reject(err);
                 })
-                .always(loaderService.done);
+                .finally(loaderService.done);
                 
+            return deferred.promise;
+        }
+        
+        /**
+         * Remove movie from watchlist
+         */
+        moviesService.removeFromWatchlist = function (movie, watchlist) 
+        {
+            var deferred = $q.defer();
+            
+            loaderService.start();
+            
+            // movie should be instanceof Movie
+            if(!(movie instanceof Movie)) {
+                return $q.reject('movie should be an instance of Movie Parse class');
+            }
+            
+            var watchlistMovies;
+            
+            dataStorage.ready()
+                .then(function () {
+                    return dataStorage.watchlistMoviesCollection(watchlist);
+                })
+                .then(function (_watchlistMovies) {
+                    watchlistMovies = _watchlistMovies;
+                    return watchlistMovies.removeMovie(movie);
+                })
+                .then(function () {
+                    deferred.resolve(movie);
+                })
+                .catch(function (err) {
+                    console.log(err);
+                    deferred.reject(err);
+                })
+                .finally(loaderService.done);
+            
             return deferred.promise;
         }
         

@@ -1,10 +1,13 @@
 angular
     .module('cinApp.models')
-    .factory('dataStorage', function (WatchedCollection, WatchlistCollection, User, $q, $timeout) 
+    .factory('dataStorage', function (WatchedCollection, WatchlistCollection, WatchlistMoviesCollection, User, $q, $timeout) 
     {
         var dataStorage = {
             _ready      : false,
             _promises   : [],
+            
+            // Watchlists
+            _watchlistMovies : {}
         };
         
         dataStorage.watchedCollection = new WatchedCollection();
@@ -46,6 +49,29 @@ angular
             else {
                 var deferred = $q.defer();
                 dataStorage._promises.push(deferred);
+                return deferred.promise;
+            }
+        }
+        
+        /**
+         * Get Watchlist Movies collection
+         */
+        dataStorage.watchlistMoviesCollection = function (watchlist) 
+        {
+            if(dataStorage._watchlistMovies[watchlist.id]) {
+                return $q.when(dataStorage._watchlistMovies[watchlist.id]);
+            }
+            else {
+                var deferred = $q.defer();
+                
+                var collection = WatchlistMoviesCollection.fromWatchlist(watchlist);
+                collection.fetch()
+                    .then(function () {
+                        // Cache
+                        dataStorage._watchlistMovies[watchlist.id] = collection;
+                        deferred.resolve(collection);
+                    });
+                
                 return deferred.promise;
             }
         }
