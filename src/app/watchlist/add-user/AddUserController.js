@@ -31,7 +31,7 @@ angular
                     $scope.$close(true);
                 })
                 .fail(function (error) {
-                    $scope.$close(false);
+                    $modalWindow.shake();
                 })
                 .always(loaderService.done);
         }

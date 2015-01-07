@@ -53,6 +53,9 @@ modalComponent.factory('angularModal', function ($q, $templateCache, $document, 
             },
             shake : function () {
                 this.effect('shake');
+            },
+            successed : function () {
+                this.effect('successed');
             }
         }
         

@@ -71,6 +71,13 @@
       animation: shakeSlow 0.4s;
     }
   }
+  
+  /** Success **/
+  &.modal-animation-successed {
+    .modal-container {
+      animation: pulse 0.4s;
+    }
+  }
 }
 
 /** Modal forms **/
@@ -103,13 +110,13 @@
 /** Movie Modal **/
 .modal-movie {
   .modal-container {
-    width: 800px;
+    width: 900px;
     height: 430px;
   }
   
   .content {
     box-sizing: border-box;
-    width: 500px;
+    width: 600px;
     float: left;
     padding: $padding-general;
     overflow-y: auto;
