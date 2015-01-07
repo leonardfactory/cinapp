@@ -1,9 +1,9 @@
 <div class="container">
     <div class="row">
         <div class="twelve columns">
-            <form role="search" class="form-center">
+            <form role="search" ng-submit="searchCtrl.search()" class="form-center">
                 <input type="text" class="form-control form-control-wide" placeholder="Search..." ng-model="searchCtrl.query">
-                <button class="btn btn-action" type="button" ng-click="searchCtrl.search()">Search</button>
+                <button class="btn btn-action" type="submit">Search</button>
             </form>
         </div>
     </div>
