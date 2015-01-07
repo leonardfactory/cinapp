@@ -64,7 +64,6 @@ angular
                         
                             var modalWindow = angularModal.show({
                                 templateUrl     : 'add/movie-detail/modal-movie-detail.html',
-                                scope           : $scope,
                                 controller      : 'MovieDetailController',
                                 controllerAs    : 'movieCtrl',
                                 locals          : {

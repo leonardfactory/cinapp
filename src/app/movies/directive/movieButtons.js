@@ -1,6 +1,6 @@
 angular
     .module('cinApp')
-    .directive('movieCheckButton', function (dataStorage, User) 
+    .directive('movieCheckButton', function (dataStorage) 
     {
         return {
             templateUrl: 'movies/directive/movie-check-button.html',
@@ -11,26 +11,35 @@ angular
             },
             link: function (scope, element, attrs) {
                 scope.loading = true;
+            },
+            controller: function ($scope, moviesService) {
+                
+                var movieId = $scope.movie.imdbId || $scope.movie.imdb_id;
                 
                 // Check status
                 dataStorage.ready()
                     .then(function () { 
-                        scope.loading = false;
+                        $scope.loading = false;
                         
-                        scope.$watch(function () {
-                            return dataStorage.watchedCollection.isMovieWatched(scope.movie.imdbId || scope.movie.imdb_id);
+                        var isWatchedListener = $scope.$watch(function () {
+                            return dataStorage.watchedCollection.isMovieWatched(movieId);
                         }, function (isWatched) {
-                            scope.checked = isWatched;
+                            $scope.checked = isWatched;
+                        });
+                        
+                        $scope.$on('$destroy', function () {
+                            isWatchedListener();
                         });
                     });
-            },
-            controller: function ($scope, moviesService) {
-                $scope.check = function () 
+                    
+                $scope.check = function ($event) 
                 {
+                    $event.stopPropagation();
+                    
                     $scope.loading = true;
                     moviesService
                         .check($scope.movie)
-                        .then(function () {
+                        .finally(function () {
                             $scope.loading = false;
                         });
                 }
