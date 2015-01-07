@@ -3,9 +3,13 @@ angular
     .factory('WatchedCollection', function (User, Movie) 
     {   
         var WatchedCollection = Parse.Collection.extend({
+            constructor: function () {
+                this.query = User.current().relation('watched').query();
+                Parse.Collection.apply(this, arguments);
+            },
             model: Movie,
             className: 'Movie',
-            query: User.current().relation('watched').query(),
+            query: null,
             comparator: function (model) {
                 return -model.createdAt.getTime();
             },

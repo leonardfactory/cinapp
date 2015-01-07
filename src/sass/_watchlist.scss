@@ -1,16 +1,7 @@
 @import "variables";
 
 .watchlists-sidebar {
-  h2 {
-    font-size: 2rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    margin: 0 0 0.4rem 0;
-    padding: $padding-medium 0;
-    
-    color: $text-color;
-    letter-spacing: .1rem;
-  }
+  
 }
 
 ul.watchlists {
@@ -78,16 +69,6 @@ ul.watchlists {
   @extend .clearfix;
   padding: $padding-medium 0;
   margin: 0 0 0.4rem 0;
-  
-  h2 {
-    font-size: 2.4rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    margin: 0 0 0.1rem 0;
-  
-    color: $text-color;
-    letter-spacing: .1rem;
-  }
 
   .actions {
     float: right;

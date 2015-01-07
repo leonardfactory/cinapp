@@ -1,13 +1,25 @@
 <div class="container">
     <div class="row">
-        <div class="twelve columns">
+        <div class="eight columns">
             <div class="jumbotron">
               <h1>Welcome to Cinapp</h1>
               <p>
                   A platform where you can save the movies you've seen, your watchlist and share it easily with your friends.
               </p>
-              <p><a class="btn btn-primary btn-lg" href="#" role="button">Get started</a></p>
+              <p><a class="btn btn-primary" href="#">Get started</a></p>
             </div>
+        </div>
+        <div class="four columns">
+            <h3>Registrati</h3>
+            <form role="register">
+                <input type="text" class="form-control u-full-width" placeholder="Username" ng-model="mainCtrl.newUser.username" />
+                <input type="password" class="form-control u-full-width" placeholder="Password" ng-model="mainCtrl.newUser.password" />
+                <input type="text" class="form-control u-full-width" placeholder="Nome" ng-model="mainCtrl.newUser.name" />
+                <input type="email" class="form-control u-full-width" placeholder="eMail" ng-model="mainCtrl.newUser.email" />
+                <button class="btn btn-action u-full-width" type="button" ng-click="mainCtrl.register()">
+                    <span class="oi" data-glyph="key"></span> Registrami
+                </button>
+            </form>
         </div>
     </div>
 </div>

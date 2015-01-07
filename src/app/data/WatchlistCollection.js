@@ -3,9 +3,13 @@ angular
     .factory('WatchlistCollection', function (User, Watchlist, Security) 
     {
         var WatchlistCollection = Parse.Collection.extend({
+            constructor: function () {
+                this.query = (new Parse.Query(Watchlist)).equalTo('users', User.current());
+                Parse.Collection.apply(this, arguments);
+            },
             model: Watchlist,
             className: 'Watchlist',
-            query: (new Parse.Query(Watchlist)).equalTo('users', User.current()),
+            query: null,
             comparator: function (a, b) {
                 return a.name.localeCompare(b.name); // Alphabetical sort
             },
