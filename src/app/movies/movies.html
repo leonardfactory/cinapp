@@ -18,9 +18,7 @@
                         </div>
                     </div>
                     <div class="movie-actions">
-                        <a ng-click="moviesCtrl.checkMovie(movie)" class="btn btn-small btn-action">
-                            <span class="oi" data-glyph="check"></span> Check
-                        </a>
+                        <movie-check-button movie="movie" small="true"></movie-check-button>
                         <a ng-click="moviesCtrl.checkMovie(movie)" class="btn btn-small btn-action">
                             <span class="oi" data-glyph="check"></span> Check for everyone
                         </a>

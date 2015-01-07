@@ -80,6 +80,17 @@ ul.movies-list {
       animation: fadeInDown 0.4s;
     }
     
+    &.ng-leave {
+      animation: fadeOutDown 0.4s;
+      position: relative;
+      top: 0;
+      transition: max-height 0.4s linear;
+      
+      &.ng-leave-active {
+        max-height: 0;
+      }
+    }
+    
     &:first-of-type {
       margin-top: 0;
     }

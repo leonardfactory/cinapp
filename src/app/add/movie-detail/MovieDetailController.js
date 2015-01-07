@@ -10,41 +10,13 @@ angular
         // Check movie as seen
         this.check = function () 
         {
-            if(_this.result !== null) 
-            {
-                loaderService.start();
-                
-                var movie = new Movie();
-                movie.fromApiObject(_this.movie);
-                
-                dataStorage.ready()
-                    .then(function () {
-                        if(dataStorage.watchedCollection.isMovieWatched(movie.imdbId)) {
-                            // Uncheck
-                            return dataStorage.watchedCollection.removeMovie(movie);
-                        }
-                        else {
-                            // Check
-                            return dataStorage.watchedCollection.addMovie(movie);
-                        }
-                    })
-                    .then(function () {
-                        console.log('Added: ' + _this.movie.title);
-                    })
-                    .catch(function (error) {
-                        console.log('Whoops. Unabled to check movie.');
-                        console.log(error);
-                    })
-                    .finally(function () {
-                        loaderService.done();
-                    });
-            }
+            //...
         }
         
         // Add to watchlists
         this.addToWatchlist = function(watchlist) 
         {   
-            if(_this.result !== null)
+            if(_this.movie !== null)
             {
                 var watchlistMovies = WatchlistMoviesCollection.fromWatchlist(watchlist);
                 

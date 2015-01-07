@@ -1,19 +1,20 @@
 angular
     .module('cinApp')
-    .controller('MoviesCtrl', function ($scope, $timeout, loaderService, User, Movie, WatchedCollection) 
+    .controller('MoviesCtrl', function ($scope, $timeout, loaderService, User, Movie, dataStorage) 
     {
         var _this = this;
         
-        this.movies = new WatchedCollection();
+        this.movies = null;
         
         this.inlineMovie = {};
         
         // Deferred loading
-        $timeout(loaderService.start)
+        loaderService.start();
+        dataStorage.ready()
             .then(function () {
-                return _this.movies.fetch();
-            })
-            .then(loaderService.done);
+                _this.movies = dataStorage.watchedCollection;
+                loaderService.done();
+            });
         
         this.alerts = [];
         

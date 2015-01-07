@@ -12,6 +12,7 @@ angular
             link: function (scope, element, attrs) {
                 scope.loading = true;
                 
+                // Check status
                 dataStorage.ready()
                     .then(function () { 
                         scope.loading = false;
@@ -22,6 +23,17 @@ angular
                             scope.checked = isWatched;
                         });
                     });
+            },
+            controller: function ($scope, moviesService) {
+                $scope.check = function () 
+                {
+                    $scope.loading = true;
+                    moviesService
+                        .check($scope.movie)
+                        .then(function () {
+                            $scope.loading = false;
+                        });
+                }
             }
         }
     });
