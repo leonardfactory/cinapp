@@ -3,7 +3,7 @@ angular
     .directive('movieWatchlistRemoveButton', function (dataStorage) 
     {
         return {
-            templateUrl: 'movies/directive/movie-buttons/movie-watchlist-remove-button.html',
+            templateUrl: 'common/directives/movie/movie-buttons/movie-watchlist-remove-button.html',
             replace: true,
             scope: {
                 movie: '=',

@@ -44,7 +44,7 @@ angular
         {
             var modalWindow = angularModal
                 .show({
-                    templateUrl: 'watchlist/add-user/modal-add-user.html',
+                    templateUrl: 'common/dialogs/add-user/modal-add-user.html',
                     scope: $scope,
                     controller: 'AddUserController',
                     controllerAs: 'addUserCtrl',

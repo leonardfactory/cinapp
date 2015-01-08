@@ -21,7 +21,7 @@ angular
         {
             var modalWindow = angularModal
                 .show({
-                    templateUrl: 'watchlist/modal-create.html'
+                    templateUrl: 'common/dialogs/create-watchlist/modal-create.html'
                 });
                 
             modalWindow.result

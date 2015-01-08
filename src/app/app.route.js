@@ -8,7 +8,7 @@ angular
             .state('movies', {
                 url: '/movies',
                 templateUrl: 'movies/movies.html',
-                controller: 'MoviesCtrl',
+                controller: 'MoviesController',
                 controllerAs: 'moviesCtrl'
             })
             .state('watchlist', {
@@ -19,7 +19,7 @@ angular
             })
             .state('watchlist.single', {
                 url: '/:normalizedName',
-                templateUrl: 'watchlist/single.html',
+                templateUrl: 'watchlist/single/single.html',
                 controller: 'SingleWatchlistController',
                 controllerAs: 'singleCtrl'
             })
@@ -32,13 +32,13 @@ angular
             .state('search', {
                 url: '/search',
                 templateUrl: 'search/search.html',
-                controller: 'SearchCtrl',
+                controller: 'SearchController',
                 controllerAs: 'searchCtrl'
             })
             .state('main', {
                 url: '/',
                 templateUrl: 'main/main.html',
-                controller: 'MainCtrl',
+                controller: 'MainController',
                 controllerAs: 'mainCtrl'
             });
     });

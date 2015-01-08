@@ -3,7 +3,7 @@ angular
     .directive('movieData', function () 
     {
         return {
-            templateUrl: 'movies/directive/movie-data/movie-data.html',
+            templateUrl: 'common/directives/movie/movie-data/movie-data.html',
             replace: true,
             scope: {
                 movie: '='

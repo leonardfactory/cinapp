@@ -3,7 +3,7 @@ angular
     .directive('movieCheckButton', function (dataStorage, User) 
     {
         return {
-            templateUrl: 'movies/directive/movie-buttons/movie-check-button.html',
+            templateUrl: 'common/directives/movie/movie-buttons/movie-check-button.html',
             replace: true,
             scope: {
                 movie: '=',
