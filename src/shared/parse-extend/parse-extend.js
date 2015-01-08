@@ -58,16 +58,9 @@
                         Parse[currentClass].prototype[methodName] = function () 
                         {
                             var deferred = $q.defer();
-                            console.log('Applying: ' + currentClass + '->' + methodName);
                             originalMethod
                                 .apply(this, arguments)
-                                .then(function (data) {
-                                    console.log(data);
-                                    deferred.resolve(data);
-                                }, function (error) {
-                                    deferred.reject(error);
-                                });
-                            console.log('Applied: ' + methodName);
+                                .then(deferred.resolve, deferred.reject);
                                 
                             return deferred.promise;
                         }
