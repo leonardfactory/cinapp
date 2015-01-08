@@ -1,12 +1,24 @@
 @import "variables";
 @import "animations/shake";
 
-/** Body no-scroll **/
+/* Body no-scroll
+   ======================================================
+   Currently the `15px` magic number is the scrollbar width. We need to remove it by
+   detecting the scrollbar width in the browser:
+    - http://davidwalsh.name/detect-scrollbar-width
+    - https://github.com/twbs/bootstrap/commit/0907244256d923807c3a4e55f4ea606b9558d0ca#diff-5492e5c74c97b8b5256879d136b55c88R992 
+   ====================================================== */
 body.noscroll {
   overflow: hidden;
+  padding-right: 15px;
 }
 
-/** Modal Elements **/
+.noscroll .nav-bar {
+  padding-right: 15px;
+}
+
+/* Modal Elements 
+ * ====================================================== */
 .modal-background {
   position: fixed;
   z-index: 100;
@@ -52,17 +64,18 @@ body.noscroll {
   }
 }
 
-/** Animations **/
+/* Animations 
+ * ====================================================== */
 .modal-background {
   
-  /** Show **/
+  //== Show
   &.modal-animation-shown {
     .modal-container {
       animation: zoomIn 0.4s;
     }
   }
   
-  /** Leaving **/
+  //== Leaving
   &.modal-animation-leaving {
     opacity: 0 !important;
     
@@ -71,14 +84,14 @@ body.noscroll {
     }
   }
   
-  /** Shake **/
+  //== Shake
   &.modal-animation-shake {
     .modal-container {
       animation: shakeSlow 0.4s;
     }
   }
   
-  /** Success **/
+  //== Success
   &.modal-animation-successed {
     .modal-container {
       animation: pulse 0.4s;
@@ -86,7 +99,8 @@ body.noscroll {
   }
 }
 
-/** Modal forms **/
+/* Modal forms
+ * ====================================================== */
 .modal-overlay form {
   padding: $padding-general;
   
@@ -97,7 +111,8 @@ body.noscroll {
   }
 }
 
-/** Add Watchlist modal **/
+/* Add Watchlist modal 
+ * ====================================================== */
 .modal-watchlist {
   .modal-overlay {
     width: 400px;
@@ -105,7 +120,8 @@ body.noscroll {
   }
 }
 
-/** Add User modal **/
+/* Add User modal
+ * ====================================================== */
 .modal-add-user {
   .modal-overlay {
     width: 400px;
@@ -113,7 +129,8 @@ body.noscroll {
   }
 }
 
-/** Movie Modal **/
+/* Movie Modal
+ * ====================================================== */
 .modal-movie {
   .modal-container {
     width: 900px;

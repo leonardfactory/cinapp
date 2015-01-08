@@ -1,5 +1,7 @@
 @import "variables";
 
+/* General movie styles
+ * ======================================================*/
 .movie-cover {
   float: left;
   margin-right: 2rem;
@@ -62,6 +64,8 @@ ul.movie-data {
   }
 }
 
+/* Movies list & list item
+ * ====================================================== */
 ul.movies-list {
   list-style-type: none;
   width: 100%;
@@ -83,6 +87,7 @@ ul.movies-list {
     
     @extend .clearfix;
     
+    //== Animations
     &.ng-enter {
       animation: fadeInDown 0.3s;
       overflow: hidden;
@@ -104,6 +109,7 @@ ul.movies-list {
       }
     }
     
+    //== Fix first element margin
     &:first-of-type {
       margin-top: 0;
     }
@@ -111,7 +117,7 @@ ul.movies-list {
 }
 
 /* Genres
- * ====================================== */
+ * ====================================================== */
 ul.movie-genres {
   list-style-type: none;
   margin: 0;

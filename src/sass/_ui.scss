@@ -1,7 +1,8 @@
 @import "variables";
 @import "animations/spinLoader";
 
-//== Icons
+/* Icons
+ * ====================================================== */
 span.oi {
   display: inline-block;
   font-size: 1.25em;
@@ -11,7 +12,8 @@ span.oi {
   transition: color 0.2s linear;
 }
 
-//== Buttons
+/* Buttons
+ * ====================================================== */
 .btn {
   border-radius: 4px;
   padding: $padding-small $padding-medium;
@@ -198,7 +200,8 @@ form .btn {
 .btn-action   { @include button-style($brand-info); }
 .btn-danger   { @include button-style($brand-danger); }
 
-//== Form inputs
+/* Form inputs
+ * ====================================================== */
 input[type="text"].form-control,
 input[type="email"].form-control,
 input[type="password"].form-control,
@@ -237,7 +240,8 @@ a.logout {
   cursor: pointer;
 }
 
-//== Placeholder
+/* Placeholder
+ * ====================================================== */
 $placeholder-color: $gray-very-light;
 ::-webkit-input-placeholder { /* WebKit browsers */
     color:    $placeholder-color;

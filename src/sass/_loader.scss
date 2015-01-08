@@ -28,7 +28,8 @@
   }
 }
 
-//== Spinner container
+/* Spinner container
+ * ====================================================== */
 .spinner-container {
   width: 40px;
   height: 40px;
@@ -39,7 +40,8 @@
   z-index: 10;
 }
 
-//== Spinner animation
+/* Spinner animation
+ * ====================================================== */
 .spinner {
   &.ng-enter {
     animation: 0.15s fadeInDown;

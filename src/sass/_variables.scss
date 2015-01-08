@@ -1,12 +1,8 @@
-//
-// Variables
-// --------------------------------------------------
-
-
-//== Colors
-//
-//## Gray and brand colors for use across Bootstrap.
-
+/* General variables for Cinapp
+ * ====================================================== */
+ 
+/* Colors
+ * ====================================================== */
 $gray-base:              #2c3e50 !default;
 $gray-darker:            lighten($gray-base, 13.5%) !default; // #222
 $gray-dark:              lighten($gray-base, 20%) !default;   // #333
@@ -22,29 +18,26 @@ $brand-warning:         #e67d20 !default;
 $brand-danger:          #e74b3c !default;
 
 
-//== Scaffolding
-//
-//## Settings for some of the most global styles.
-
-//** Background color for `<body>`.
+/* Used colors for common elements
+ * ====================================================== */
+//== Background color for `<body>`.
 $body-bg:               $gray-lighter !default;
-//** Global text color on `<body>`.
+//== Global text color on `<body>`.
 $text-color:            #34495e !default;
 
-//** Global textual link color.
+//== Global textual link color.
 $link-color:            $brand-info !default;
-//** Link hover color set via `darken()` function.
+//== Link hover color set via `darken()` function.
 $link-hover-color:      darken($link-color, 15%) !default;
 
 
-//== Typography
-//
-//## Font, line-height, and color for body text, headings, and more.
+/* Typography
+ * ====================================================== */
 
 $font-family-sans-serif:  "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
 $font-family-serif:       "Bitter", Georgia, "Times New Roman", Times, serif !default;
 $font-family-text:        "Helvetica Neue", Helvetica, Arial, sans-serif !default;
-//** Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
+//== Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
 $font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace !default;
 $font-family-base:        $font-family-sans-serif !default;
 
@@ -55,9 +48,13 @@ $padding-small: 8px;
 $padding-smaller: 6px;
 $padding-min: 3px;
 
-//== Navbar
+/* Navbar
+ * ====================================================== */
 $navbar-height: 60px;
 $navbar-brand-img-height: 38px;
+
+/* General utility classes
+ * ====================================================== */
 
 //== Clearfix
 .clearfix {
