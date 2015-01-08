@@ -1,4 +1,4 @@
-var modalComponent = angular.module('angular-modal', ['common-templates']);
+var modalComponent = angular.module('angular-modal', ['shared-templates']);
 
 modalComponent.factory('angularModal', function ($q, $templateCache, $document, $rootScope, $compile, $controller, $timeout) 
 {
