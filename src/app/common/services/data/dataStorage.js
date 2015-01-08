@@ -79,6 +79,9 @@ angular
                         // Cache
                         dataStorage._watchlistMovies[watchlist.id] = collection;
                         deferred.resolve(collection);
+                    })
+                    .fail(function (error) {
+                        deferred.reject(error);
                     });
                 
                 return deferred.promise;
