@@ -1,6 +1,6 @@
 angular
     .module('cinApp.models')
-    .factory('dataStorage', function (WatchedCollection, WatchlistCollection, WatchlistMoviesCollection, User, $q, $timeout, $rootScope) 
+    .factory('dataStorage', function ($q, $timeout, $rootScope, WatchedCollection, WatchlistCollection, WatchlistMoviesCollection, User) 
     {
         var dataStorage = {
             _ready      : false,
@@ -14,7 +14,7 @@ angular
          * Init dataSotrage with new user
          */
         dataStorage.init = function () 
-        {
+        {   
             dataStorage.watchedCollection = new WatchedCollection();
             dataStorage.watchlistCollection = new WatchlistCollection();
             
@@ -29,8 +29,6 @@ angular
             promises
                 .then(function () {
                     dataStorage._ready = true;
-                    
-                    console.log('dataStorage: ready for user ' + User.current().id);
                     
                     angular.forEach(dataStorage._promises, function (deferred) {
                         deferred.resolve(dataStorage);
@@ -101,8 +99,8 @@ angular
         $rootScope.$watch(function () {
             return User.current();
         },
-        function (newUser) {
-            if(newUser !== null) {
+        function (newUser, oldUser) {
+            if(newUser !== null && newUser.id !== oldUser.id) {
                 dataStorage._ready = false;
                 dataStorage.init();
             }

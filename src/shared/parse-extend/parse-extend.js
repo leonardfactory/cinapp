@@ -11,10 +11,10 @@
         */
         module.run(function ($q, $window) 
         {
-            if(!angular.isUndefined($window.Parse) && angular.isObject($window.Parse))
+            if(!angular.isUndefined($window.Parse) && angular.isObject($window.Parse) && !$window.Parse.__parseAngularExtended__)
             {
                 var Parse = $window.Parse;
-                console.log('Parse:');
+                Parse.__parseAngularExtended__ = true;
                 
                 /*
                  * Methods to update on global object
