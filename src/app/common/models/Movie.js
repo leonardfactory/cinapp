@@ -13,24 +13,24 @@ angular
             {
                 var _this = this;
                 
-                this.setName(obj.title);
-                this.setOriginalTitle(obj.original_title);
-                this.setReleaseDate(moment(obj.release_date, 'YYYY-MM-DD').toDate());
-                this.setStatus(obj.status);
-                this.setPosterPath(obj.poster_path);
-                this.setImdbId(obj.imdb_id);
-                this.setTmdbId(obj.id.toString());
-                this.setDirector(obj.director);
-                this.setOverview(obj.overview);
-                this.setRuntime(obj.runtime);
-                this.setVoteAverage(obj.vote_average);
+                this.name = obj.title;
+                this.originalTitle = obj.original_title;
+                this.releaseDate = moment(obj.release_date, 'YYYY-MM-DD').toDate();
+                this.status = obj.status;
+                this.posterPath = obj.poster_path;
+                this.imdbId = obj.imdb_id;
+                this.tmdbId = obj.id.toString();
+                this.director = obj.director;
+                this.overview = obj.overview;
+                this.runtime = obj.runtime;
+                this.voteAverage = obj.vote_average;
                 
                 // Genres
                 var genres = [];
                 angular.forEach(obj.genres, function (genre) {
                     genres.push(genre.name);
                 });
-                this.setGenres(genres);
+                this.genres = genres;
             }
             
         });
