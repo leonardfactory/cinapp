@@ -1,6 +1,6 @@
 angular
     .module('cinApp.models')
-    .factory('WatchlistUsersCollection', function (User, Movie, Security) 
+    .factory('WatchlistUsersCollection', function ($q, User, Movie, Security) 
     {
         var WatchlistUsersCollection = Parse.Collection.extend({
             model: User,
@@ -10,6 +10,10 @@ angular
             },
             addUser: function (user) {
                 var _this = this;
+                
+                if(!(user instanceof User)) {
+                    return $q.reject('User not found');
+                }
                 
                 this._watchlist.setACL(Security.WatchlistUpdate(this._watchlist, user));
                 this._watchlist.usersCount++;

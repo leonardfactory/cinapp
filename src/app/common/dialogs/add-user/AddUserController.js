@@ -23,9 +23,7 @@ angular
             
             query.first()
                 .then(function (user) {
-                    if(user) { // Found
-                        return _this.watchlistUsers.addUser(user);
-                    }
+                    return _this.watchlistUsers.addUser(user);
                 })
                 .then(function () {
                     $scope.$close(true);
