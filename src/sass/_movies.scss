@@ -84,13 +84,13 @@ ul.movies-list {
     @extend .clearfix;
     
     &.ng-enter {
-      //animation: fadeInDown 0.4s;
+      animation: fadeInDown 0.3s;
       overflow: hidden;
-      transition: height 0.4s ease;
-      height: 0;
+      //transition: height 0.4s ease;
+      //height: 0;
       
       &.ng-enter-active {
-        height: 170px;
+        //height: 170px;
       }
     }
     

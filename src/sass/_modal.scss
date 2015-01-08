@@ -1,6 +1,11 @@
 @import "variables";
 @import "animations/shake";
 
+/** Body no-scroll **/
+body.noscroll {
+  overflow: hidden;
+}
+
 /** Modal Elements **/
 .modal-background {
   position: fixed;
@@ -135,7 +140,9 @@
     font-weight: bold;
     font-size: 1.8em;
     color: $brand-primary;
-    margin-bottom: 0.2em;
+    padding: 0;
+    text-transform: none;
+    margin: 0 0 0.2em 0;
   }
   
   blockquote {
