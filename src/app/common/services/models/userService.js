@@ -8,21 +8,12 @@ angular
          * Register
          */
         userService.register = function (user) 
-        {
-            var deferred = $q.defer();
-            
+        {   
             loaderService.start();
             
-            user.signUp()
-                .then(function (user) {
-                    deferred.resolve(user);
-                })
-                .fail(function (error) {
-                    deferred.reject(error);
-                })
-                .always(loaderService.done);
-                
-            return deferred.promise;
+            return user
+                .$signUp()
+                .finally(loaderService.done);
         }
         
         return userService;

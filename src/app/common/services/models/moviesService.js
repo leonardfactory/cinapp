@@ -8,9 +8,7 @@ angular
          * Check a movie and return a promise
          */
         moviesService.check = function (movieObj) 
-        {
-            var deferred = $q.defer();
-            
+        {   
             loaderService.start();
             
             var movie;
@@ -23,7 +21,7 @@ angular
                 movie = movieObj;
             }
 
-            dataStorage.ready()
+            return dataStorage.ready()
                 .then(function () {
                     if(_.contains(User.current().watchedId, movie.imdbId)) {
                         // Uncheck
@@ -34,19 +32,7 @@ angular
                         return dataStorage.watchedCollection.addMovie(movie);
                     }
                 })
-                .then(function () {
-                    deferred.resolve(movie);
-                })
-                .catch(function (error) {
-                    console.log('Whoops. Unabled to check movie.');
-                    console.log(error);
-                    deferred.reject(error);
-                })
-                .finally(function () {
-                    loaderService.done();
-                });
-                
-            return deferred.promise;
+                .finally(loaderService.done);
         }
         
         /**
@@ -54,8 +40,6 @@ angular
          */
         moviesService.addToWatchlist = function (movieObj, watchlist) 
         {
-            var deferred = $q.defer();
-
             loaderService.start();
             
             var movie, watchlistMovies;
@@ -68,7 +52,7 @@ angular
                 movie = movieObj;
             }
             
-            dataStorage.ready()
+            return dataStorage.ready()
                 .then(function () {
                     return dataStorage.watchlistMoviesCollection(watchlist);
                 })
@@ -76,25 +60,14 @@ angular
                     watchlistMovies = _watchlistMovies;
                     return watchlistMovies.addMovie(movie);
                 })
-                .then(function () {
-                    deferred.resolve(movie);
-                })
-                .catch(function (err) {
-                    console.log(err);
-                    deferred.reject(err);
-                })
                 .finally(loaderService.done);
-                
-            return deferred.promise;
         }
         
         /**
          * Remove movie from watchlist
          */
         moviesService.removeFromWatchlist = function (movie, watchlist) 
-        {
-            var deferred = $q.defer();
-            
+        {   
             loaderService.start();
             
             // movie should be instanceof Movie
@@ -104,7 +77,7 @@ angular
             
             var watchlistMovies;
             
-            dataStorage.ready()
+            return dataStorage.ready()
                 .then(function () {
                     return dataStorage.watchlistMoviesCollection(watchlist);
                 })
@@ -112,16 +85,7 @@ angular
                     watchlistMovies = _watchlistMovies;
                     return watchlistMovies.removeMovie(movie);
                 })
-                .then(function () {
-                    deferred.resolve(movie);
-                })
-                .catch(function (err) {
-                    console.log(err);
-                    deferred.reject(err);
-                })
                 .finally(loaderService.done);
-            
-            return deferred.promise;
         }
         
         return moviesService;

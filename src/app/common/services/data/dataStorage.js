@@ -19,8 +19,8 @@ angular
             dataStorage.watchlistCollection = new WatchlistCollection();
             
             var promises = $q.all([
-                dataStorage.watchlistCollection.fetch(),
-                dataStorage.watchedCollection.fetch()
+                dataStorage.watchlistCollection.$fetch(),
+                dataStorage.watchedCollection.$fetch()
             ]);
             
             /**
@@ -77,14 +77,14 @@ angular
             else {
                 var deferred = $q.defer();
                 
-                var collection = WatchlistMoviesCollection.fromWatchlist(watchlist);
-                collection.fetch()
+                var collection = new WatchlistMoviesCollection([], { watchlist: watchlist });
+                collection.$fetch()
                     .then(function () {
                         // Cache
                         dataStorage._watchlistMovies[watchlist.id] = collection;
                         deferred.resolve(collection);
                     })
-                    .fail(function (error) {
+                    .catch(function (error) {
                         deferred.reject(error);
                     });
                 

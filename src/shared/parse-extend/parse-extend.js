@@ -14,48 +14,48 @@
             if(!angular.isUndefined($window.Parse) && angular.isObject($window.Parse))
             {
                 var Parse = $window.Parse;
-
+                console.log('Parse:');
+                
                 /*
                  * Methods to update on global object
                  */
                 var methodsToUpdate = {
                     "Object": {
                         proto: ['save', 'fetch', 'destroy'],
-                        static: ['saveAll', 'destroyAll']
+                        stat: ['saveAll', 'destroyAll']
                     },
                     "Collection": {
                         proto: ['fetch'],
-                        static: []
+                        stat: []
                     },
                     "Query": {
                         proto: ['find', 'first', 'count', 'get'],
-                        static: []
+                        stat: []
                     },
                     "Cloud": {
                         proto: [],
-                        static: ['run']
+                        stat: ['run']
                     },
                     "User": {
                         proto: ['signUp'],
-                        static: ['requestPasswordReset', 'logIn']
+                        stat: ['requestPasswordReset', 'logIn']
                     },
                     "FacebookUtils": {
                         proto: [],
-                        static: ['logIn', 'link', 'unlink']
+                        stat: ['logIn', 'link', 'unlink']
                     }
                 };
                 
                 /*
                  * Patch Parse methods in order to use $q promises
                  */
-                angular.forEach(methodsToUpdate, function (className, currentObject)
+                angular.forEach(methodsToUpdate, function (currentObject, className)
                 {   
                     // Patch prototype methods
                     angular.forEach(currentObject.proto, function (methodName) 
                     {
-                        var originalMethod = Parse[currentClass].prototype[methodName];
-                        
-                        Parse[currentClass].prototype[methodName] = function () 
+                        var originalMethod = Parse[className].prototype[methodName];
+                        Parse[className].prototype['$' + methodName] = function () 
                         {
                             var deferred = $q.defer();
                             originalMethod
@@ -67,18 +67,17 @@
                     });
                     
                     // Patch static methods
-                    angular.forEach(currentObject.static, function (methodName) 
+                    angular.forEach(currentObject.stat, function (methodName) 
                     {
-                        var originalMethod = Parse[currentClass][methodName];
+                        var originalMethod = Parse[className][methodName];
                         
-                        Parse[currentClass][methodName] = function () 
+                        Parse[className]['$' + methodName] = function () 
                         {
                             var deferred = $q.defer();
-                            
                             originalMethod
                                 .apply(this, arguments)
                                 .then(deferred.resolve, deferred.reject);
-                                
+                            
                             return deferred.promise;
                         }
                     });

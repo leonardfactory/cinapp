@@ -22,7 +22,7 @@ angular
                 var _this = this;
                 
                 return Parse.Cloud
-                    .run('insertMovie', { movie: movie.toObject() })
+                    .$run('insertMovie', { movie: movie.toObject() })
                     .then(function (object) {
                         try {
                             _this._watchlist.relation('movies').add(object);
@@ -32,7 +32,7 @@ angular
                             return $q.reject('Movie already added');
                         }
                         
-                        return _this._watchlist.save();
+                        return _this._watchlist.$save();
                     });
             },
             hasMovie: function (movie) {
@@ -44,7 +44,7 @@ angular
                 this._watchlist.relation('movies').remove(movie);
                 this.remove(movie);
                 
-                return this._watchlist.save();
+                return this._watchlist.$save();
             }
         }, {
             /**

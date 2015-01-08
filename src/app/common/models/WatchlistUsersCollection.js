@@ -30,7 +30,7 @@ angular
                 
                 this.add(user);
                 
-                return this._watchlist.save();
+                return this._watchlist.$save();
             }
         }, {
             /**

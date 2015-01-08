@@ -19,7 +19,7 @@ angular
                 // @todo Can be optimized passing directly the watchlist with UIRouter.
                 var query = new Parse.Query(Watchlist);
                 query.equalTo('normalizedName', $stateParams.normalizedName);
-                return query.first();
+                return query.$first();
             })
             .then(function (watchlist) {
                 _this.watchlist = watchlist;
@@ -32,7 +32,7 @@ angular
                 _this.movies = watchlistMovies;
                 
                 _this.watchlistUsers = WatchlistUsersCollection.fromWatchlist(_this.watchlist);
-                return _this.watchlistUsers.fetch();
+                return _this.watchlistUsers.$fetch();
             })
             .catch(function (error) {
                 console.log('Whoops. Unable to load Watchlist.');
@@ -56,6 +56,7 @@ angular
                 
             modalWindow.result
                 .then(function (result) {
+                    // ...
                 })
                 .catch(function (error) {
                     console.log('Cannot add user.');

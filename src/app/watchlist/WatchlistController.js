@@ -52,11 +52,10 @@ angular
                 .then(function () {
                     return _this.watchlists.removeWatchlist(watchlist);
                 })
-                .then(loaderService.done)
                 .catch(function (error) {
-                    loaderService.done();
                     console.log('Error: ');
                     console.log(error);
-                });
+                })
+                .finally(loaderService.done);
         }
     });

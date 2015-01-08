@@ -23,7 +23,7 @@ angular
                 watchlist.normalizedName = watchlist.name.trim().replace(/\W+/g, '-').toLowerCase() + '-' + User.current().id.toLowerCase().substr(0, 3);
                 
                 return watchlist
-                        .save()
+                        .$save()
                         .then(function (object) {
                             _this.add(object);
                             return object;
@@ -38,18 +38,14 @@ angular
                 
                 // Delete cause no other users are interested
                 if(watchlist.usersCount <= 0) {
-                    return watchlist.destroy();
+                    return watchlist.$destroy();
                 }
                 // Remove only current user
                 else {
                     watchlist.relation('users').remove(User.current());
                     watchlist.setACL(Security.WatchlistRemove(watchlist, User.current()));
                     
-                    return watchlist
-                            .save()
-                            .then(function (object) {
-                                return object;
-                            });
+                    return watchlist.$save();
                 }
             }
         });
