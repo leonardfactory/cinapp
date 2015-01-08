@@ -26,6 +26,9 @@ modalComponent.factory('angularModal', function ($q, $templateCache, $document, 
         var element             = $compile(elementTemplate)(modalScope); // Link to modal scope
         body.append(element);
         
+        // Body should not be scrollable when modal is opened
+        body.addClass('noscroll');
+        
         // `Esc` binding
         var escBinding = function (evt) {
             if(evt.which === 27) {
@@ -85,7 +88,13 @@ modalComponent.factory('angularModal', function ($q, $templateCache, $document, 
             
             var delay = options.closeDelay || 400;
             $timeout(function () {
+                // Unbind keydown
                 $document.unbind('keydown', escBinding);
+                
+                // Allow body sto scroll again
+                body.removeClass('noscroll');
+                
+                // Remove scope & DOM element
                 modalScope.$destroy();
                 element.remove();
             }, delay);
