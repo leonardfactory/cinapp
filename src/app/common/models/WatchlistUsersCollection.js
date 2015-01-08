@@ -3,6 +3,15 @@ angular
     .factory('WatchlistUsersCollection', function ($q, User, Movie, Security) 
     {
         var WatchlistUsersCollection = Parse.Collection.extend({
+            /**
+             * Create custom query based on passed watchlist.
+             */
+            initialize: function (models, options) {
+                if(options && options.watchlist) {
+                    this._watchlist     = options.watchlist;
+                    this.query          = options.watchlist.relation('users').query();  
+                }
+            },
             model: User,
             _watchlist: null,
             comparator: function (a, b) {
@@ -27,6 +36,7 @@ angular
             /**
              * Static method to retrieve a new Users collection
              * based on the users saved inside a particular collection
+             * @deprecated
              */
             fromWatchlist: function (watchlist) 
             {

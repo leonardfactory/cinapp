@@ -3,9 +3,8 @@ angular
     .factory('WatchlistCollection', function (User, Watchlist, Security) 
     {
         var WatchlistCollection = Parse.Collection.extend({
-            constructor: function () {
+            initialize: function (models, options) {
                 this.query = (new Parse.Query(Watchlist)).equalTo('users', User.current());
-                Parse.Collection.apply(this, arguments);
             },
             model: Watchlist,
             className: 'Watchlist',

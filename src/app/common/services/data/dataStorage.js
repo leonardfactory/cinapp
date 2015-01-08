@@ -18,32 +18,36 @@ angular
             dataStorage.watchedCollection = new WatchedCollection();
             dataStorage.watchlistCollection = new WatchlistCollection();
             
-            dataStorage
-                .watchlistCollection.fetch()
-                .then(function () {
-                    return dataStorage.watchedCollection.fetch();
-                })
-                /**
-                 * Execute ready callbacks when all resources have been loaded
-                 */
+            var promises = $q.all([
+                dataStorage.watchlistCollection.fetch(),
+                dataStorage.watchedCollection.fetch()
+            ]);
+            
+            /**
+             * Execute ready callbacks when all resources have been loaded
+             */
+            promises
                 .then(function () {
                     dataStorage._ready = true;
-                
+                    
+                    console.log('dataStorage: ready for user ' + User.current().id);
+                    
                     angular.forEach(dataStorage._promises, function (deferred) {
                         deferred.resolve(dataStorage);
                     });
                 
                     dataStorage._promises = [];
                 })
-                .fail(function (error) {
+                .catch(function (error) {
                     console.log('Error in dataStorage loading');
                     console.log(error);
                 
                     angular.forEach(dataStorage._promises, function (deferred) {
                         deferred.reject(error);
                     });
-                })
-                .done();
+                    
+                    dataStorage._promises = [];
+                });
         }
         
         /**

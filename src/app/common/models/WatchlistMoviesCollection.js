@@ -3,6 +3,15 @@ angular
     .factory('WatchlistMoviesCollection', function ($q, User, Movie, MovieError) 
     {
         var WatchlistMoviesCollection = Parse.Collection.extend({
+            /**
+             * Initialize movies from passed watchlist
+             */
+            initialize: function (models, options) {
+                if(options && options.watchlist) {
+                    this._watchlist = options.watchlist;
+                    this.query = options.watchlist.relation('movies').query();
+                }
+            },
             model: Movie,
             className: 'Movie',
             _watchlist: null,
@@ -41,6 +50,7 @@ angular
             /**
              * Static method to retrieve a new Movies collection
              * based on the movies saved inside a particular collection
+             * @deprecated
              */
             fromWatchlist: function (watchlist) 
             {
