@@ -56,7 +56,6 @@ angular
                 
             modalWindow.result
                 .then(function (result) {
-                    console.log('Completed.')
                 })
                 .catch(function (error) {
                     console.log('Cannot add user.');
