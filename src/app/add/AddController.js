@@ -63,7 +63,7 @@ angular
                             _this.result.director = director;
                         
                             var modalWindow = angularModal.show({
-                                templateUrl     : 'add/movie-detail/modal-movie-detail.html',
+                                templateUrl     : 'common/dialogs/movie-detail/modal-movie-detail.html',
                                 controller      : 'MovieDetailController',
                                 controllerAs    : 'movieCtrl',
                                 locals          : {

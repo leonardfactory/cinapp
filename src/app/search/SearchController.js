@@ -1,6 +1,6 @@
 angular
     .module('cinApp')
-    .controller('SearchCtrl', function ($q, $scope, $timeout, tmdbService, loaderService) 
+    .controller('SearchController', function ($q, $scope, $timeout, tmdbService, loaderService) 
     {
         var _this = this;
         

@@ -1,6 +1,6 @@
 angular
     .module('cinApp')
-    .controller('LoginCtrl', function ($scope, parseService, User) 
+    .controller('LoginController', function ($scope, parseService, User) 
     {
         var _this = this;
         

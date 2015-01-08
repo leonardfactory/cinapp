@@ -1,6 +1,6 @@
 angular
     .module('cinApp')
-    .controller('MainCtrl', function (User, userService)
+    .controller('MainController', function (User, userService)
     {
         var _this = this;
     

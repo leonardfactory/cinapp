@@ -1,6 +1,6 @@
 angular
     .module('cinApp')
-    .controller('MoviesCtrl', function ($scope, $timeout, loaderService, User, Movie, dataStorage) 
+    .controller('MoviesController', function ($scope, $timeout, loaderService, User, Movie, dataStorage) 
     {
         var _this = this;
         
