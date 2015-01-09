@@ -1,10 +1,18 @@
 angular
     .module('cinApp')
-    .controller('LoginController', function ($scope, parseService, User) 
+    .controller('LoginController', function ($scope, userService, User) 
     {
         var _this = this;
         
-        this.logged = parseService.logged();
+        this.logged = userService.logged();
+        this.error = '';
+        this.errorCount = 0;
+        
+        $scope.$watch(function () {
+            return userService.logged();
+        }, function (logged) {
+            _this.logged = logged;
+        });
         
         this.user = {
             username: '',
@@ -22,22 +30,15 @@ angular
         {
             _this.alert = null;
             
-            User
-                .logIn(_this.user.username, _this.user.password)
-                .then(function (user) 
-                {
-                    _this.logged = parseService.logged();
-                },
-                function (error) 
-                {
-                    _this.logged = false;
-                    _this.alert = 'Error while logging: ' + error;
+            userService.login(_this.user.username, _this.user.password)
+                .catch(function (error) {
+                    _this.error = error;
+                    $scope.$apply();
                 });
         }
         
         this.logout = function () 
         {
-            User.logOut();
-            _this.logged = false;
+            userService.logout();
         }
     });

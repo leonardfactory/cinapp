@@ -143,7 +143,7 @@ angular
             return User.current();
         },
         function (newUser, oldUser) {
-            if(newUser !== null && newUser.id !== oldUser.id) {
+            if(newUser !== null && (!oldUser || newUser.id !== oldUser.id)) {
                 dataStorage._ready = false;
                 dataStorage.init();
             }

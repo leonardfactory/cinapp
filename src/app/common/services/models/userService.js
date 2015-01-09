@@ -1,8 +1,36 @@
 angular
     .module('cinApp')
-    .service('userService', function ($q, dataStorage, loaderService, User) 
+    .service('userService', function ($q, $rootScope, dataStorage, loaderService, User) 
     {
         var userService = {};
+        
+        /**
+         * Check if is logged
+         */
+        userService.logged = function () {
+            return User.current() !== null;
+        }
+        
+        /**
+         * Login
+         */
+        userService.login = function (username, password) 
+        {
+            loaderService.start();
+            
+            return User.$logIn(username, password)
+                .then(function () {
+                    $rootScope.$apply();
+                })
+                .finally(loaderService.done);
+        }
+        
+        /**
+         * Logout
+         */
+        userService.logout = function () {
+            User.logOut();
+        }
         
         /**
          * Register
