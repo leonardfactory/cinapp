@@ -31,10 +31,10 @@
     <body>
         <nav class="navbar u-full-width" role="navigation">
             <div class="u-pull-right" ng-controller="LoginController as loginCtrl" ng-cloak>
-                <ul class="navbar-menu" ng-if="loginCtrl.logged === false">
+                <ul class="navbar-menu" ng-if="loginCtrl.logged === false" lf-shake-error="loginCtrl.error">
                     <li ui-sref-active="active"><a ui-sref="main">Home</a></li>
                     <li>
-                        <form class="navbar-form form-inline" role="login" > <!-- -->
+                        <form class="navbar-form form-inline" role="login"> <!-- -->
                             <input type="text" class="form-control form-control-negative" placeholder="Username" ng-model="loginCtrl.user.username">
                             <input type="password" class="form-control form-control-negative" placeholder="Password" ng-model="loginCtrl.user.password">
                             <button type="submit" class="btn btn-primary" ng-click="loginCtrl.login()">Login</button>
