@@ -23,7 +23,8 @@ angular
                 .show({
                     templateUrl: 'common/dialogs/create-watchlist/modal-create.html'
                 });
-                
+            
+            // Todo move to service
             modalWindow.result
                 .then(function (result) {
                     if(result.result) {
@@ -38,7 +39,8 @@ angular
                     }
                 })
                 .catch(function (error) {
-                    console.log('Error ' + error);
+                    console.log('Error ');
+                    console.log(error);
                 })
                 .finally(loaderService.done);
         }
