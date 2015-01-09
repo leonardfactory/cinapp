@@ -4,7 +4,7 @@
  */
 var models = angular.module('cinApp.models', ['parse-extend']);
 var app = angular.module('cinApp', ['cinApp.models', 'angular-modal',
-                                    'ngAnimate', 'ui.router', 'templates', 'truncate']);
+                                    'ngAnimate', 'lfEffects', 'ui.router', 'templates', 'truncate']);
 var templates = angular.module('templates', []);
 
 angular.element(document).ready(function() {

@@ -1,0 +1,7 @@
+@import "../animations/_shake";
+
+.lf-effect-shake {
+  &.lf-effect-shake-add-active {
+    animation: shakeSlow 0.4s linear;
+  }
+}
