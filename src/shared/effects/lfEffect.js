@@ -3,11 +3,28 @@ angular
     .service('lfAnimator', function ($timeout, $animate) 
     {
         return {
-            applyEffect: function (element, animationClass) {
-                return $animate.addClass(element, animationClass)
-                    .then(function () {
-                        element.removeClass(animationClass);
-                    });
+            /**
+             * Apply an effect using a css animation class.
+             * In case a timeout is passed, we will use a deferred
+             * implementation instead of the the $animate service.
+             */
+            applyEffect: function (element, animationClass, timeout) {
+                if(!angular.isUndefined(timeout)) {
+                    
+                    $timeout(function () {
+                        element.addClass(animationClass);
+                    }, 0);
+                    
+                    return $timeout(function () {
+                            element.removeClass(animationClass);
+                        }, timeout);
+                }
+                else {
+                    return $animate.addClass(element, animationClass)
+                        .then(function () {
+                            element.removeClass(animationClass);
+                        });
+                }
             }
         }
     })

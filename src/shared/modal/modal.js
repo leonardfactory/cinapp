@@ -1,6 +1,6 @@
-var modalComponent = angular.module('angular-modal', ['shared-templates']);
+var modalComponent = angular.module('angular-modal', ['shared-templates', 'lfEffects']);
 
-modalComponent.factory('angularModal', function ($q, $templateCache, $document, $rootScope, $compile, $controller, $timeout) 
+modalComponent.factory('angularModal', function ($q, $templateCache, $document, $rootScope, $compile, $controller, $timeout, lfAnimator) 
 {
     var angularModal = {};
     
@@ -26,6 +26,8 @@ modalComponent.factory('angularModal', function ($q, $templateCache, $document, 
         var element             = $compile(elementTemplate)(modalScope); // Link to modal scope
         body.append(element);
         
+        var containerElement    = element.find('.modal-container');
+        
         // Body should not be scrollable when modal is opened
         body.addClass('noscroll');
         
@@ -45,14 +47,8 @@ modalComponent.factory('angularModal', function ($q, $templateCache, $document, 
             opened   : modalOpenDefer.promise,
             
             // Animations
-            _latestEffect : '',
             effect : function (effectName) {
-                element.removeClass('modal-animation-' + this._latestEffect);
-                
-                this._latestEffect = effectName;
-                $timeout(function () {
-                    element.addClass('modal-animation-' + effectName);
-                }, 0);
+                lfAnimator.applyEffect(element, 'modal-animation-' + effectName, 400/*ms*/);
             },
             shake : function () {
                 this.effect('shake');
