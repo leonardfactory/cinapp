@@ -1,6 +1,6 @@
 angular
     .module('cinApp')
-    .controller('WatchlistController', function ($timeout, loaderService, dataStorage, Watchlist, angularModal)
+    .controller('WatchlistController', function ($timeout, loaderService, dataStorage, watchlistService, angularModal)
     {
         this.watchlists = null;
         
@@ -19,30 +19,12 @@ angular
          */
         this.createWatchlist = function () 
         {
-            var modalWindow = angularModal
+            angularModal
                 .show({
-                    templateUrl: 'common/dialogs/create-watchlist/modal-create.html'
+                    templateUrl: 'common/dialogs/create-watchlist/modal-create-watchlist.html',
+                    controller: 'CreateWatchlistController',
+                    controllerAs: 'createCtrl'
                 });
-            
-            // Todo move to service
-            modalWindow.result
-                .then(function (result) {
-                    if(result.result) {
-                        var name = result.params;
-                        
-                        loaderService.start();
-                        
-                        var watchlist   = new Watchlist();
-                        watchlist.name  = name;
-                        
-                        return _this.watchlists.addWatchlist(watchlist); 
-                    }
-                })
-                .catch(function (error) {
-                    console.log('Error ');
-                    console.log(error);
-                })
-                .finally(loaderService.done);
         }
         
         /**
@@ -52,7 +34,7 @@ angular
         {
             $timeout(loaderService.start)
                 .then(function () {
-                    return _this.watchlists.removeWatchlist(watchlist);
+                    return watchlistService.remove(watchlist);
                 })
                 .catch(function (error) {
                     console.log('Error: ');

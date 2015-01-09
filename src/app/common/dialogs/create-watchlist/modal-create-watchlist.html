@@ -1,12 +1,11 @@
-<!--<ng-modal-box close="close(false)" shown="shown" class="modal-watchlist"> -->
 <ng-modal-box class="modal-watchlist">
     <form role="create">
         <h3>Create new Watchlist</h3>
-        <input type="text" placeholder="Watchlist Name" class="form-control" ng-model="name">
+        <input type="text" placeholder="Watchlist Name" class="form-control" ng-model="createCtrl.watchlist.name">
         <br />
         <div class="modal-actions">
             <button class="btn btn-normal" type="button" ng-click="$close(false)">Cancel</button>
-            <button class="btn btn-action" type="button" ng-click="$close(true, name)">Add Watchlist</button>
+            <button class="btn btn-action" type="button" ng-click="createCtrl.createWatchlist()">Add Watchlist</button>
         </div>
     </form>
 </ng-modal-box>
