@@ -19,14 +19,12 @@ angular
                 watchlist.relation('users').add(User.current());
                 watchlist.usersCount = 1;
                 
-                // Compute normalizedName
-                watchlist.normalizedName = watchlist.name.trim().replace(/\W+/g, '-').toLowerCase() + '-' + User.current().id.toLowerCase().substr(0, 3);
-                
                 return watchlist
                         .$save()
-                        .then(function (object) {
-                            _this.add(object);
-                            return object;
+                        .then(function (savedWatchlist) {
+                            watchlist.normalizedName = savedWatchlist.normalizedName;
+                            _this.add(savedWatchlist);
+                            return savedWatchlist;
                         });
             },
             removeWatchlist: function (watchlist) {
