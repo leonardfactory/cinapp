@@ -21,16 +21,16 @@ angular
 
             var query = Parse.Query.or(queryUsername, queryMail); // Find email or username matching
             
-            query.first()
+            query.$first()
                 .then(function (user) {
                     return _this.watchlistUsers.addUser(user);
                 })
                 .then(function () {
                     $scope.$close(true);
                 })
-                .fail(function (error) {
+                .catch(function (error) {
                     $modalWindow.shake();
                 })
-                .always(loaderService.done);
+                .finally(loaderService.done);
         }
     });
