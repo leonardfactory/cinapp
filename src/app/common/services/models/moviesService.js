@@ -54,7 +54,7 @@ angular
             
             return dataStorage.ready()
                 .then(function () {
-                    return dataStorage.watchlistMoviesCollection(watchlist);
+                    return dataStorage.watchlistMovies.getCollection(watchlist.id, { watchlist: watchlist });
                 })
                 .then(function (_watchlistMovies) {
                     watchlistMovies = _watchlistMovies;
@@ -79,7 +79,7 @@ angular
             
             return dataStorage.ready()
                 .then(function () {
-                    return dataStorage.watchlistMoviesCollection(watchlist);
+                    return dataStorage.watchlistMovies.getCollection(watchlist.id, { watchlist: watchlist });
                 })
                 .then(function (_watchlistMovies) {
                     watchlistMovies = _watchlistMovies;

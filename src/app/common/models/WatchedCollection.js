@@ -16,7 +16,7 @@ angular
             addMovie: function (movie) {
                 var _this = this;
                 
-                var pr = Parse.Cloud
+                return Parse.Cloud
                     .$run('insertMovie', { movie: movie.toObject() })
                     .then(function (object) {
                         _this.add(object);
@@ -25,8 +25,6 @@ angular
                     
                         return User.current().$save();
                     });
-                console.log(pr);
-                return pr;
             },
             removeMovie: function (movie) {
                 var _this = this;

@@ -26,13 +26,15 @@ angular
                 return dataStorage.ready();
             })
             .then(function () {
-                return dataStorage.watchlistMoviesCollection(_this.watchlist);
+                return dataStorage.watchlistMovies.getCollection(_this.watchlist.id, { watchlist: _this.watchlist });
             })
             .then(function (watchlistMovies) {
                 _this.movies = watchlistMovies;
                 
-                _this.watchlistUsers = WatchlistUsersCollection.fromWatchlist(_this.watchlist);
-                return _this.watchlistUsers.$fetch();
+                return dataStorage.watchlistUsers.getCollection(_this.watchlist.id, { watchlist: _this.watchlist });
+            })
+            .then(function (watchlistUsers) {
+                _this.watchlistUsers = watchlistUsers;
             })
             .catch(function (error) {
                 console.log('Whoops. Unable to load Watchlist.');

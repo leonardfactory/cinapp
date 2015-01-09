@@ -1,17 +1,72 @@
 angular
     .module('cinApp.models')
-    .factory('dataStorage', function ($q, $timeout, $rootScope, WatchedCollection, WatchlistCollection, WatchlistMoviesCollection, User) 
+    .factory('DeferredCollections', function ($q) 
+    {
+        /**
+         * Describe a Parse.com set of collection which needs to be accessible in the `dataStorage`.
+         * Since we need to provide caching features, we specify with this class how
+         * the collections should be cached and how `dataStorage` should handle them.
+         * @class
+         */
+        function DeferredCollections(collectionName, initializer)
+        {
+            this.collectionName = collectionName;
+            this.initializer = initializer;
+            
+            this._maps      = {};
+            this._promises  = {};
+        }
+        
+        DeferredCollections.prototype.getCollection = function (id, options) 
+        {
+            var _this = this;
+            
+            if(this._maps[id]) {
+                return $q.when(this._maps[id]);
+            }
+            else {
+                // Return old promise if we started to fetch the collection
+                if(this._promises[id]) {
+                    return this._promises[id];
+                }
+                // Start fetching and register the promise fetch
+                else {
+                    var deferred = $q.defer();
+                    this._promises[id] = deferred.promise;
+                    
+                    var collection = this.initializer(options);
+                    collection.$fetch()
+                        .then(function (results) {
+                            // console.log('Fetched ' + _this.collectionName + ': ' + id);
+                            _this._maps[id] = collection;
+                            deferred.resolve(collection);
+                        })
+                        .catch(function (error) {
+                            deferred.reject(error);
+                        })
+                        .finally(function () {
+                            _this._promises[id] = null;
+                        });
+                    
+                    return deferred.promise;
+                }
+            }
+        }
+        
+        return DeferredCollections;
+    });
+    
+angular
+    .module('cinApp.models')
+    .factory('dataStorage', function ($q, $timeout, $rootScope, DeferredCollections, WatchedCollection, WatchlistCollection, WatchlistMoviesCollection, WatchlistUsersCollection, User) 
     {
         var dataStorage = {
             _ready      : false,
-            _promises   : [],
-            
-            // Watchlists
-            _watchlistMovies : {}
+            _promises   : []
         };
         
         /**
-         * Init dataSotrage with new user
+         * Init dataStorage with new user
          */
         dataStorage.init = function () 
         {   
@@ -67,28 +122,16 @@ angular
         /**
          * Get Watchlist Movies collection
          */
-        dataStorage.watchlistMoviesCollection = function (watchlist) 
-        {
-            if(dataStorage._watchlistMovies[watchlist.id]) {
-                return $q.when(dataStorage._watchlistMovies[watchlist.id]);
-            }
-            else {
-                var deferred = $q.defer();
-                
-                var collection = new WatchlistMoviesCollection([], { watchlist: watchlist });
-                collection.$fetch()
-                    .then(function () {
-                        // Cache
-                        dataStorage._watchlistMovies[watchlist.id] = collection;
-                        deferred.resolve(collection);
-                    })
-                    .catch(function (error) {
-                        deferred.reject(error);
-                    });
-                
-                return deferred.promise;
-            }
-        }
+        dataStorage.watchlistMovies = new DeferredCollections('WatchlistMoviesCollection', function (options) {
+            return new WatchlistMoviesCollection([], options);
+        });
+        
+        /**
+         * Get Watchlist Users collection
+         */
+        dataStorage.watchlistUsers = new DeferredCollections('WatchlistUsersCollection', function (options) {
+            return new WatchlistUsersCollection([], options);
+        });
         
         // Init if User is logged
         if(User.current() !== null) {
