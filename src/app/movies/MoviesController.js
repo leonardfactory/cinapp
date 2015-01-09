@@ -26,6 +26,9 @@ angular
             _this.alerts.splice(index, 1);
         };
         
+        /**
+         * @deprecated
+         */
         this.addMovie = function () 
         {
             var movie = new Movie();
