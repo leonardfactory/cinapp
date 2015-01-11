@@ -3,7 +3,7 @@
  * Here we define the ngApp while initializing some useful stuff.
  */
 var models = angular.module('cinApp.models', ['parse-extend']);
-var app = angular.module('cinApp', ['cinApp.models', 'angular-modal',
+var app = angular.module('cinApp', ['cinApp.models', 'lfExtensions', 'angular-modal',
                                     'ngAnimate', 'lfEffects', 'ui.router', 'templates', 'truncate']);
 var templates = angular.module('templates', []);
 

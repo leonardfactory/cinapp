@@ -23,8 +23,8 @@ angular
                         .$save()
                         .then(function (savedWatchlist) {
                             watchlist.normalizedName = savedWatchlist.normalizedName;
-                            _this.add(savedWatchlist);
-                            return savedWatchlist;
+                            _this.add(watchlist);
+                            return watchlist;
                         });
             },
             removeWatchlist: function (watchlist) {

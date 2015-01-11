@@ -1,6 +1,6 @@
 angular
     .module('cinApp')
-    .service('userService', function ($q, $rootScope, dataStorage, loaderService, User) 
+    .service('userService', function ($q, $rootScope, dataStorage, loaderService, User, Watchlist) 
     {
         var userService = {};
         
@@ -41,6 +41,27 @@ angular
             
             return user
                 .$signUp()
+                .finally(loaderService.done);
+        }
+        
+        /**
+         * Add user to a watchlist
+         */
+        userService.addToWatchlist = function (user, watchlist) 
+        {
+            loaderService.start();
+            
+            if(!(watchlist instanceof Watchlist)) {
+                return $q.reject('watchlist should be an instance of Watchlist');
+            }
+            
+            return dataStorage.ready()
+                .then(function () {
+                    return dataStorage.watchlistUsers.getCollection(watchlist.id, { watchlist: watchlist });
+                })
+                .then(function (watchlistUsers) {
+                    return watchlistUsers.addUser(user);
+                })
                 .finally(loaderService.done);
         }
         

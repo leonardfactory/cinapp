@@ -37,7 +37,6 @@ angular
                     var collection = this.initializer(options);
                     collection.$fetch()
                         .then(function (results) {
-                            // console.log('Fetched ' + _this.collectionName + ': ' + id);
                             _this._maps[id] = collection;
                             deferred.resolve(collection);
                         })
@@ -58,7 +57,7 @@ angular
     
 angular
     .module('cinApp.models')
-    .factory('dataStorage', function ($q, $timeout, $rootScope, DeferredCollections, WatchedCollection, WatchlistCollection, WatchlistMoviesCollection, WatchlistUsersCollection, User) 
+    .factory('dataStorage', function ($q, $timeout, $rootScope, DeferredCollections, WatchedCollection, WatchlistCollection, WatchlistMoviesCollection, WatchlistUsersCollection, Watchlist, User) 
     {
         var dataStorage = {
             _ready      : false,

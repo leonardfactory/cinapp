@@ -1,6 +1,6 @@
 angular
     .module('cinApp')
-    .controller('AddUserController', function ($scope, $modalWindow, loaderService, User,   watchlist, watchlistUsers) /* locals */
+    .controller('AddUserController', function ($scope, $modalWindow, loaderService, userService, User,   watchlist, watchlistUsers) /* locals */
     {
         var _this = this;
         
@@ -23,7 +23,7 @@ angular
             
             query.$first()
                 .then(function (user) {
-                    return _this.watchlistUsers.addUser(user);
+                    return userService.addToWatchlist(user, _this.watchlist);
                 })
                 .then(function () {
                     $scope.$close(true);
