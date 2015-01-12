@@ -1,6 +1,6 @@
 angular
     .module('cinApp.models')
-    .factory('Movie', function () 
+    .factory('ParseMovie', function () 
     {   
         var Movie = Parse.Object.extend({
             className: 'Movie',

@@ -1,6 +1,6 @@
 angular
     .module('cinApp.models')
-    .factory('Watchlist', function () 
+    .factory('ParseWatchlist', function () 
     {
         var Watchlist = Parse.Object.extend({
             className: 'Watchlist',

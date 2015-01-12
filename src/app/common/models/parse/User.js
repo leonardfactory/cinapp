@@ -1,6 +1,6 @@
 angular
     .module('cinApp.models')
-    .factory('User', function () 
+    .factory('ParseUser', function () 
     {   
         var User = Parse.User.extend({
             className: '_User',
