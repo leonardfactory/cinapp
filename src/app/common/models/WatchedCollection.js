@@ -1,6 +1,6 @@
 angular
     .module('cinApp.models')
-    .factory('WatchedCollection', function (User, Movie) 
+    .factory('old_WatchedCollection', function (User, Movie) 
     {   
         var WatchedCollection = Parse.Collection.extend({
             constructor: function () {

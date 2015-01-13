@@ -73,8 +73,8 @@ angular
             dataStorage.watchlistCollection = new WatchlistCollection();
             
             var promises = $q.all([
-                dataStorage.watchlistCollection.$fetch(),
-                dataStorage.watchedCollection.$fetch()
+                dataStorage.watchlistCollection.fetch(),
+                dataStorage.watchedCollection.fetch()
             ]);
             
             /**
