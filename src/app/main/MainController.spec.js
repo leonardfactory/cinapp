@@ -1,6 +1,6 @@
 describe('Controller: MainCtrl', function()
 {
-    beforeEach(module('cinApp'));
+    beforeEach(angular.mock.module('cinApp'));
     
     var ctrl, scope;
     

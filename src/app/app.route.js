@@ -11,7 +11,7 @@ angular
                 controller: 'MoviesController',
                 controllerAs: 'moviesCtrl'
             })
-            .state('watchlist', {
+            /*.state('watchlist', {
                 url: '/watchlist',
                 templateUrl: 'watchlist/watchlist.html',
                 controller: 'WatchlistController',
@@ -28,7 +28,7 @@ angular
                 templateUrl: 'add/add.html',
                 controller: 'AddController',
                 controllerAs: 'addCtrl'
-            })
+            })*/
             .state('search', {
                 url: '/search',
                 templateUrl: 'search/search.html',

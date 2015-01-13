@@ -9,7 +9,7 @@ angular
         this.inlineMovie = {};
         
         // Predicate
-        this.predicate = 'name';
+        this.predicate = 'model.name';
         
         // Deferred loading
         loaderService.start();

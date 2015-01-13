@@ -2,8 +2,9 @@ angular
     .module 'cinApp.models'
     .factory 'Movie', (NgParse, ParseMovie) ->
         class Movie extends NgParse.Object
+            
+            @class = ParseMovie
+            @className = 'Movie'
+            
             constructor: (options) ->
-                _options = _.defaults
-                                class: ParseMovie,
-                                options
-                super _options
+                super options

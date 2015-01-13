@@ -1,6 +1,6 @@
 describe('Controller: MoviesCtrl', function()
 {
-    beforeEach(module('cinApp'));
+    beforeEach(angular.mock.module('cinApp'));
     
     var ctrl, scope;
     
@@ -9,8 +9,4 @@ describe('Controller: MoviesCtrl', function()
         ctrl = $controller('MoviesCtrl', { $scope: scope });
     }));
     
-    it('should have `movies` array', function()
-    {
-        expect(ctrl.movies.length).toBe(2);
-    });
 });

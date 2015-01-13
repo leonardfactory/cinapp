@@ -22,8 +22,8 @@ angular
                         $scope.loading = false;
                         
                         var isWatchedListener = $scope.$watch(function () {
-                            return User.current()   ? _.contains(User.current().watchedId, movieId) 
-                                                    : false;
+                            return User.class.current()   ? _.contains(User.class.current().watchedId, movieId) 
+                                                          : false;
                         }, function (isWatched) {
                             $scope.checked = isWatched;
                         });

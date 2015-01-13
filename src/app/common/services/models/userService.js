@@ -8,7 +8,7 @@ angular
          * Check if is logged
          */
         userService.logged = function () {
-            return User.current() !== null;
+            return User.class.current() !== null;
         }
         
         /**
@@ -29,7 +29,7 @@ angular
          * Logout
          */
         userService.logout = function () {
-            User.logOut();
+            User.class.logOut();
         }
         
         /**

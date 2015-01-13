@@ -5,7 +5,7 @@ angular
             constructor: (options) ->
                 _options = _.defaults
                                 class : Movie
-                                query : new NgParse.Query User.model.current().relation('watched').query() ,
+                                query : new NgParse.Query Movie, User.class.current().relation('watched').query() ,
                                 options
                                 
                 super _options
@@ -22,7 +22,7 @@ angular
                         
                         @add savedMovie
                         
-                        currentUser = new User model: User.model.current()
+                        currentUser = new User model: User.class.current()
                         currentUser.model.relation('watched').add savedMovie
                         currentUser.model.add 'watchedId', savedMovie.imdbId
                         
@@ -39,7 +39,7 @@ angular
                         
                         @remove savedMovie.id
                         
-                        currentUser = new User model: User.model.current()
+                        currentUser = new User model: User.class.current()
                         
                         # Saving the user here should not be necessary, since it's saved by CloudCode.
                         # However Parse has troubles handling the array without calling the save operation.

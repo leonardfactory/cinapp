@@ -2,8 +2,9 @@ angular
     .module 'cinApp.models'
     .factory 'User', (NgParse, ParseUser) ->
         class User extends NgParse.Object
+            
+            @class = ParseUser
+            @className = '_User'
+            
             constructor: (options) ->
-                _options = _.defaults
-                                class: ParseUser,
-                                options
-                super _options
+                super options

@@ -57,7 +57,7 @@ angular
     
 angular
     .module('cinApp.models')
-    .factory('dataStorage', function ($q, $timeout, $rootScope, DeferredCollections, WatchedCollection, WatchlistCollection, WatchlistMoviesCollection, WatchlistUsersCollection, Watchlist, User) 
+    .factory('dataStorage', function ($q, $timeout, $rootScope, WatchedCollection,  Watchlist, User) /*WatchlistCollection, DeferredCollections, WatchlistMoviesCollection, WatchlistUsersCollection, */ 
     {
         var dataStorage = {
             _ready      : false,
@@ -70,10 +70,10 @@ angular
         dataStorage.init = function () 
         {   
             dataStorage.watchedCollection = new WatchedCollection();
-            dataStorage.watchlistCollection = new WatchlistCollection();
+            //dataStorage.watchlistCollection = new WatchlistCollection();
             
             var promises = $q.all([
-                dataStorage.watchlistCollection.fetch(),
+                //dataStorage.watchlistCollection.fetch(),
                 dataStorage.watchedCollection.fetch()
             ]);
             
@@ -121,25 +121,25 @@ angular
         /**
          * Get Watchlist Movies collection
          */
-        dataStorage.watchlistMovies = new DeferredCollections('WatchlistMoviesCollection', function (options) {
+        /*dataStorage.watchlistMovies = new DeferredCollections('WatchlistMoviesCollection', function (options) {
             return new WatchlistMoviesCollection([], options);
-        });
+        });*/
         
         /**
          * Get Watchlist Users collection
          */
-        dataStorage.watchlistUsers = new DeferredCollections('WatchlistUsersCollection', function (options) {
+        /*dataStorage.watchlistUsers = new DeferredCollections('WatchlistUsersCollection', function (options) {
             return new WatchlistUsersCollection([], options);
-        });
+        });*/
         
         // Init if User is logged
-        if(User.current() !== null) {
+        if(User.class.current() !== null) {
             dataStorage.init();
         }
         
         // Update on user logout
         $rootScope.$watch(function () {
-            return User.current();
+            return User.class.current();
         },
         function (newUser, oldUser) {
             if(newUser !== null && (!oldUser || newUser.id !== oldUser.id)) {
