@@ -14,7 +14,7 @@ angular
             },
             controller: function ($scope, moviesService) {
                 
-                var movieId = $scope.movie.imdbId || $scope.movie.imdb_id;
+                var movieId = $scope.movie.model.imdbId || $scope.movie.imdb_id;
                 
                 // Check status
                 dataStorage.ready()

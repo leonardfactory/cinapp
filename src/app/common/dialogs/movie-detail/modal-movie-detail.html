@@ -1,8 +1,8 @@
 <ng-modal-box class="modal-movie">
     <div class="content">
-        <h1 class="title">{{ movieCtrl.movie.title || movieCtrl.movie.name }}</h1>
+        <h1 class="title">{{ movieCtrl.movie.title || movieCtrl.movie.model.name }}</h1>
     
-        <blockquote ng-if="movieCtrl.movie.tagline">{{ movieCtrl.movie.tagline }}</blockquote>
+        <blockquote ng-if="movieCtrl.movie.model.tagline || movieCtrl.movie.tagline">{{ movieCtrl.movie.model.tagline || movieCtrl.movie.tagline }}</blockquote>
         
         <movie-data movie="movieCtrl.movie"></movie-data>
         
@@ -16,13 +16,13 @@
                 </a>
                 <ul>
                     <li ng-repeat="watchlist in movieCtrl.watchlists.models">
-                        <a ng-click="movieCtrl.addToWatchlist(watchlist)">{{ watchlist.name }}</a>
+                        <a ng-click="movieCtrl.addToWatchlist(watchlist)">{{ watchlist.model.name }}</a>
                     </li>
                 </ul>
             </div>
         </div>
     
-        <p class="description">{{ movieCtrl.movie.overview }}</p>
+        <p class="description">{{ movieCtrl.movie.model.overview }}</p>
     </div>
     <div class="poster">
         <movie-img movie="movieCtrl.movie" width="300px" height="430px"></movie-img>

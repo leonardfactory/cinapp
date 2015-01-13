@@ -14,7 +14,7 @@ angular
                 // scope.loading = true;
             },
             controller: function ($scope, moviesService) {
-                var movieId = $scope.movie.imdbId || $scope.movie.imdb_id;
+                var movieId = $scope.movie.model.imdbId || $scope.movie.imdb_id;
                 
                 // Remove movie from watchlist
                 $scope.remove = function ($event) 
