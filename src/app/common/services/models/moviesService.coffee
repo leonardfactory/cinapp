@@ -14,8 +14,8 @@ angular
                 dataStorage
                     .ready()
                     .then ->
-                        currentUser = User.class.current()
-                        if movie.model.imdbId in currentUser.watchedId
+                        currentUser = new User current: yes
+                        if movie.model.imdbId in currentUser.model.watchedId
                             dataStorage.watchedCollection.removeMovie movie
                         else
                             dataStorage.watchedCollection.addMovie movie

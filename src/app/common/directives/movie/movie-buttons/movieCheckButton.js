@@ -21,12 +21,12 @@ angular
                         $scope.loading = false;
                         
                         var isWatchedListener = $scope.$watch(function () {
-                            console.log(User.class.current().watchedId);
+                            //console.log(User.class.current().watchedId);
                             return User.class.current()   ? _.contains(User.class.current().watchedId, movieId) 
                                                           : false;
                         }, function (isWatched) {
-                            console.log(isWatched);
-                            console.log(movieId);
+                            //console.log(isWatched);
+                            //console.log(movieId);
                             $scope.checked = isWatched;
                         });
                         
