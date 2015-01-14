@@ -2,11 +2,9 @@ angular
     .module 'cinApp'
     .factory 'userService', ($q, $rootScope, dataStorage, loaderService, User, Watchlist) ->
         
-        currentUser = new User current: yes
-        
         userService =
             logged: ->
-                currentUser.model isnt null
+                User.current().model isnt null
             
             login: (username, password) ->
                 loaderService.start()
