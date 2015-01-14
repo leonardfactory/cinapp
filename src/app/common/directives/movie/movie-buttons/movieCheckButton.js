@@ -13,8 +13,7 @@ angular
                 scope.loading = true;
             },
             controller: function ($scope, moviesService) {
-                
-                var movieId = $scope.movie.model.imdbId || $scope.movie.imdb_id;
+                var movieId = $scope.movie.imdb_id || $scope.movie.model.imdbId;
                 
                 // Check status
                 dataStorage.ready()
@@ -22,9 +21,12 @@ angular
                         $scope.loading = false;
                         
                         var isWatchedListener = $scope.$watch(function () {
+                            console.log(User.class.current().watchedId);
                             return User.class.current()   ? _.contains(User.class.current().watchedId, movieId) 
                                                           : false;
                         }, function (isWatched) {
+                            console.log(isWatched);
+                            console.log(movieId);
                             $scope.checked = isWatched;
                         });
                         

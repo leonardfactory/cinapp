@@ -61,6 +61,7 @@ angular
                                     // Filter only meaningful reasults
                                     if(result.director === null) return;
                                     if(!result.poster_path) return;
+                                    if(!result.imdb_id) return;
                                     
                                     _this.results.push(result);
                                 });

@@ -23,8 +23,8 @@ angular
                         @add savedMovie
                         
                         currentUser = new User model: User.class.current()
-                        currentUser.model.relation('watched').add savedMovie
-                        currentUser.model.add 'watchedId', savedMovie.imdbId
+                        currentUser.model.relation('watched').add savedMovie.model
+                        currentUser.model.add 'watchedId', savedMovie.model.imdbId
                         
                         currentUser.save()
                         
@@ -35,7 +35,7 @@ angular
                 Parse.Cloud
                     .$run 'removeWatchedMovie', movie: movie.model.toObject()
                     .then (object) =>
-                        savedMovie = new Movie: model: object
+                        savedMovie = new Movie model: object
                         
                         @remove savedMovie.id
                         
@@ -43,7 +43,7 @@ angular
                         
                         # Saving the user here should not be necessary, since it's saved by CloudCode.
                         # However Parse has troubles handling the array without calling the save operation.
-                        currentUser.model.remove 'watchedId', savedMovie.imdbId
+                        currentUser.model.remove 'watchedId', savedMovie.model.imdbId
                         currentUser.save()
                         
             isMovieWatched: (movieImdbId) ->
