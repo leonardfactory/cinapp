@@ -133,7 +133,7 @@ angular
         });*/
         
         // Init if User is logged
-        if(User.class.current() !== null) {
+        /*if(User.class.current() !== null) {
             dataStorage.init();
         }
         
@@ -146,7 +146,7 @@ angular
                 dataStorage._ready = false;
                 dataStorage.init();
             }
-        });
+        });*/
         
         return dataStorage;
         // @todo refresh data on logOut

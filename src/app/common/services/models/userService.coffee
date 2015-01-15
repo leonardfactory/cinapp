@@ -4,7 +4,7 @@ angular
         
         userService =
             logged: ->
-                User.current().model isnt null
+                true # User.current().model isnt null
             
             login: (username, password) ->
                 loaderService.start()
