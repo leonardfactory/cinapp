@@ -1,6 +1,6 @@
 angular
     .module 'cinApp'
-    .controller 'MainController', ($scope, Movie, NgParse) ->
+    .controller 'MainController', ($scope, Movie, User, NgParse) ->
         class MainController
             
             # Creates a new MainController
@@ -9,17 +9,15 @@ angular
                 @title = "Cinapp"
                 
                 # login
-                NgParse.User
+                User
                     .login 'leonardo', 'leonardo'
                     .then (user) ->
                         user.username = 'leonardo2'
-                        console.log user
+                        console.log User.current
                 #        console.log NgParse.User.current
                 
-                console.log NgParse.User.current
-                
                 @logged = false
-                $scope.$watch (-> NgParse.User.logged), 
+                $scope.$watch (-> User.logged() ), 
                     (isLogged) =>
                         @logged = isLogged
                 
@@ -29,7 +27,6 @@ angular
                     .fetch()
                     .then ->
                         movie.genres.push 'GenereTest'
-                        console.log movie
 #                       movie
 #                             .save()
 #                             .then ->
@@ -37,8 +34,7 @@ angular
 
 
             logout: ->
-                NgParse.User.logout()
-                console.log NgParse.User.current
+                User.logout()
             
             
         new MainController
