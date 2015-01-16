@@ -1,6 +1,6 @@
 angular
     .module 'cinApp'
-    .controller 'MainController', (Movie) ->
+    .controller 'MainController', (Movie, NgParse) ->
         class MainController
             
             # Creates a new MainController
@@ -8,16 +8,25 @@ angular
             constructor: ->
                 @title = "Cinapp"
                 
+                # login
+                NgParse.User
+                    .login 'leonardo', 'leonardo'
+                    .then (user) ->
+                        user.username = 'leonardo2'
+                        console.log user
+                        console.log NgParse.User.current
+                
+                # get movie
                 movie = Movie.get id: 'oVP1BA87Ny'
                 movie
                     .fetch()
                     .then ->
                         movie.genres.push 'GenereTest'
                         console.log movie
-                        movie
-                            .save()
-                            .then ->
-                                console.log movie
+#                       movie
+#                             .save()
+#                             .then ->
+#        console.log movie
             
             
         new MainController

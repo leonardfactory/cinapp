@@ -24,11 +24,15 @@
     "moment": "~2.8.4",
     "angular-truncate": "*",
     "animate-css": "~3.2.0",
-    "parse-js-sdk": "~1.3.1"
+    "parse-js-sdk": "~1.3.1",
+    "angular-locker": "~1.0.3"
   },
   "overrides": {
     "bootstrap-sass-official": {
       "ignore": true
+    },
+    "angular-locker": {
+      "main": ["dist/angular-locker.min.js", "dist/angular-locker.min.js.map"]
     }
   },
   "resolutions": {
