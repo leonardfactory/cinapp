@@ -1,6 +1,6 @@
 angular
     .module 'cinApp'
-    .controller 'MainController', (Movie, NgParse) ->
+    .controller 'MainController', ($scope, Movie, NgParse) ->
         class MainController
             
             # Creates a new MainController
@@ -14,7 +14,14 @@ angular
                     .then (user) ->
                         user.username = 'leonardo2'
                         console.log user
-                        console.log NgParse.User.current
+                #        console.log NgParse.User.current
+                
+                console.log NgParse.User.current
+                
+                @logged = false
+                $scope.$watch (-> NgParse.User.logged), 
+                    (isLogged) =>
+                        @logged = isLogged
                 
                 # get movie
                 movie = Movie.get id: 'oVP1BA87Ny'
@@ -27,6 +34,11 @@ angular
 #                             .save()
 #                             .then ->
 #        console.log movie
+
+
+            logout: ->
+                NgParse.User.logout()
+                console.log NgParse.User.current
             
             
         new MainController
