@@ -1,6 +1,6 @@
 angular
     .module('cinApp.models')
-    .factory('WatchlistCollection', function (User, Watchlist, Security) 
+    .factory('OldWatchlistCollection', function (User, Watchlist, Security) 
     {
         var WatchlistCollection = Parse.Collection.extend({
             initialize: function (models, options) {

@@ -3,9 +3,10 @@ angular
     .factory 'WatchedCollection', (NgParse, User, Movie) ->
         class WatchedCollection extends NgParse.Collection
             constructor: (options) ->
+                
                 _options = _.defaults
                                 class : Movie
-                                query : new NgParse.Query Movie, User.class.current().relation('watched').query() ,
+                                query : User.current.watched.query(),
                                 options
                                 
                 super _options
@@ -15,7 +16,7 @@ angular
                 unless movie instanceof Movie
                     throw new Error "Can't add an object which is not an instance of `Movie` to the `WatchedCollection`"
                 
-                Parse.Cloud
+                ###Parse.Cloud
                     .$run 'insertMovie', movie: movie.model.toObject()
                     .then (object) =>
                         savedMovie = new Movie model: object
@@ -26,12 +27,12 @@ angular
                         currentUser.model.relation('watched').add savedMovie.model
                         currentUser.model.add 'watchedId', savedMovie.model.imdbId
                         
-                        currentUser.save()
+                        currentUser.save()###
                         
             removeMovie: (movie) ->
                 unless movie instanceof Movie
                     throw new Error "Can't remove an object which is not an instance of `Movie` from the `WatchedCollection`"
-                    
+                    ###
                 Parse.Cloud
                     .$run 'removeWatchedMovie', movie: movie.model.toObject()
                     .then (object) =>
@@ -44,7 +45,7 @@ angular
                         # Saving the user here should not be necessary, since it's saved by CloudCode.
                         # However Parse has troubles handling the array without calling the save operation.
                         currentUser.model.remove 'watchedId', savedMovie.model.imdbId
-                        currentUser.save()
+                        currentUser.save()###
                         
             isMovieWatched: (movieImdbId) ->
                 found = false

@@ -1,9 +1,8 @@
 angular
     .module 'cinApp.models'
-    .factory 'Watchlist', (NgParse, ParseWatchlist) ->
+    .factory 'Watchlist', (NgParse) ->
         class Watchlist extends NgParse.Object
-            constructor: (options) ->
-                _options = _.defaults
-                                class: ParseWatchlist,
-                                options
-                super _options
+            
+            @registerForClassName 'Watchlist'
+            
+            @defineAttributes ['name', 'normalizedName', 'usersCount']

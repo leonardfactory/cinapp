@@ -9,14 +9,14 @@ angular
         link: (scope, element, attrs) ->
             scope.loading = yes
         controller: ($scope, moviesService) ->
-            movieId = $scope.movie.imdb_id || $scope.movie.model?.imdbId
+            movieId = $scope.movie.imdb_id || $scope.movie.imdbId
             
             dataStorage.ready()
                 .then ->
                     $scope.loading = no
                     
                     isWatchedListener = $scope.$watch(
-                        -> movieId in User.current().model?.watchedId ,
+                        -> movieId in User.current.watchedId ,
                         (isWatched) -> $scope.checked = isWatched 
                     )
                     

@@ -19,7 +19,7 @@ angular
                         #query.where.attr('genres').contains('Thriller')
                         query.where.relatedTo 'watched', User.current
                             
-                        query.find().then (results) -> console.log results
+                        #query.find().then (results) -> console.log results
 
                         #user.watched.add movie
                         #user.save()

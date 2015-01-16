@@ -57,7 +57,7 @@ angular
     
 angular
     .module('cinApp.models')
-    .factory('dataStorage', function ($q, $timeout, $rootScope, WatchedCollection,  Watchlist, User) /*WatchlistCollection, DeferredCollections, WatchlistMoviesCollection, WatchlistUsersCollection, */ 
+    .factory('dataStorage', function ($q, $timeout, $rootScope, WatchedCollection, WatchlistCollection, Watchlist, User) /*, DeferredCollections, WatchlistMoviesCollection, WatchlistUsersCollection, */ 
     {
         var dataStorage = {
             _ready      : false,
@@ -70,10 +70,10 @@ angular
         dataStorage.init = function () 
         {   
             dataStorage.watchedCollection = new WatchedCollection();
-            //dataStorage.watchlistCollection = new WatchlistCollection();
+            dataStorage.watchlistCollection = new WatchlistCollection();
             
             var promises = $q.all([
-                //dataStorage.watchlistCollection.fetch(),
+                dataStorage.watchlistCollection.fetch(),
                 dataStorage.watchedCollection.fetch()
             ]);
             
@@ -133,20 +133,20 @@ angular
         });*/
         
         // Init if User is logged
-        /*if(User.class.current() !== null) {
+        if(User.current !== null) {
             dataStorage.init();
         }
         
         // Update on user logout
         $rootScope.$watch(function () {
-            return User.class.current();
+            return User.current;
         },
         function (newUser, oldUser) {
             if(newUser !== null && (!oldUser || newUser.id !== oldUser.id)) {
                 dataStorage._ready = false;
                 dataStorage.init();
             }
-        });*/
+        });
         
         return dataStorage;
         // @todo refresh data on logOut
