@@ -3,7 +3,7 @@ angular
     .factory 'Movie', (NgParse) ->
         class Movie extends NgParse.Object
             
-            @className = 'Movie'
+            @registerForClassName 'Movie'
                 
             @defineAttributes ['name', 'originalTitle', 'director', {name: 'releaseDate', type: NgParse.Date }, 'posterPath', 'overview', 'imdbId', 'tmdbId', 'status', 'voteAverage', 'runtime', {name: 'genres', type: NgParse.Array }]
             

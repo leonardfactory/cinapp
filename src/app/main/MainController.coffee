@@ -10,11 +10,21 @@ angular
                 
                 # login
                 User
-                    .login 'leonardo', 'leonardo'
+                    .login 'mario', 'mario'
                     .then (user) ->
-                        user.username = 'leonardo2'
                         console.log User.current
-                #        console.log NgParse.User.current
+                        
+                        # query
+                        query = new NgParse.Query class: Movie
+                        #query.where.attr('genres').contains('Thriller')
+                        query.where.relatedTo 'watched', User.current
+                            
+                        query.find().then (results) -> console.log results
+
+                        #user.watched.add movie
+                        #user.save()
+                        #    .then ->
+                        #        console.log user
                 
                 @logged = false
                 $scope.$watch (-> User.logged() ), 
@@ -23,15 +33,9 @@ angular
                 
                 # get movie
                 movie = Movie.get id: 'oVP1BA87Ny'
-                movie
-                    .fetch()
-                    .then ->
-                        movie.genres.push 'GenereTest'
-#                       movie
-#                             .save()
-#                             .then ->
-#        console.log movie
-
+                
+                
+                
 
             logout: ->
                 User.logout()
