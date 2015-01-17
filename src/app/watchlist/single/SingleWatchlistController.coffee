@@ -20,7 +20,6 @@ angular
                         # Load movies for this watchlist
                         @movies = WatchlistMoviesCollection.get watchlist: @watchlist
                         @movies.update()
-                        console.log @movies
                         
                     .finally loaderService.done
                 

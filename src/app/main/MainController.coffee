@@ -9,7 +9,7 @@ angular
                 @title = "Cinapp"
                 
                 # login
-                User
+                ###User
                     .login 'mario', 'mario'
                     .then (user) ->
                         console.log User.current
@@ -24,15 +24,16 @@ angular
                         #user.watched.add movie
                         #user.save()
                         #    .then ->
-                        #        console.log user
+                        #        console.log user###
                 
                 @logged = false
                 $scope.$watch (-> User.logged() ), 
                     (isLogged) =>
+                        console.log "Logged is #{isLogged}"
                         @logged = isLogged
                 
                 # get movie
-                movie = Movie.get id: 'oVP1BA87Ny'
+                # movie = Movie.get id: 'oVP1BA87Ny'
                 
                 
                 
