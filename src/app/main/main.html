@@ -6,16 +6,21 @@
                 <p>
                     Crea le tue <strong>watchlist</strong> e condividile con i tuoi amici, segna gli ultimi film che hai visto e goditi la tua libreria cinematografica.
                 </p>
+                <p>
+                   <div ng-if="mainCtrl.logged"> 
+                       <a ng-click="mainCtrl.logout()">Logout</a>
+                   </div>
+                </p>
                 <img src="assets/images/logo.png" />
             </div>
         </div>
         <div class="four columns">
             <h3>Registrati</h3>
             <form role="register">
-                <input type="text" class="form-control u-full-width" placeholder="Username" ng-model="mainCtrl.newUser.username" />
-                <input type="password" class="form-control u-full-width" placeholder="Password" ng-model="mainCtrl.newUser.password" />
-                <input type="text" class="form-control u-full-width" placeholder="Nome" ng-model="mainCtrl.newUser.name" />
-                <input type="email" class="form-control u-full-width" placeholder="eMail" ng-model="mainCtrl.newUser.email" />
+                <input type="text" class="form-control u-full-width" placeholder="Username" ng-model="mainCtrl.newUser.model.username" />
+                <input type="password" class="form-control u-full-width" placeholder="Password" ng-model="mainCtrl.newUser.model.password" />
+                <input type="text" class="form-control u-full-width" placeholder="Nome" ng-model="mainCtrl.newUser.model.name" />
+                <input type="email" class="form-control u-full-width" placeholder="eMail" ng-model="mainCtrl.newUser.model.email" />
                 <button class="btn btn-action u-full-width" type="button" ng-click="mainCtrl.register()">
                     <span class="oi" data-glyph="key"></span> Registrami
                 </button>

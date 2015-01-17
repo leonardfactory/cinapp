@@ -14,6 +14,8 @@ var templateCache = require('gulp-angular-templatecache');
 var ngAnnotate = require('gulp-ng-annotate');
 var plumber = require('gulp-plumber');
 var watch = require('gulp-watch');
+var gulpif = require('gulp-if');
+var coffee = require('gulp-coffee');
 
 var onError = function (err) {
     gutil.beep();
@@ -25,8 +27,8 @@ var paths = {
     
     src: './src/',
     assets: ['./src/assets/**/*.*'],
-    app_js: ['./src/app/**/*.js', '!./src/app/**/*.spec.js'],
-    shared_js: ['./src/shared/**/*.js', '!./src/shared/**/*.spec.js'],
+    app_js: ['./src/app/**/*.{js,coffee}', '!./src/app/**/*.spec.{js,coffee}'],
+    shared_js: ['./src/shared/**/*.{js,coffee}', '!./src/shared/**/*.spec.{js,coffee}'],
     sass: ['./src/sass/**/*.scss'],
     template: ['./src/app/**/*.html'],
     shared_template: ['./src/shared/**/*.html'],
@@ -52,6 +54,8 @@ gulp.task('build:shared', function (cb)
     gulp.src(paths.shared_js)
         .pipe(plumber(onError))
         .pipe(sourcemaps.init())
+        .pipe(gulpif(/[.]coffee$/, coffee()))
+        .pipe(angularFilesort())
         .pipe(concat('shared.js'))
         .pipe(ngAnnotate())
         .pipe(sourcemaps.write())
@@ -73,8 +77,9 @@ gulp.task('build:angular', function (cb)
 {
     gulp.src(paths.app_js)
         .pipe(plumber(onError))
-        .pipe(angularFilesort())
         .pipe(sourcemaps.init())
+        .pipe(gulpif(/[.]coffee$/, coffee()))
+        .pipe(angularFilesort())
         .pipe(concat('app.js'))
         .pipe(ngAnnotate())
         .pipe(sourcemaps.write())

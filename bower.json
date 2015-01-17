@@ -1,6 +1,6 @@
 {
   "name": "cinapp",
-  "version": "0.0.1",
+  "version": "0.2.0",
   "authors": [
     "Leonardo Ascione <me@leonardfactory.com>"
   ],
@@ -23,11 +23,18 @@
     "angular-deferred-bootstrap": "~0.1.5",
     "moment": "~2.8.4",
     "angular-truncate": "*",
-    "animate-css": "~3.2.0"
+    "animate-css": "~3.2.0",
+    "angular-locker": "~1.0.3"
   },
   "overrides": {
     "bootstrap-sass-official": {
       "ignore": true
+    },
+    "angular-locker": {
+      "main": [
+        "dist/angular-locker.min.js",
+        "dist/angular-locker.min.js.map"
+      ]
     }
   },
   "resolutions": {

@@ -23,12 +23,13 @@ angular
                 controller: 'SingleWatchlistController',
                 controllerAs: 'singleCtrl'
             })
+            /*
             .state('add', {
                 url: '/add',
                 templateUrl: 'add/add.html',
                 controller: 'AddController',
                 controllerAs: 'addCtrl'
-            })
+            })*/
             .state('search', {
                 url: '/search',
                 templateUrl: 'search/search.html',

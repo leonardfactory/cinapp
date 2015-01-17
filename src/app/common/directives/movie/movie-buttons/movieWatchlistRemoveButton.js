@@ -1,6 +1,6 @@
 angular
     .module('cinApp')
-    .directive('movieWatchlistRemoveButton', function (dataStorage) 
+    .directive('movieWatchlistRemoveButton', function () 
     {
         return {
             templateUrl: 'common/directives/movie/movie-buttons/movie-watchlist-remove-button.html',
@@ -14,7 +14,7 @@ angular
                 // scope.loading = true;
             },
             controller: function ($scope, moviesService) {
-                var movieId = $scope.movie.imdbId || $scope.movie.imdb_id;
+                var movieId = $scope.movie.imdb_id || $scope.movie.imdbId;
                 
                 // Remove movie from watchlist
                 $scope.remove = function ($event) 
