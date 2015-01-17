@@ -14,6 +14,9 @@ angular
                                 
                 super _options
                 
+            @hash: ->
+                'WatchedCollection'
+                
             
             addMovie: (movie) ->
                 unless movie instanceof Movie and not movie.isNew

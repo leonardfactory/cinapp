@@ -1,6 +1,6 @@
 angular
     .module 'cinApp'
-    .service 'moviesService', ($q, dataStorage, loaderService, NgParse, User, Movie, WatchlistMoviesCollection) ->
+    .service 'moviesService', ($q, dataStorage, loaderService, NgParse, User, Movie, WatchedCollection, WatchlistMoviesCollection) ->
         
         moviesService =
             
@@ -21,18 +21,23 @@ angular
                             
                             else
                                 result # Movie object
-                
+            
+            #
             check: (movieObj) ->
                 loaderService.start()
                 
+                collection = null
+                movie = null
+                
                 @getMovie movieObj
-                    .then (movie) =>
-                        dataStorage
-                            .ready()
-                            .then ->
-                                if movie.imdbId in User.current.watchedId
-                                    dataStorage.watchedCollection.removeMovie movie
-                                else
-                                    dataStorage.watchedCollection.addMovie movie
-                            
-                            .finally loaderService.done
+                    .then (_movie) =>
+                        movie = _movie
+                        collection = WatchedCollection.get()
+                        collection.update()
+                    .then =>
+                        if movie.imdbId in User.current.watchedId
+                            collection.removeMovie movie
+                        else
+                            collection.addMovie movie
+                        
+                    .finally loaderService.done
