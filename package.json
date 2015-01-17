@@ -1,6 +1,6 @@
 {
   "name": "cinapp",
-  "version": "0.0.1",
+  "version": "0.2.0",
   "description": "Cinapp, a platform to make movie choice easier.",
   "main": "index.js",
   "scripts": {
