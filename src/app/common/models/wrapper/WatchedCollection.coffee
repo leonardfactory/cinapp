@@ -2,6 +2,9 @@ angular
     .module 'cinApp.models'
     .factory 'WatchedCollection', (NgParse, User, Movie) ->
         class WatchedCollection extends NgParse.Collection
+            
+            @collectionName = 'WatchedCollection'
+            
             constructor: (options) ->
                 
                 _options = _.defaults
