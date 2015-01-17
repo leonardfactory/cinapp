@@ -16,26 +16,25 @@ angular
                 
             
             addMovie: (movie) ->
-                unless movie instanceof Movie
+                unless movie instanceof Movie and not movie.isNew
                     throw new Error "Can't add an object which is not an instance of `Movie` to the `WatchedCollection`"
                 
-                ###Parse.Cloud
-                    .$run 'insertMovie', movie: movie.model.toObject()
-                    .then (object) =>
-                        savedMovie = new Movie model: object
-                        
-                        @add savedMovie
-                        
-                        currentUser = new User model: User.class.current()
-                        currentUser.model.relation('watched').add savedMovie.model
-                        currentUser.model.add 'watchedId', savedMovie.model.imdbId
-                        
-                        currentUser.save()###
+                @add movie
+                
+                User.current.watched.add movie
+                User.current.watchedId.push movie.imdbId
+                User.current.save()
                         
             removeMovie: (movie) ->
-                unless movie instanceof Movie
+                unless movie instanceof Movie and not movie.isNew
                     throw new Error "Can't remove an object which is not an instance of `Movie` from the `WatchedCollection`"
-                    ###
+                
+                @remove movie
+                
+                User.current.watched.remove movie
+                User.current.watchedId.remove movie.imdbId
+                User.current.save()
+                ###
                 Parse.Cloud
                     .$run 'removeWatchedMovie', movie: movie.model.toObject()
                     .then (object) =>
