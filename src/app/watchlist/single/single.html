@@ -7,9 +7,9 @@
     
     <h2>{{ singleCtrl.watchlist.name }}</h2>
     <p class="users">
-        <!-- <span ng-repeat="user in singleCtrl.watchlistUsers.models">
-            {{ user.displayName() }}{{ $last ? '' : ', ' }}
-        </span> -->
+        <span ng-repeat="user in singleCtrl.users.models">
+            {{ user.displayName }}{{ $last ? '' : ', ' }}
+        </span>
         &nbsp;
     </p>
 </div>

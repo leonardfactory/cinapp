@@ -7,3 +7,7 @@ angular
             
             @defineAttributes [ 'name', { name: 'watchedId', type: NgParse.Array }, { name: 'watched', type: NgParse.Relation, className: 'Movie' } ]
             
+            # Show name if provided, or directly username.
+            #
+            Object.defineProperty @prototype, 'displayName',
+                get: -> @name ? @username
