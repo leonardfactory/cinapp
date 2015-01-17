@@ -26,3 +26,23 @@ angular
             #
             @hash: (options = {}) -> 
                 @collectionName + ':' + options.watchlist.id
+                
+            # Add a movie
+            #
+            addMovie: (movie) ->
+                
+                if @contains movie
+                    throw new Error "Movie is already contained in the Watchlist"
+                
+                @watchlist.movies.add movie
+                @add movie
+                
+                @watchlist.save()
+                
+            # Remoe a movie
+            #
+            removeMovie: (movie) ->
+                @watchlist.movies.remove movie
+                @remove movie
+                
+                @watchlist.save()
