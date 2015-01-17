@@ -34,20 +34,6 @@ angular
                 User.current.watched.remove movie
                 User.current.watchedId.remove movie.imdbId
                 User.current.save()
-                ###
-                Parse.Cloud
-                    .$run 'removeWatchedMovie', movie: movie.model.toObject()
-                    .then (object) =>
-                        savedMovie = new Movie model: object
-                        
-                        @remove savedMovie.id
-                        
-                        currentUser = new User model: User.class.current()
-                        
-                        # Saving the user here should not be necessary, since it's saved by CloudCode.
-                        # However Parse has troubles handling the array without calling the save operation.
-                        currentUser.model.remove 'watchedId', savedMovie.model.imdbId
-                        currentUser.save()###
                         
             isMovieWatched: (movieImdbId) ->
                 found = false
