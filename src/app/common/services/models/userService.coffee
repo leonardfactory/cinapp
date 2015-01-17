@@ -1,8 +1,9 @@
 angular
     .module 'cinApp'
-    .factory 'userService', ($q, $rootScope, dataStorage, loaderService, User, Watchlist, WatchlistUsersCollection) ->
+    .factory 'userService', ($q, $rootScope, loaderService, User, Watchlist, WatchlistUsersCollection) ->
         
         userService =
+            
             logged: ->
                 User.logged()
             
@@ -10,8 +11,6 @@ angular
                 loaderService.start()
                 
                 User.login username, password
-                    .then ->
-                        $rootScope.$apply()
                     .finally loaderService.done
             
             logout: ->

@@ -1,6 +1,6 @@
 angular
     .module 'cinApp'
-    .service 'moviesService', ($q, dataStorage, loaderService, NgParse, User, Movie, WatchedCollection, WatchlistMoviesCollection) ->
+    .service 'moviesService', ($q, loaderService, NgParse, User, Movie, WatchedCollection, WatchlistMoviesCollection) ->
         
         moviesService =
             

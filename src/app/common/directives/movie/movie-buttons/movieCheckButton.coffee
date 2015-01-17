@@ -1,26 +1,28 @@
 angular
     .module 'cinApp'
-    .directive 'movieCheckButton', (dataStorage, User) ->
+    .directive 'movieCheckButton', (User) ->
         templateUrl: 'common/directives/movie/movie-buttons/movie-check-button.html'
         replace: true
         scope:
             movie: '='
             small: '@'
-        link: (scope, element, attrs) ->
-            scope.loading = yes
         controller: ($scope, moviesService) ->
             movieId = $scope.movie.imdb_id || $scope.movie.imdbId
+            $scope.loading = no
             
-            dataStorage.ready()
-                .then ->
-                    $scope.loading = no
-                    
-                    isWatchedListener = $scope.$watch(
-                        -> movieId in User.current.watchedId ,
-                        (isWatched) -> $scope.checked = isWatched 
-                    )
-                    
-                    $scope.$on '$destroy', -> isWatchedListener()
+            isWatchedListener = $scope.$watch(
+                (-> 
+                    if User.current then (movieId in User.current.watchedId) else null)
+                ,
+                ((isWatched) ->
+                    if isWatched?
+                        $scope.loading = no
+                        $scope.checked = isWatched
+                    else
+                        $scope.loading = yes)
+            )
+            
+            $scope.$on '$destroy', -> isWatchedListener()
             
             $scope.check = ($event) ->
                 $event.stopPropagation()

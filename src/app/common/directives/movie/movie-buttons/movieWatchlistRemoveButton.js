@@ -1,6 +1,6 @@
 angular
     .module('cinApp')
-    .directive('movieWatchlistRemoveButton', function (dataStorage) 
+    .directive('movieWatchlistRemoveButton', function () 
     {
         return {
             templateUrl: 'common/directives/movie/movie-buttons/movie-watchlist-remove-button.html',
