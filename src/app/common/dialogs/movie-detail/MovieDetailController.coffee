@@ -1,5 +1,6 @@
 angular
-    .module 'MovieDetailController', ($scope, $modalWindow, loaderService, WatchlistCollection, moviesService, movie) ->
+    .module 'cinApp'
+    .controller 'MovieDetailController', ($scope, $modalWindow, loaderService, WatchlistCollection, moviesService, movie) ->
         class MovieDetailController
             constructor: ->
                 @movie = movie
