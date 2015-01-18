@@ -23,16 +23,16 @@ var onError = function (err) {
 }
 
 var paths = {
-    build: './build/',
+    build: 'build/',
     
-    src: './src/',
+    src: 'src/',
     assets: ['./src/assets/**/*.*'],
-    app_js: ['./src/app/**/*.{js,coffee}', '!./src/app/**/*.spec.{js,coffee}'],
-    shared_js: ['./src/shared/**/*.{js,coffee}', '!./src/shared/**/*.spec.{js,coffee}'],
-    sass: ['./src/sass/**/*.scss'],
-    template: ['./src/app/**/*.html'],
-    shared_template: ['./src/shared/**/*.html'],
-    index: './src/index.html'
+    app_js: ['src/app/**/*.{js,coffee}', '!src/app/**/*.spec.{js,coffee}'],
+    shared_js: ['src/shared/**/*.{js,coffee}', '!src/shared/**/*.spec.{js,coffee}'],
+    sass: ['src/sass/**/*.scss'],
+    template: ['src/app/**/*.html'],
+    shared_template: ['src/shared/**/*.html'],
+    index: 'src/index.html'
 }
 
 gulp.task('build:copy-libs', function (cb) 
@@ -52,7 +52,7 @@ gulp.task('build:assets', function (cb)
 gulp.task('build:shared', function (cb) 
 {
     gulp.src(paths.shared_js)
-        .pipe(plumber(onError))
+        .pipe(plumber())
         .pipe(sourcemaps.init())
         .pipe(gulpif(/[.]coffee$/, coffee()))
         .pipe(angularFilesort())
@@ -76,9 +76,9 @@ gulp.task('build:shared-partials', function (cb)
 gulp.task('build:angular', function (cb) 
 {
     gulp.src(paths.app_js)
-        .pipe(plumber(onError))
+        .pipe(plumber())
         .pipe(sourcemaps.init())
-        .pipe(gulpif(/[.]coffee$/, coffee()))
+        .pipe(coffee({ bare: true }))
         .pipe(angularFilesort())
         .pipe(concat('app.js'))
         .pipe(ngAnnotate())
@@ -135,7 +135,8 @@ gulp.task('watch', function ()
 {
     watch(paths.template,           function () { gulp.start('build:partials'); });
     watch(paths.shared_template,    function () { gulp.start('build:shared-partials'); });
-    watch(paths.app_js,             function () { gulp.start('build:angular'); });
+    //watch(paths.app_js,             function () { gulp.start('build:angular'); });
+    gulp.watch(paths.app_js, ['build:angular']);
     watch(paths.shared_js,          function () { gulp.start('build:shared'); });
     watch(paths.sass,               function () { gulp.start('build:sass-fast'); });
     watch(paths.index,              function () { gulp.start('build:html'); });
