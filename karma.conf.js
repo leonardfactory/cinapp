@@ -23,7 +23,6 @@ module.exports = function(config) {
             'bower_components/angular-route/angular-route.js',
             'bower_components/moment/moment.js',
             'bower_components/underscore/underscore.js',
-            'bower_components/parse-js-sdk/lib/parse.js',
             'src/shared/**/*.{js,coffee}',
             'src/app/**/*.{js,coffee}'
         ],
