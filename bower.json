@@ -24,7 +24,8 @@
     "moment": "~2.8.4",
     "angular-truncate": "*",
     "animate-css": "~3.2.0",
-    "angular-locker": "~1.0.3"
+    "angular-locker": "~1.0.3",
+    "ng-parse": "~0.1.2"
   },
   "overrides": {
     "bootstrap-sass-official": {
