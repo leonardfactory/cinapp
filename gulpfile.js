@@ -17,6 +17,8 @@ var watch           = require('gulp-watch');
 var gulpif          = require('gulp-if');
 var coffee          = require('gulp-coffee');
 var rev             = require('gulp-rev-append');
+var uglify          = require('gulp-uglify');
+var minifyCSS       = require('gulp-minify-css');
 
 
 var onError = function (err) {
@@ -128,6 +130,132 @@ gulp.task('build:clean', function (cb)
         './build/**'
     ], cb);
 });
+
+// ==========
+// Production
+// ==========
+
+gulp.task('prod:copy-libs', function (cb) 
+{
+    var vendor = [
+        './bower_components/angular/angular.min.js',
+        './bower_components/angular/angular.min.js.gzip',
+        './bower_components/angular/angular.min.js.map',
+        './bower_components/angular-animate/angular-animate.min.js',
+        './bower_components/angular-animate/angular-animate.min.js.map',
+        './bower_components/angular-deferred-bootstrap/angular-deferred-bootstrap.min.js',
+        './bower_components/angular-locker/dist/angular-locker.min.js',
+        './bower_components/angular-locker/dist/angular-locker.min.js.map',
+        './bower_components/angular-route/angular-route.min.js',
+        './bower_components/angular-route/angular-route.min.js.map',
+        './bower_components/angular-truncate/src/truncate.js',
+        './bower_components/angular-ui-router/release/angular-ui-router.min.js',
+        './bower_components/animate-css/animate.min.css',
+        './bower_components/moment/min/moment.min.js',
+        './bower_components/ng-parse/dist/ng-parse.min.js',
+        './bower_components/underscore/underscore-min.js',
+        './bower_components/underscore/underscore-min.map',
+    ]
+    
+    gulp.src(vendor, {base: './bower_components/' })
+        .pipe(gulp.dest('./prod/libs/'))
+        .on('finish', cb);
+});
+
+gulp.task('prod:assets', function (cb) 
+{
+    gulp.src(paths.assets)
+        .pipe(gulp.dest('./prod/assets/'))
+        .on('finish', cb);
+});
+
+gulp.task('prod:shared', function (cb) 
+{
+    gulp.src(paths.shared_js)
+        .pipe(plumber())
+        .pipe(gulpif(/[.]coffee$/, coffee()))
+        .pipe(angularFilesort())
+        .pipe(concat('shared.js'))
+        .pipe(ngAnnotate())
+        .pipe(uglify())
+        .pipe(gulp.dest('./prod/shared/'))
+        .on('finish', cb);
+});
+
+gulp.task('prod:shared-partials', function (cb) 
+{
+    gulp.src(paths.shared_template)
+        .pipe(plumber())
+        .pipe(templateCache({ standalone: true, module: 'shared-templates' }))
+        .pipe(uglify())
+        .pipe(gulp.dest('./prod/shared/'))
+        .on('finish', cb);
+});
+
+
+gulp.task('prod:angular', function (cb) 
+{
+    gulp.src(paths.app_js)
+        .pipe(plumber())
+        .pipe(sourcemaps.init())
+        .pipe(coffee({ bare: true }))
+        .pipe(angularFilesort())
+        .pipe(concat('app.js'))
+        .pipe(ngAnnotate())
+        .pipe(uglify())
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest('./prod/app/'))
+        .on('finish', cb);
+});
+
+gulp.task('prod:sass', function (cb) 
+{
+    gulp.src(paths.sass)
+        .pipe(sass({ errLogToConsole: true }))
+        .pipe(autoprefixer({ browsers: ['last 2 versions'], cascade: false }))
+        .pipe(minifyCSS())
+        .pipe(gulp.dest('./prod/assets/css/'))
+        .on('finish', cb);
+});
+
+
+gulp.task('prod:partials', function (cb) 
+{
+    gulp.src(paths.template)
+        .pipe(plumber())
+        .pipe(templateCache({ standalone: true }))
+        .pipe(uglify())
+        .pipe(gulp.dest('./prod/app/'))
+        .on('finish', cb);
+});
+
+
+gulp.task('prod:html', ['prod:copy-libs', 'prod:shared', 'prod:shared-partials', 'prod:angular', 'prod:sass', 'prod:partials', 'prod:assets'], function () 
+{
+    gulp.src('./src/index.html')
+        .pipe(plumber(onError))
+        .pipe(inject(gulp.src('./prod/libs/**/*.{js,css}'), {name: 'bower', ignorePath: '/prod/', addRootSlash: false})) // Bower
+        .pipe(inject(gulp.src('./prod/assets/**/*.{js,css}'), {name: 'assets', ignorePath: '/prod/', addRootSlash: false})) // Assets
+        .pipe(inject(gulp.src('./prod/shared/**/*.js'), {name: 'shared', ignorePath: '/prod/', addRootSlash: false})) // Shared AngularJS components
+        .pipe(inject(gulp.src('./prod/app/**/*.js'), {name: 'app', ignorePath: '/prod/', addRootSlash: false})) // AngularJS and Styles
+        .pipe(rev()) // Add hashes to files requiring it
+        .pipe(gulp.dest('./prod'));
+});
+
+gulp.task('serve-prod', serve('prod'));
+
+gulp.task('prod:clean', function (cb) 
+{
+    del([
+        './prod/**'
+    ], cb);
+});
+
+gulp.task('prod', [ 'prod:html', 'serve-prod' ]);
+
+// =======
+// General
+// =======
 
 gulp.task('default', ['build:html']);
 

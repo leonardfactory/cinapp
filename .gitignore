@@ -1,5 +1,6 @@
 node_modules/
 bower_components/
 build/
+prod/
 npm-debug.log
 .sass-cache/

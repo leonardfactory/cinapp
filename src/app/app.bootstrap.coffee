@@ -6,5 +6,6 @@ angular
             module: 'cinApp'
             injectorModules: 'cinApp'
             resolve:
+                ### @ngInject ###
                 tmdbService: (tmdbService) ->
                     tmdbService.init()
