@@ -1,21 +1,23 @@
-var gulp = require('gulp');
-var gutil = require('gulp-util');
-var bowerFiles = require('main-bower-files');
+var gulp            = require('gulp');
+var gutil           = require('gulp-util');
+var bowerFiles      = require('main-bower-files');
 var angularFilesort = require('gulp-angular-filesort');
-var inject = require('gulp-inject');
-var concat = require('gulp-concat');
-var sourcemaps = require('gulp-sourcemaps');
-//var sass = require('gulp-ruby-sass');
-var sass = require('gulp-sass');
-var autoprefixer = require('gulp-autoprefixer');
-var serve = require('gulp-serve');
-var del = require('del');
-var templateCache = require('gulp-angular-templatecache');
-var ngAnnotate = require('gulp-ng-annotate');
-var plumber = require('gulp-plumber');
-var watch = require('gulp-watch');
-var gulpif = require('gulp-if');
-var coffee = require('gulp-coffee');
+var inject          = require('gulp-inject');
+var concat          = require('gulp-concat');
+var sourcemaps      = require('gulp-sourcemaps');
+//var sass          = require('gulp-ruby-sass');
+var sass            = require('gulp-sass');
+var autoprefixer    = require('gulp-autoprefixer');
+var serve           = require('gulp-serve');
+var del             = require('del');
+var templateCache   = require('gulp-angular-templatecache');
+var ngAnnotate      = require('gulp-ng-annotate');
+var plumber         = require('gulp-plumber');
+var watch           = require('gulp-watch');
+var gulpif          = require('gulp-if');
+var coffee          = require('gulp-coffee');
+var rev             = require('gulp-rev-append');
+
 
 var onError = function (err) {
     gutil.beep();
@@ -24,7 +26,6 @@ var onError = function (err) {
 
 var paths = {
     build: 'build/',
-    
     src: 'src/',
     assets: ['./src/assets/**/*.*'],
     app_js: ['src/app/**/*.{js,coffee}', '!src/app/**/*.spec.{js,coffee}'],
@@ -117,6 +118,7 @@ gulp.task('build:html', ['build:copy-libs', 'build:shared', 'build:shared-partia
         .pipe(inject(gulp.src('./build/assets/**/*.{js,css}'), {name: 'assets', ignorePath: '/build/', addRootSlash: false})) // Assets
         .pipe(inject(gulp.src('./build/shared/**/*.js'), {name: 'shared', ignorePath: '/build/', addRootSlash: false})) // Shared AngularJS components
         .pipe(inject(gulp.src('./build/app/**/*.js'), {name: 'app', ignorePath: '/build/', addRootSlash: false})) // AngularJS and Styles
+        .pipe(rev()) // Add hashes to files requiring it
         .pipe(gulp.dest('./build'));
 });
 
@@ -131,7 +133,7 @@ gulp.task('default', ['build:html']);
 
 gulp.task('serve', serve('build'));
 
-gulp.task('watch', function () 
+gulp.task('watch', ['watch:ng-parse'], function () 
 {
     watch(paths.template,           function () { gulp.start('build:partials'); });
     watch(paths.shared_template,    function () { gulp.start('build:shared-partials'); });
@@ -140,4 +142,10 @@ gulp.task('watch', function ()
     watch(paths.shared_js,          function () { gulp.start('build:shared'); });
     watch(paths.sass,               function () { gulp.start('build:sass-fast'); });
     watch(paths.index,              function () { gulp.start('build:html'); });
+});
+
+// Watches even ng-parse since it may be rebuilt
+gulp.task('watch:ng-parse', function () 
+{
+    watch('bower_components/ng-parse/dist/**/*.js', function () { gulp.start('build:copy-libs'); })
 });
