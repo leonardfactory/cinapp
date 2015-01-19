@@ -1,6 +1,6 @@
 <div class="modal-background" ng-class="{ 'modal-shown' : shown }">
     <div class="modal-overlay">
-        <div class="modal-container" ng-transclude>
+        <div class="modal-container" ng-modal-click-outside="$close(false)" ng-transclude>
         </div>
     </div>
 </div>
