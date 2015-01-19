@@ -14,7 +14,7 @@
                 <img src="assets/images/logo.png" />
             </div>
         </div>
-        <div class="four columns">
+        <div class="four columns" ng-if="!mainCtrl.logged">
             <h3>Registrati</h3>
             <form role="register">
                 <input type="text" class="form-control u-full-width" placeholder="Username" ng-model="mainCtrl.user.username" />

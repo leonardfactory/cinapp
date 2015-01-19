@@ -253,6 +253,12 @@ gulp.task('prod:clean', function (cb)
 
 gulp.task('prod', [ 'prod:html', 'serve-prod' ]);
 
+gulp.task('prod:copy', [ 'prod:html'], function()
+{
+    gulp.src('./prod/**')
+        .pipe(gulp.dest('../cinapp-cloud/public/'));
+});
+
 // =======
 // General
 // =======
