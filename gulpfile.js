@@ -19,6 +19,7 @@ var coffee          = require('gulp-coffee');
 var rev             = require('gulp-rev-append');
 var uglify          = require('gulp-uglify');
 var minifyCSS       = require('gulp-minify-css');
+var shell           = require('gulp-shell')
 
 
 var onError = function (err) {
@@ -258,6 +259,14 @@ gulp.task('prod:copy', [ 'prod:html'], function()
     gulp.src('./prod/**')
         .pipe(gulp.dest('../cinapp-cloud/public/'));
 });
+
+gulp.task('prod:deploy', ['prod:copy'], shell.task([
+        'parse deploy'
+    ], 
+    {
+        cwd: '../cinapp-cloud/'
+    }
+));
 
 // =======
 // General
