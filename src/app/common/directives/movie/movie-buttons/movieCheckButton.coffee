@@ -25,7 +25,8 @@ angular
             $scope.$on '$destroy', -> isWatchedListener()
             
             $scope.check = ($event) ->
-                $event.stopPropagation()
+                $event.preventDefault()
+                $event.doneMovieAction = true
                 
                 if not $scope.loading
                     $scope.loading = yes

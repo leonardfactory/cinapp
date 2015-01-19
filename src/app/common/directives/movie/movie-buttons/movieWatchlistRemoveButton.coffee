@@ -11,7 +11,8 @@ angular
             movieId = $scope.movie.imdb_id or $scope.movie.imdbId
             
             $scope.remove = ($event) ->
-                $event.stopPropagation()
+                $event.preventDefault()
+                $event.doneMovieAction = true
                 
                 unless $scope.loading
                     $scope.loading = true
