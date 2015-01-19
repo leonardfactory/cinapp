@@ -19,15 +19,7 @@ angular
                 )
                 
             register: =>
-                loaderService.start()
-                console.log @user
-                @user
-                    .signup()
-                    .then =>
-                        console.log 'logged in!'
-                    .catch (error) =>
-                        console.log error
-                    .finally loaderService.done
+                userService.register(@user)
             
             
         new MainController

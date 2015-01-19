@@ -1,6 +1,6 @@
 angular
     .module 'cinApp'
-    .factory 'userService', ($q, $rootScope, loaderService, User, Watchlist, WatchlistUsersCollection) ->
+    .factory 'userService', ($q, $rootScope, loaderService, initializationService, User, Watchlist, WatchlistUsersCollection) ->
         
         userService =
             
@@ -19,7 +19,8 @@ angular
             register: (user) ->
                 loaderService.start()
                 
-                user.signUp()
+                user.signup()
+                    .then -> initializationService.initializeCurrent()
                     .finally loaderService.done
             
             addToWatchlist: (user, watchlist) ->
@@ -34,4 +35,6 @@ angular
                     collection.update()
                         .then => collection.addUser user
                         .finally loaderService.done
+                        
+                
                         
