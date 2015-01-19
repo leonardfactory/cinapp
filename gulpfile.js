@@ -281,7 +281,6 @@ gulp.task('watch', ['watch:ng-parse'], function ()
     watch(paths.template,           function () { gulp.start('build:partials'); });
     watch(paths.shared_template,    function () { gulp.start('build:shared-partials'); });
     watch(paths.app_js,             function () { gulp.start('build:angular'); });
-    //gulp.watch(paths.app_js, ['build:angular']);
     watch(paths.shared_js,          function () { gulp.start('build:shared'); });
     watch(paths.sass,               function () { gulp.start('build:sass-fast'); });
     watch(paths.index,              function () { gulp.start('build:html'); });

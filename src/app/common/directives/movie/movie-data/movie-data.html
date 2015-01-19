@@ -1,9 +1,9 @@
 <ul class="movie-data">
     <li ng-if="movie.model.director || movie.director">
-        <span class="oi" data-glyph="video"></span> Directed by {{ movie.model.director || movie.director }}
+        <span class="oi" data-glyph="video"></span> Directed by {{ movie.director }}
     </li>
     <li>
-        <span class="oi" data-glyph="timer"></span> {{ movie.model.runtime || movie.runtime }} min.
+        <span class="oi" data-glyph="timer"></span> {{ movie.runtime | minToHour }}
     </li>
     <li>
         <span class="oi" data-glyph="star"></span> {{ voteAverage }}
