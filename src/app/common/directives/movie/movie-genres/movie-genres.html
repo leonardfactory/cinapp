@@ -1,5 +1,5 @@
 <ul class="movie-genres">
-    <li ng-repeat="genre in movie.model.genres || movie.genres" class="movie-genre movie-genre-{{ genre | genreDisplayName:true }}">
+    <li ng-repeat="genre in movie.genres" class="movie-genre movie-genre-{{ genre | genreDisplayName:true }}">
         {{ genre | genreDisplayName }}
     </li>
 </ul>

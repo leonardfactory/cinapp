@@ -104,7 +104,6 @@ angular
                     inside = event.target is element[0] or element[0].contains(event.target) > 0
                     # Then run passed function
                     if not inside
-                        console.log 'Not inside'
                         clickFn scope
                 
                 # Defer in order to not catch click that opened the modal
@@ -114,5 +113,4 @@ angular
             
                 scope.$on '$destroy', -> 
                     $document.unbind 'click', documentClick
-                    console.log 'Unbound'
         
