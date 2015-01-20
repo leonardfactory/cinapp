@@ -28,3 +28,7 @@ angular
                 @genres = new NgParse.Array
                 @genres.push genre.name for genre in obj.genres
                 
+            # Default known genres
+            #
+            @genres = [ 'Dramma', 'Crime', 'Thriller', 'Avventura', 'Azione', 'Fantascienza', 'Storia', 'Fantasy', 'Commedia', 'Mistero', 'Documentario' ]
+                

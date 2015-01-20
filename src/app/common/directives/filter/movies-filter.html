@@ -1,0 +1,7 @@
+<div class="movies-filter">
+    <ul class="movie-genres">
+        <li ng-repeat="genre in genres | orderBy:genre " class="movie-genre movie-genre-{{ genre | genreDisplayName:true }}">
+            {{ genre | genreDisplayName }}
+        </li>
+    </ul>
+</div>
