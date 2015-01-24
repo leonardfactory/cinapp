@@ -1,0 +1,39 @@
+@import "../variables";
+
+$lf-slider-height: 8px;
+$lf-slider-handle-size: 16px;
+$lf-slider-handle-translate: - ($lf-slider-handle-size / 2 - $lf-slider-height / 2);
+
+.lf-slider {
+  height: $lf-slider-height;
+  border-radius: $lf-slider-height / 2;
+  background-color: $gray-very-light;
+  //border: 2px solid $gray-very-light;
+}
+
+.lf-slider-bar {
+  position: relative;
+}
+
+.lf-slider-connect-bar {
+  position: absolute;
+  background-color: $brand-info;
+  height: $lf-slider-height;
+  top: 0px;
+}
+
+.lf-slider-handle {
+  position: absolute;
+  cursor: pointer;
+  height: $lf-slider-handle-size;
+  width: $lf-slider-handle-size;
+  border-radius: 15px;
+  background-color: $gray-lighter;
+  border: 2px solid $brand-info;
+  transition: background-color 200ms ease-out;
+  transform: translate($lf-slider-handle-translate, $lf-slider-handle-translate);
+  
+  &:hover {
+    background-color: white;
+  }
+}

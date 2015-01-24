@@ -50,7 +50,7 @@ gulp.task 'build:shared', ->
     gulp.src paths.shared_src
         .pipe plumber onError
         .pipe sourcemaps.init()
-        .pipe coffee bare: true
+        .pipe coffee()
         .pipe angularFilesort()
         .pipe concat 'shared.js'
         .pipe ngAnnotate()

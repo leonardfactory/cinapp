@@ -1,3 +1,12 @@
+@import "../variables";
+
 .movies-filter {
-  margin: 0 0 0.4rem 0;
+  margin: 0 0 3rem 0;
+}
+
+.movies-filter h4 {
+  font-size: 1.2rem;
+  padding: 6px 0 6px 0;
+  font-weight: bold;
+  color: $brand-primary;
 }

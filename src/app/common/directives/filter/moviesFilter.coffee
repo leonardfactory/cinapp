@@ -7,4 +7,5 @@ angular
             filters: '=' # Pass filters object
         link: (scope, element, attrs) ->
             scope.genres = Movie.genres
+            scope.runtime = [ 10, 20 ]
             

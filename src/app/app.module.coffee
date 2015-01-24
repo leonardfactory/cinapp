@@ -5,7 +5,7 @@ Here we define the ngApp while initializing some useful stuff.
 
 models  = angular.module 'cinApp.models', ['ngParse']
 app     = angular.module 'cinApp', ['cinApp.models', 'angular-modal', 
-                                    'ngAnimate', 'lfEffects', 'ui.router', 'templates', 'truncate']
+                                    'ngAnimate', 'lfEffects', 'lfSlider', 'ui.router', 'templates', 'truncate']
                                     
 templates = angular.module( 'templates', [] )
 

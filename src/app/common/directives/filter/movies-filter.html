@@ -1,7 +1,35 @@
 <div class="movies-filter">
-    <ul class="movie-genres">
-        <li ng-repeat="genre in genres | orderBy:genre " class="movie-genre movie-genre-{{ genre | genreDisplayName:true }}">
-            {{ genre | genreDisplayName }}
-        </li>
-    </ul>
+    <!-- Filter by Title -->
+    <div class="row">
+        <div class="four columns">
+            <h4>Title, Actors, Director</h4>
+        </div>
+        <div class="eight columns">
+            <input type="text" class="form-control u-full-width" placeholder="Start typing..." />
+        </div>
+    </div>
+    
+    <!-- Filter by Runtime -->
+    <div class="row">
+        <div class="four columns">
+            <h4>Runtime</h4>
+        </div>
+        <div class="eight columns">
+            <lf-slider knobs="runtime" show-connect-bar="true"></lf-slider>
+        </div>
+    </div>
+    
+    <!-- Filter by genre -->
+    <div class="row">
+        <div class="four columns">
+            <h4>Genre</h4>
+        </div>
+        <div class="eight columns">
+            <ul class="movie-genres">
+                <li ng-repeat="genre in genres | orderBy:genre " class="movie-genre movie-genre-{{ genre | genreDisplayName:true }}">
+                    {{ genre | genreDisplayName }}
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
